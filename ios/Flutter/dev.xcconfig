@@ -1,0 +1,2 @@
+SERVER_ENV=dev
+BUNDLE_ID_SUFFIX=.dev

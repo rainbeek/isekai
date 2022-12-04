@@ -1,3 +1,5 @@
+/ios/Flutter/DartDefines.xcconfig
+
 # Miscellaneous
 *.class
 *.log

@@ -1,0 +1,2 @@
+SERVER_ENV=emulator
+BUNDLE_ID_SUFFIX=.emulator
