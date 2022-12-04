@@ -1,3 +1,8 @@
 {
-  "recommendations": ["dart-code.flutter", "esbenp.prettier-vscode"]
+  "recommendations": [
+    "dart-code.flutter",
+    "esbenp.prettier-vscode",
+    "localizely.flutter-intl",
+    "streetsidesoftware.code-spell-checker"
+  ]
 }

@@ -1,0 +1,8 @@
+{
+  "dictionaryDefinitions": [
+    { "name": "live-bresto", "path": "./dictionaries/live-bresto.txt" },
+    { "name": "dependencies", "path": "./dictionaries/dependencies.txt" }
+  ],
+  "dictionaries": ["live-bresto", "dependencies"],
+  "enabledLanguageIds": ["dart", "swift", "kotlin"]
+}
