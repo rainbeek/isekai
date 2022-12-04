@@ -8,8 +8,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const test = 'test';
-
     return MaterialApp(
       title: 'Live Bresto',
       theme: ThemeData(
