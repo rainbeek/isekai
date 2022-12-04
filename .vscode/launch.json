@@ -2,10 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug",
+      "name": "Emulator-Debug",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main.dart"
+      "program": "lib/main.dart",
+      "args": ["--dart-define", "SERVER_ENV=emulator"]
+    },
+    {
+      "name": "Dev-Debug",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": ["--dart-define", "SERVER_ENV=dev"]
     }
   ]
 }

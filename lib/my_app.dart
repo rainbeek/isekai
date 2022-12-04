@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:live_bresto/data/definitions/app_mode.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context)!.appName),
+        title: Text('${S.of(context)!.appName} - ${AppMode.serverEnv.name}'),
       ),
       body: Center(
         child: Column(
