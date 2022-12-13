@@ -7,31 +7,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/model/login_session.dart';
 
-final sessionStreamProvider = StreamProvider<LoginSession>((ref) {
-  final maybeSession = ref.watch(_sessionProvider);
+final ensureLoggedInActionProvider = FutureProvider((ref) async {
+  await ref.read(_sessionProvider.notifier).setup();
 
-  if (maybeSession == null) {
-    return const Stream.empty();
+  final session = ref.read(_sessionProvider);
+  if (session != null) {
+    return;
   }
 
-  return Stream.value(maybeSession);
+  await ref.read(_authActionsProvider).signInAnonymously();
 });
 
-final authActionsProvider = Provider(
-  (ref) => AuthActions(),
+final _authActionsProvider = Provider(
+  (ref) => _AuthActions(),
 );
-
-class AuthActions {
-  Future<void> signInAnonymously() async {
-    final credential = await FirebaseAuth.instance.signInAnonymously();
-    final idToken = await credential.user?.getIdToken();
-    debugPrint('Signed in anonymously: $idToken');
-  }
-
-  Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
-  }
-}
 
 final _sessionProvider = StateNotifierProvider<_SessionProvider, LoginSession?>(
   (ref) => _SessionProvider(),
@@ -84,5 +73,17 @@ class _SessionProvider extends StateNotifier<LoginSession?> {
     }
 
     return null;
+  }
+}
+
+class _AuthActions {
+  Future<void> signInAnonymously() async {
+    final credential = await FirebaseAuth.instance.signInAnonymously();
+    final idToken = await credential.user?.getIdToken();
+    debugPrint('Signed in anonymously: $idToken');
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }
