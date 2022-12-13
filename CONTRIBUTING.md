@@ -41,6 +41,21 @@ asdf reshim
 
 次に、[Set up an editor > Android Studio and IntelliJ](https://flutter.dev/docs/get-started/editor?tab=androidstudio) に従って、Android Studio の環境構築を完了させます。
 
+### Firebase サーバーをローカルで立てる
+
+Firebase CLI のインストールを行います。
+
+[「Firebase CLI をインストールする」](https://firebase.google.com/docs/cli#install_the_firebase_cli)を参考にしてください。
+
+以下コマンドを実行します。
+
+```shell
+firebase emulators:start --import=emulator-data --export-on-exit=emulator-data
+```
+
+上記により、`emulator-data` フォルダーに Firebase Emulator のデータが保持されます。
+リセットしたい場合は、フォルダーごと削除してください。
+
 ## メンテナンス
 
 ### Flutter のバージョン更新
