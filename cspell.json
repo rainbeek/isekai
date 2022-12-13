@@ -4,5 +4,10 @@
     { "name": "dependencies", "path": "./dictionaries/dependencies.txt" }
   ],
   "dictionaries": ["live-bresto", "dependencies"],
+  "ignorePaths": [
+    "*.freezed.dart",
+    "/lib/firebase_options_*.dart",
+    "/lib/generated_plugin_registrant.dart"
+  ],
   "enabledLanguageIds": ["dart", "swift", "kotlin"]
 }
