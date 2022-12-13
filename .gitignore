@@ -1,3 +1,5 @@
+*.freezed.dart
+
 /emulator-data
 
 /.env
