@@ -6,7 +6,8 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": ["--dart-define", "SERVER_ENV=emulator"]
+      "args": ["--dart-define", "SERVER_ENV=emulator"],
+      "preLaunchTask": "Use Environments"
     },
     {
       "name": "Dev-Debug",
