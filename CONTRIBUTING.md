@@ -43,9 +43,7 @@ asdf reshim
 
 ### Firebase サーバーをローカルで立てる
 
-Firebase CLI のインストールを行います。
-
-[「Firebase CLI をインストールする」](https://firebase.google.com/docs/cli#install_the_firebase_cli)を参考にしてください。
+[「Firebase CLI をインストールする」](https://firebase.google.com/docs/cli#install_the_firebase_cli)を参考に、Firebase CLI をインストールします。
 
 以下コマンドを実行します。
 
@@ -86,4 +84,16 @@ asdf local flutter <version>
 ```shell
 rm pubspec.lock
 flutter pub get
+```
+
+### コミットされている Firebase のプロジェクト情報を更新
+
+以下コマンドを実行します。
+
+```shell
+flutterfire config \
+  --project=shicolabs-dev \
+  --out=lib/firebase_options_emulator.dart \
+  --ios-bundle-id=com.gmash.LiveBresto.emulator \
+  --android-app-id=com.gmash.LiveBresto.emulator
 ```

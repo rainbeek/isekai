@@ -1,1 +1,5 @@
 include: package:colomney_lints/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - "lib/firebase_options*.dart"
