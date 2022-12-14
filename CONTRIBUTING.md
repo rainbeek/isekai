@@ -115,4 +115,9 @@ flutterfire config \
   --out=lib/firebase_options_emulator.dart \
   --ios-bundle-id=com.gmash.LiveBresto.emulator \
   --android-app-id=com.gmash.LiveBresto.emulator
+flutterfire config \
+  --project=shicolabs-dev \
+  --out=lib/firebase_options_dev.dart \
+  --ios-bundle-id=com.gmash.LiveBresto.dev \
+  --android-app-id=com.gmash.LiveBresto.dev
 ```
