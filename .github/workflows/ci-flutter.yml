@@ -60,6 +60,14 @@ jobs:
       - name: Install Flutter dependencies
         run: flutter pub get
 
+      - name: Generate environment config file
+        run: |
+          cp .env.example .env
+          ./use_env.sh
+
+      - name: Generate automatic codes
+        run: flutter pub run build_runner build
+
       - name: Flutter analyze
         run: flutter analyze --fatal-infos > flutter-analyze.log
 
