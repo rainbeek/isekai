@@ -25,9 +25,9 @@ class DatabaseActions {
     final result = await FirebaseFirestore.instance
         .collection('threadContents')
         .doc(testThreadId)
-        .collection(userId)
-        .doc('messages')
-        .collection('a')
+        .collection('users')
+        .doc(userId)
+        .collection('messages')
         .add(messageDictionary);
 
     debugPrint('$result');
