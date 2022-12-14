@@ -18,6 +18,16 @@ final ensureLoggedInActionProvider = FutureProvider((ref) async {
   await ref.read(_authActionsProvider).signInAnonymously();
 });
 
+final sessionStreamProvider = StreamProvider<LoginSession>((ref) {
+  final maybeSession = ref.watch(_sessionProvider);
+
+  if (maybeSession == null) {
+    return const Stream.empty();
+  }
+
+  return Stream.value(maybeSession);
+});
+
 final _authActionsProvider = Provider(
   (ref) => _AuthActions(),
 );

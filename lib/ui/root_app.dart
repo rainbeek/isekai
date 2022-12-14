@@ -3,6 +3,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/definitions/app_mode.dart';
+import 'package:live_bresto/data/model/post_message.dart';
+import 'package:live_bresto/data/service/auth_service.dart';
+import 'package:live_bresto/data/service/database_service.dart';
 import 'package:live_bresto/ui/root_presenter.dart';
 
 final _rootPresenterProvider = StateNotifierProvider<RootPresenter, bool>(
@@ -38,47 +41,31 @@ class RootApp extends ConsumerWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final databaseActions = ref.watch(databaseActionsProvider);
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('${S.of(context)!.appName} - ${AppMode.serverEnv.name}'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+        child: Container(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () async {
+          final session = await ref.read(sessionStreamProvider.future);
+          await databaseActions.setMessage(
+            const PostMessage(text: 'test'),
+            userId: session.userId,
+          );
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
   }
 }
