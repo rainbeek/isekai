@@ -7,6 +7,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/model/post_message.dart';
 
+final threadMessagesProvider =
+    StreamProvider.family<List<PostMessage>, String>((_, threadId) {
+  return FirebaseFirestore.instance
+      .collectionGroup('messages')
+      .withConverter(
+        fromFirestore: PostMessage.fromFirestore,
+        toFirestore: (postMessage, options) => postMessage.toFirestore(),
+      )
+      .snapshots()
+      .map(
+        (snapshot) => snapshot.docs.map((doc) => doc.data()).toList(),
+      );
+});
+
 final databaseActionsProvider = Provider(
   (ref) => DatabaseActions(),
 );
@@ -16,19 +30,15 @@ class DatabaseActions {
     PostMessage message, {
     required String userId,
   }) async {
-    // cspell:disable next
-    const testThreadId = 'sELkOLGe1qHrasoPQpg0';
-    final messageDictionary = <String, String>{
-      'text': message.text,
-    };
-
     final result = await FirebaseFirestore.instance
-        .collection('threadContents')
-        .doc(testThreadId)
         .collection('users')
         .doc(userId)
         .collection('messages')
-        .add(messageDictionary);
+        .withConverter(
+          fromFirestore: PostMessage.fromFirestore,
+          toFirestore: (postMessage, _) => postMessage.toFirestore(),
+        )
+        .add(message);
 
     debugPrint('$result');
   }
