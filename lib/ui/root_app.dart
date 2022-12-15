@@ -76,9 +76,10 @@ class MyHomePage extends ConsumerWidget {
 
                 return ListTile(
                   title: Text(message.text),
+                  subtitle: Text('User: ${message.userId}'),
                 );
               },
-              separatorBuilder: (context, index) => const Divider(),
+              separatorBuilder: (context, index) => const Divider(height: 0),
               itemCount: messages.length,
             );
           },
