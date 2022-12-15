@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/definitions/app_mode.dart';
-import 'package:live_bresto/data/model/post_message.dart';
 import 'package:live_bresto/data/service/auth_service.dart';
 import 'package:live_bresto/data/service/database_service.dart';
 import 'package:live_bresto/ui/root_presenter.dart';
@@ -76,7 +75,7 @@ class MyHomePage extends ConsumerWidget {
                 final message = messages[index];
 
                 return ListTile(
-                  title: Text(message.text ?? ''),
+                  title: Text(message.text),
                 );
               },
               separatorBuilder: (context, index) => const Divider(),
@@ -89,7 +88,8 @@ class MyHomePage extends ConsumerWidget {
         onPressed: () async {
           final session = await ref.read(sessionStreamProvider.future);
           await databaseActions.setMessage(
-            const PostMessage(text: 'test'),
+            threadId: AppMode.threadIdForDebug,
+            text: 'テスト',
             userId: session.userId,
           );
         },
