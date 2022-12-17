@@ -13,8 +13,6 @@ final threadMessagesProvider =
   return FirebaseFirestore.instance
       .collectionGroup('messages')
       .where('threadId', isEqualTo: threadId)
-      .orderBy('createdAt', descending: true)
-      .limit(100)
       .withConverter(
         fromFirestore: MessageFirestore.fromFirestore,
         toFirestore: (postMessage, options) => postMessage.toFirestore(),
