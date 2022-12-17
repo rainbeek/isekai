@@ -58,9 +58,7 @@ class _SessionProvider extends StateNotifier<LoginSession?> {
           return null;
         }
 
-        final token = await user.getIdToken();
-
-        return LoginSession(userId: user.uid, token: token);
+        return _convertUserToLoginSession(user);
       },
     ).listen((session) {
       state = session;
@@ -74,9 +72,7 @@ class _SessionProvider extends StateNotifier<LoginSession?> {
         return null;
       }
 
-      final token = await user.getIdToken();
-
-      return LoginSession(userId: user.uid, token: token);
+      return _convertUserToLoginSession(user);
     } on FirebaseAuthException {
       // TODO(ide): Firebase Emulator環境だとエラーが発生することがあるので、暫定対応
       await FirebaseAuth.instance.signOut();
@@ -84,13 +80,20 @@ class _SessionProvider extends StateNotifier<LoginSession?> {
 
     return null;
   }
+
+  LoginSession _convertUserToLoginSession(User user) {
+    return LoginSession(userId: user.uid);
+  }
 }
 
 class _AuthActions {
   Future<void> signInAnonymously() async {
     final credential = await FirebaseAuth.instance.signInAnonymously();
-    final idToken = await credential.user?.getIdToken();
-    debugPrint('Signed in anonymously: $idToken');
+
+    final userId = credential.user?.uid;
+    final token = await credential.user?.getIdToken();
+
+    debugPrint('Signed in anonymously: userId: $userId, token: $token');
   }
 
   Future<void> signOut() async {

@@ -6,6 +6,5 @@ part 'login_session.freezed.dart';
 class LoginSession with _$LoginSession {
   const factory LoginSession({
     required String userId,
-    required String token,
   }) = _LoginSession;
 }
