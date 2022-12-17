@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:live_bresto/data/dto/message_firestore.dart';
+import 'package:live_bresto/data/dao/message_firestore.dart';
 
 part 'thread_contents.freezed.dart';
 
