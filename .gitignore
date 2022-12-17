@@ -1,3 +1,9 @@
+*.freezed.dart
+
+/emulator-data
+
+/.env
+/lib/environment_config.dart
 /ios/Flutter/DartDefines.xcconfig
 
 # Miscellaneous
