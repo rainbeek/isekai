@@ -73,6 +73,18 @@ firebase emulators:start --import=emulator-data --export-on-exit=emulator-data
 
 VSCode の「Emulator-Debug」などの構成でデバッグ実行します。
 
+## デプロイ
+
+### Firestore のルールをデプロイ
+
+[「Firebase CLI をインストールする」](https://firebase.google.com/docs/cli#install_the_firebase_cli)を参考に、Firebase CLI をインストールします。
+
+以下コマンドを実行します。
+
+```shell
+firebase deploy --only firestore:rules
+```
+
 ## メンテナンス
 
 ### Flutter のバージョン更新
