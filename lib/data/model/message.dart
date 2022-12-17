@@ -7,5 +7,6 @@ class Message with _$Message {
   const factory Message({
     required String userId,
     required String text,
+    required DateTime createdAt,
   }) = _Message;
 }

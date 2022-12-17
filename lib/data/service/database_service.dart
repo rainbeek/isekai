@@ -13,6 +13,8 @@ final threadMessagesProvider =
   return FirebaseFirestore.instance
       .collectionGroup('messages')
       .where('threadId', isEqualTo: threadId)
+      .orderBy('createdAt', descending: true)
+      .limit(100)
       .withConverter(
         fromFirestore: MessageFirestore.fromFirestore,
         toFirestore: (postMessage, options) => postMessage.toFirestore(),
@@ -46,7 +48,11 @@ class DatabaseActions {
     required String text,
     required String userId,
   }) async {
-    final messageFirestore = MessageFirestore(threadId: threadId, text: text);
+    final messageFirestore = MessageFirestore(
+      threadId: threadId,
+      text: text,
+      createdAt: DateTime.now(),
+    );
 
     await FirebaseFirestore.instance
         .collection('users')

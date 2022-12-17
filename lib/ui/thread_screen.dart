@@ -45,6 +45,12 @@ class ThreadScreen extends ConsumerWidget {
                 return ListTile(
                   title: Text(message.text),
                   subtitle: Text('User: ${message.userId}'),
+                  trailing: Text(
+                    S.of(context)!.messageDateFormat(
+                          message.createdAt,
+                          message.createdAt,
+                        ),
+                  ),
                 );
               },
               separatorBuilder: (context, index) => const Divider(height: 0),
