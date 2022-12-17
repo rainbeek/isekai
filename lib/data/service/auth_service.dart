@@ -5,21 +5,22 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/model/login_session.dart';
+import 'package:live_bresto/data/model/session.dart';
 
-final ensureLoggedInActionProvider = FutureProvider((ref) async {
-  await ref.read(_sessionProvider.notifier).setup();
-
-  final session = ref.read(_sessionProvider);
-  if (session != null) {
-    return;
-  }
-
-  await ref.read(_authActionsProvider).signInAnonymously();
+final forceSessionProvider = FutureProvider((ref) async {
+  return await ref.watch(_sessionStreamProvider.future);
 });
 
-final sessionStreamProvider = StreamProvider<LoginSession>((ref) {
-  final maybeSession = ref.watch(_sessionProvider);
+final sessionProvider = StateNotifierProvider<SessionState, Session?>(
+  (ref) => SessionState(),
+);
+
+final authActionsProvider = Provider(
+  (ref) => AuthActions(),
+);
+
+final _sessionStreamProvider = StreamProvider<Session>((ref) {
+  final maybeSession = ref.watch(sessionProvider);
 
   if (maybeSession == null) {
     return const Stream.empty();
@@ -28,18 +29,10 @@ final sessionStreamProvider = StreamProvider<LoginSession>((ref) {
   return Stream.value(maybeSession);
 });
 
-final _authActionsProvider = Provider(
-  (ref) => _AuthActions(),
-);
+class SessionState extends StateNotifier<Session?> {
+  SessionState() : super(null);
 
-final _sessionProvider = StateNotifierProvider<_SessionProvider, LoginSession?>(
-  (ref) => _SessionProvider(),
-);
-
-class _SessionProvider extends StateNotifier<LoginSession?> {
-  _SessionProvider() : super(null);
-
-  StreamSubscription<LoginSession?>? _sessionSubscription;
+  StreamSubscription<Session?>? _sessionSubscription;
 
   @override
   Future<void> dispose() async {
@@ -48,7 +41,7 @@ class _SessionProvider extends StateNotifier<LoginSession?> {
     super.dispose();
   }
 
-  Future<void> setup() async {
+  Future<void> initialize() async {
     final session = await _currentSession();
     state = session;
 
@@ -65,7 +58,7 @@ class _SessionProvider extends StateNotifier<LoginSession?> {
     });
   }
 
-  Future<LoginSession?> _currentSession() async {
+  Future<Session?> _currentSession() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
@@ -81,12 +74,12 @@ class _SessionProvider extends StateNotifier<LoginSession?> {
     return null;
   }
 
-  LoginSession _convertUserToLoginSession(User user) {
-    return LoginSession(userId: user.uid);
+  Session _convertUserToLoginSession(User user) {
+    return Session(userId: user.uid);
   }
 }
 
-class _AuthActions {
+class AuthActions {
   Future<void> signInAnonymously() async {
     final credential = await FirebaseAuth.instance.signInAnonymously();
 

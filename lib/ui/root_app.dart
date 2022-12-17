@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:live_bresto/data/usecase/session_use_case.dart';
 import 'package:live_bresto/ui/root_presenter.dart';
 import 'package:live_bresto/ui/thread_screen.dart';
 
 final _rootPresenterProvider = StateNotifierProvider<RootPresenter, bool>(
-  (ref) => RootPresenter(ref: ref),
+  (ref) => RootPresenter(sessionActions: ref.watch(sessionActionsProvider)),
 );
 
 class RootApp extends ConsumerWidget {

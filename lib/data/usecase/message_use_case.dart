@@ -27,7 +27,7 @@ class MessageActions {
   final DatabaseActions _databaseActions;
 
   Future<void> sendMessage({required String text}) async {
-    final session = await _ref.read(sessionStreamProvider.future);
+    final session = await _ref.read(forceSessionProvider.future);
     const threadId = AppMode.threadIdForDebug;
 
     await _databaseActions.setMessage(

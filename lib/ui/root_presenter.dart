@@ -1,17 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/service/auth_service.dart';
+import 'package:live_bresto/data/usecase/session_use_case.dart';
 
 class RootPresenter extends StateNotifier<bool> {
   RootPresenter({
-    required Ref ref,
+    required SessionActions sessionActions,
   }) : super(false) {
-    _setup(ref: ref);
+    _setup(sessionActions: sessionActions);
   }
 
   Future<void> _setup({
-    required Ref ref,
+    required SessionActions sessionActions,
   }) async {
-    await ref.read(ensureLoggedInActionProvider.future);
+    await sessionActions.ensureLoggedIn();
 
     state = true;
   }
