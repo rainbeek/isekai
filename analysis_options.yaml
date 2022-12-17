@@ -1,1 +1,7 @@
 include: package:colomney_lints/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - "**.freezed.dart"
+    - "lib/environment_config.dart"
+    - "lib/firebase_options*.dart"

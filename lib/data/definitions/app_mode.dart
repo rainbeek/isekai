@@ -1,6 +1,9 @@
 class AppMode {
   static final serverEnv = _getApiEnv();
 
+  // cspell:disable next
+  static const threadIdForDebug = 'sELkOLGe1qHrasoPQpg0';
+
   static ServerEnv _getApiEnv() {
     const serverEnvString =
         String.fromEnvironment('SERVER_ENV', defaultValue: 'emulator');
