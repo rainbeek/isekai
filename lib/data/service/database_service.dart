@@ -22,7 +22,9 @@ final threadMessagesProvider =
       .map(
         (snapshot) => snapshot.docs
             .map((doc) {
-              final userId = doc.reference.parent.parent?.id;
+              final messagesCollectionRef = doc.reference.parent;
+              final userDocumentRef = messagesCollectionRef.parent;
+              final userId = userDocumentRef?.id;
               if (userId == null) {
                 return null;
               }
