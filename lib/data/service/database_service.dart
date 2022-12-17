@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/dao/message_firestore.dart';
 import 'package:live_bresto/data/model/message.dart';
@@ -42,14 +41,14 @@ final databaseActionsProvider = Provider(
 );
 
 class DatabaseActions {
-  Future<void> setMessage({
+  Future<void> sendMessage({
     required String threadId,
     required String text,
     required String userId,
   }) async {
     final messageFirestore = MessageFirestore(threadId: threadId, text: text);
 
-    final result = await FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
         .collection('messages')
@@ -58,7 +57,5 @@ class DatabaseActions {
           toFirestore: (postMessage, _) => postMessage.toFirestore(),
         )
         .add(messageFirestore);
-
-    debugPrint('$result');
   }
 }

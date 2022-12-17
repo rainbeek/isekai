@@ -54,7 +54,7 @@ class ThreadScreen extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async => presenter.sendMessage(text: 'テスト'),
+        onPressed: () async => presenter.sendMessage(text: 'テスト🗣'),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

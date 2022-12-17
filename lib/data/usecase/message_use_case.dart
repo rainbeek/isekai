@@ -30,7 +30,7 @@ class MessageActions {
     final session = await _ref.read(forceSessionProvider.future);
     const threadId = AppMode.threadIdForDebug;
 
-    await _databaseActions.setMessage(
+    await _databaseActions.sendMessage(
       threadId: threadId,
       text: text,
       userId: session.userId,
