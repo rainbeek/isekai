@@ -46,11 +46,12 @@ class DatabaseActions {
     required String threadId,
     required String text,
     required String userId,
+    required DateTime createdAt,
   }) async {
     final messageFirestore = MessageFirestore(
       threadId: threadId,
       text: text,
-      createdAt: DateTime.now(),
+      createdAt: createdAt,
     );
 
     await FirebaseFirestore.instance

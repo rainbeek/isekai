@@ -34,6 +34,7 @@ class MessageActions {
       threadId: threadId,
       text: text,
       userId: session.userId,
+      createdAt: DateTime.now(),
     );
   }
 }
