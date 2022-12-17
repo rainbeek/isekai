@@ -1,3 +1,16 @@
 {
-  "appName": "Live Bresto"
+  "appName": "Live Bresto",
+  "messageDateFormat": "{date} {time}",
+  "@messageDateFormat": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      },
+      "time": {
+        "type": "DateTime",
+        "format": "jm"
+      }
+    }
+  }
 }
