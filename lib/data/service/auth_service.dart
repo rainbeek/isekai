@@ -7,27 +7,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/model/session.dart';
 
-final forceSessionProvider = FutureProvider((ref) async {
-  return await ref.watch(_sessionStreamProvider.future);
-});
-
-final sessionProvider = StateNotifierProvider<SessionState, Session?>(
+final sessionStateProvider = StateNotifierProvider<SessionState, Session?>(
   (ref) => SessionState(),
 );
 
 final authActionsProvider = Provider(
   (ref) => AuthActions(),
 );
-
-final _sessionStreamProvider = StreamProvider<Session>((ref) {
-  final maybeSession = ref.watch(sessionProvider);
-
-  if (maybeSession == null) {
-    return const Stream.empty();
-  }
-
-  return Stream.value(maybeSession);
-});
 
 class SessionState extends StateNotifier<Session?> {
   SessionState() : super(null);

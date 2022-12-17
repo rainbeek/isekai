@@ -2,8 +2,8 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/definitions/app_mode.dart';
-import 'package:live_bresto/data/service/auth_service.dart';
 import 'package:live_bresto/data/service/database_service.dart';
+import 'package:live_bresto/data/usecase/session_use_case.dart';
 
 final currentThreadMessagesProvider = StreamProvider((ref) {
   return ref.watch(threadMessagesProvider(AppMode.threadIdForDebug).stream);
