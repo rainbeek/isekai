@@ -10,9 +10,8 @@ env:
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
-
     concurrency:
-      group: ${{ github.ref }}
+      group: ${{ github.workflow }}-${{ github.job }}-${{ github.head_ref }}
       cancel-in-progress: true
 
     steps:
