@@ -9,6 +9,7 @@ env:
 
 jobs:
   lint-and-test:
+    name: Lint Flutter
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.job }}-${{ github.head_ref }}
