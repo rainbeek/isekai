@@ -6,7 +6,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/dao/message_firestore.dart';
+import 'package:live_bresto/data/dao/thread_firestore.dart';
 import 'package:live_bresto/data/model/message.dart';
+import 'package:live_bresto/data/model/thread.dart';
+
+final threadProvider = StreamProvider.family<Thread, String>((_, threadId) {
+  return FirebaseFirestore.instance
+      .collection('threads')
+      .doc(threadId)
+      .withConverter(
+        fromFirestore: ThreadFirestore.fromFirestore,
+        toFirestore: (postMessage, options) => postMessage.toFirestore(),
+      )
+      .snapshots()
+      .map((snapshot) {
+    final threadFirestore = snapshot.data()!;
+    return threadFirestore.toMessage();
+  });
+});
 
 final threadMessagesProvider =
     StreamProvider.family<List<Message>, String>((_, threadId) {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/definitions/app_mode.dart';
+import 'package:live_bresto/data/model/thread.dart';
 import 'package:live_bresto/data/usecase/message_use_case.dart';
+import 'package:live_bresto/data/usecase/thread_use_case.dart';
 import 'package:live_bresto/ui/thread_presenter.dart';
 
 final _threadPresenterProvider = Provider(
@@ -14,12 +15,33 @@ class ThreadScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final threadStream = ref.watch(currentThreadProvider.stream);
     final messagesStream = ref.watch(currentThreadMessagesProvider.stream);
     final presenter = ref.watch(_threadPresenterProvider);
 
+    print(threadStream);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('${S.of(context)!.appName} - ${AppMode.serverEnv.name}'),
+        title: StreamBuilder<Thread>(
+          stream: threadStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return const Text('エラーが発生しました。');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+
+            final messages = snapshot.data;
+            if (messages == null) {
+              return const Text('null');
+            }
+
+            return Text(messages.title);
+          },
+        ),
       ),
       body: Center(
         child: StreamBuilder(
