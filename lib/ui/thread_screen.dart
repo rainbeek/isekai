@@ -32,12 +32,12 @@ class ThreadScreen extends ConsumerWidget {
               return const CircularProgressIndicator();
             }
 
-            final messages = snapshot.data;
-            if (messages == null) {
+            final thread = snapshot.data;
+            if (thread == null) {
               return const Text('null');
             }
 
-            return Text(messages.title);
+            return Text(thread.title);
           },
         ),
       ),
