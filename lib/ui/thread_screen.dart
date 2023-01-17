@@ -19,8 +19,6 @@ class ThreadScreen extends ConsumerWidget {
     final messagesStream = ref.watch(currentThreadMessagesProvider.stream);
     final presenter = ref.watch(_threadPresenterProvider);
 
-    print(threadStream);
-
     return Scaffold(
       appBar: AppBar(
         title: StreamBuilder<Thread>(
