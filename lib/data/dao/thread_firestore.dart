@@ -31,7 +31,7 @@ class ThreadFirestore with _$ThreadFirestore {
     };
   }
 
-  Thread toMessage() {
+  Thread toThread() {
     return Thread(
       title: title!,
     );

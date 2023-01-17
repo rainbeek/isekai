@@ -21,7 +21,7 @@ final threadProvider = StreamProvider.family<Thread, String>((_, threadId) {
       .snapshots()
       .map((snapshot) {
     final threadFirestore = snapshot.data()!;
-    return threadFirestore.toMessage();
+    return threadFirestore.toThread();
   });
 });
 
