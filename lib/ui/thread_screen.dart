@@ -20,7 +20,6 @@ class ThreadScreen extends ConsumerWidget {
     final presenter = ref.watch(_threadPresenterProvider);
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: StreamBuilder<Thread>(
           stream: threadStream,
@@ -42,120 +41,47 @@ class ThreadScreen extends ConsumerWidget {
           },
         ),
       ),
-      body: Column(
-        children: [
-          StreamBuilder(
-            stream: messagesStream,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return const Text('エラーが発生しました。');
-              }
+      body: Center(
+        child: StreamBuilder(
+          stream: messagesStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return const Text('エラーが発生しました。');
+            }
 
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
 
-              final messages = snapshot.data;
-              if (messages == null) {
-                return Container();
-              }
+            final messages = snapshot.data;
+            if (messages == null) {
+              return Container();
+            }
 
-              return Expanded(
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    final message = messages[index];
+            return ListView.separated(
+              itemBuilder: (context, index) {
+                final message = messages[index];
 
-                    return ListTile(
-                      title: Text(message.text),
-                      subtitle: Text('User: ${message.userId}'),
-                      trailing: Text(
-                        S.of(context)!.messageDateFormat(
-                              message.createdAt,
-                              message.createdAt,
-                            ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) =>
-                      const Divider(height: 0),
-                  itemCount: messages.length,
-                ),
-              );
-            },
-          ),
-        ],
+                return ListTile(
+                  title: Text(message.text),
+                  subtitle: Text('User: ${message.userId}'),
+                  trailing: Text(
+                    S.of(context)!.messageDateFormat(
+                          message.createdAt,
+                          message.createdAt,
+                        ),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) => const Divider(height: 0),
+              itemCount: messages.length,
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          var contributor = '';
-          await showModalBottomSheet<void>(
-            isScrollControlled: true,
-            context: context,
-            builder: (context) {
-              return Container(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-                height: 750, //TODOサイズを比率にする。
-                alignment: Alignment.center,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 20,
-                    )
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: ElevatedButton(
-                            onPressed: () => Navigator.pop(context),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey,
-                            ),
-                            child: const Text('閉じる'),
-                          ),
-                        ),
-                        const Expanded(child: SizedBox()),
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              presenter.sendMessage(text: contributor);
-                              Navigator.pop(context);
-                            },
-                            child: const Text('投稿'),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Scrollbar(
-                      child: TextField(
-                        autofocus: true,
-                        maxLines: 12,
-                        minLines: 12,
-                        decoration: const InputDecoration(
-                          hintText: 'コメントを投稿する',
-                          border: OutlineInputBorder(),
-                        ),
-                        onChanged: (text) {
-                          contributor = text;
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-        tooltip: 'コメントを投稿する',
+        onPressed: () async => presenter.sendMessage(text: 'テスト🗣'),
+        tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
