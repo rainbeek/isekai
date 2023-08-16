@@ -1,11 +1,3 @@
-inputs:
-  firebase-options-dart-base64-emulator:
-    required: true
-  firebase-options-dart-base64-dev:
-    required: true
-  firebase-options-dart-base64-prod:
-    required: true
-
 runs:
   using: "composite"
   steps:
