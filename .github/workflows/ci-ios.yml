@@ -1,0 +1,35 @@
+name: CI / iOS
+
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "ios/**"
+      - ".xcode-version"
+      - "pubspec.lock"
+
+jobs:
+  build:
+    name: Build iOS app
+    runs-on: macos-13
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.job }}-${{ github.head_ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+
+      - name: Setup Xcode
+        uses: ./.github/actions/setup-xcode
+
+      - name: Setup CocoaPods
+        uses: ./.github/actions/setup-cocoapods
+
+      - name: Generate uncommited Flutter files
+        run: ./.github/actions/generate-uncommited-flutter-files
+
+      - name: iOS build
+        shell: bash
+        run: flutter build ios --dart-define SERVER_ENV=dev --no-codesign

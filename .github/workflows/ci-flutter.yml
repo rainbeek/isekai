@@ -1,8 +1,9 @@
-name: CI/Flutter
+name: CI / Flutter
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - "main"
 
 env:
   JAVA_VERSION: "12.x"
@@ -35,39 +36,11 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: cat cspell.log | reviewdog -efm='%f:%l:%c - %m' -name='Code Spell Checker' -reporter='github-pr-review'
 
-      - uses: actions/setup-java@v1
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
 
-      # asdf用のバージョン指定ファイルからFlutterのバージョンを読み取り、
-      # "-stable" サフィックスを削除したものを環境変数に格納する
-      - name: Get Flutter version
-        id: get-flutter-version
-        run: |
-          asdf_flutter_version="$(cat .tool-versions | awk '{print $2}')"
-          flutter_version="$(echo $asdf_flutter_version | sed -e 's/-stable//g')"
-          echo "flutter-version=$flutter_version" >> $GITHUB_OUTPUT
-
-      - name: Cache Flutter
-        uses: actions/cache@v3
-        with:
-          path: /opt/hostedtoolcache/flutter
-          key: ${{ runner.OS }}-flutter-${{ steps.get-flutter-version.outputs.flutter-version }}
-
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ steps.get-flutter-version.outputs.flutter-version }}
-
-      - name: Install Flutter dependencies
-        run: flutter pub get
-
-      - name: Generate environment config file
-        run: |
-          cp .env.example .env
-          ./use_env.sh
-
-      - name: Generate automatic codes
-        run: flutter pub run build_runner build
+      - name: Generate uncommited Flutter files
+        run: ./.github/actions/generate-uncommited-flutter-files
 
       - name: Flutter analyze
         run: flutter analyze --fatal-infos > flutter-analyze.log
