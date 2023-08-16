@@ -1,0 +1,16 @@
+runs:
+  using: "composite"
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: flutter pub get
+
+    - name: Generate environment config file
+      shell: bash
+      run: |
+        cp .env.example .env
+        ./use_env.sh
+
+    - name: Generate automatic codes
+      shell: bash
+      run: flutter pub run build_runner build
