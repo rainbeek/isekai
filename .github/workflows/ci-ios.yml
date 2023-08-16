@@ -32,7 +32,7 @@ jobs:
         uses: ./.github/actions/setup-cocoapods
 
       - name: Generate uncommited Flutter files
-        run: ./.github/actions/generate-uncommited-flutter-files
+        uses: ./.github/actions/generate-uncommited-flutter-files
 
       - name: iOS build
         shell: bash
