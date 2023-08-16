@@ -16,7 +16,7 @@ jobs:
     name: Check spell
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.job }}-${{ github.head_ref }}
+      group: ${{ github.workflow }}-check-spell-${{ github.head_ref }}
       cancel-in-progress: true
 
     steps:
@@ -43,7 +43,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.job }}-${{ github.head_ref }}
+      group: ${{ github.workflow }}-lint-${{ github.head_ref }}
       cancel-in-progress: true
 
     steps:

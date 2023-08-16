@@ -14,7 +14,7 @@ jobs:
     name: Build dev app
     runs-on: macos-13
     concurrency:
-      group: ${{ github.workflow }}-${{ github.job }}-${{ github.head_ref }}
+      group: ${{ github.workflow }}-build-dev-app-${{ github.head_ref }}
       cancel-in-progress: true
 
     steps:
