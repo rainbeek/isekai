@@ -5,8 +5,11 @@ on:
     branches:
       - "main"
 
-env:
-  JAVA_VERSION: "12.x"
+permissions:
+  contents: read
+  issues: read
+  pull-requests: write
+  statuses: write
 
 jobs:
   lint-and-test:
