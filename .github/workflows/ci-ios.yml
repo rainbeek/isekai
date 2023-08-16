@@ -4,10 +4,10 @@ on:
   pull_request:
     branches:
       - "main"
-    # paths:
-    #   - "ios/**"
-    #   - ".xcode-version"
-    #   - "pubspec.lock"
+    paths:
+      - "ios/**"
+      - ".xcode-version"
+      - "pubspec.lock"
 
 permissions:
   contents: read
