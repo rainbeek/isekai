@@ -22,6 +22,8 @@ jobs:
       cancel-in-progress: true
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
 
