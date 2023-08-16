@@ -46,7 +46,7 @@ jobs:
         uses: ./.github/actions/generate-uncommited-flutter-files
 
       - name: Flutter analyze
-        uses: flutter analyze --fatal-infos > flutter-analyze.log
+        run: flutter analyze --fatal-infos > flutter-analyze.log
 
       - name: Run reviewdog for Flutter Analyzer
         if: failure()
