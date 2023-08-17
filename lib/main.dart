@@ -12,8 +12,6 @@ import 'package:live_bresto/ui/root_app.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  const test = 'test';
-
   final FirebaseOptions firebaseOptions;
   switch (AppMode.serverEnv) {
     case ServerEnv.emulator:
