@@ -5,26 +5,18 @@ updates:
     open-pull-requests-limit: 1
     schedule:
       interval: "daily"
-    reviewers:
-      - "shotaIDE"
   - package-ecosystem: "gradle"
     directory: "/android/"
     open-pull-requests-limit: 1
     schedule:
       interval: "daily"
-    reviewers:
-      - "shotaIDE"
   - package-ecosystem: "bundler"
     directory: "/"
     open-pull-requests-limit: 1
     schedule:
       interval: "daily"
-    reviewers:
-      - "shotaIDE"
   - package-ecosystem: "github-actions"
     directory: "/"
     open-pull-requests-limit: 1
     schedule:
       interval: "daily"
-    reviewers:
-      - "shotaIDE"
