@@ -1,4 +1,4 @@
-name: CI / iOS
+name: CI / Android
 
 on:
   pull_request:
@@ -16,17 +16,14 @@ concurrency:
 jobs:
   build-dev-app:
     name: Build dev app
-    runs-on: macos-13
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
-      - name: Setup Xcode
-        uses: ./.github/actions/setup-xcode
-      - name: Setup CocoaPods
-        uses: ./.github/actions/setup-cocoapods
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
-      - name: Build iOS dev app
-        shell: bash
-        run: flutter build ios --dart-define SERVER_ENV=dev --no-codesign
+      - name: Build Android dev app
+        run: flutter build appbundle --dart-define SERVER_ENV=dev

@@ -11,28 +11,24 @@ permissions:
   pull-requests: write
   statuses: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   check-spell:
     name: Check spell
     runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-check-spell-${{ github.head_ref }}
-      cancel-in-progress: true
-
     steps:
       - uses: actions/checkout@v3
-
       - name: Install reviewdog
         uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
-
       - name: Install Code Spell Checker
         run: npm install -g cspell
-
       - name: Check Code Spell
         run: cspell '**/*.{dart,swift,kt}' > cspell.log
-
       - name: Run reviewdog for Code Spell Checker
         if: failure()
         env:
@@ -42,22 +38,14 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-lint-${{ github.head_ref }}
-      cancel-in-progress: true
-
     steps:
       - uses: actions/checkout@v3
-
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
-
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
-
       - name: Flutter analyze
         run: flutter analyze --fatal-infos > flutter-analyze.log
-
       - name: Run reviewdog for Flutter Analyzer
         if: failure()
         env:
