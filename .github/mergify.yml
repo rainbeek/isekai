@@ -7,7 +7,6 @@ pull_request_rules:
       - "check-success = Lint Flutter"
       - "check-success = Build iOS dev app"
       - "check-success = Build Android dev app"
-      - "approved-reviews-by = shotaIDE"
     actions:
       merge:
         method: squash
