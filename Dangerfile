@@ -6,6 +6,7 @@ allowed_title_prefixes = %w[
   perf
   refactor
   dev
+  ci
   build
 ]
 
