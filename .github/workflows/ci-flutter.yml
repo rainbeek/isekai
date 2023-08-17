@@ -11,13 +11,14 @@ permissions:
   pull-requests: write
   statuses: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   check-spell:
     name: Check spell
     runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-check-spell-${{ github.head_ref }}
-      cancel-in-progress: true
 
     steps:
       - uses: actions/checkout@v3
@@ -42,9 +43,6 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-lint-${{ github.head_ref }}
-      cancel-in-progress: true
 
     steps:
       - uses: actions/checkout@v3
