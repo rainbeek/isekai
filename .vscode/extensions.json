@@ -3,7 +3,7 @@
     "dart-code.flutter",
     "esbenp.prettier-vscode",
     "localizely.flutter-intl",
-    "streetsidesoftware.code-spell-checker",
-    "misogi.ruby-rubocop"
+    "misogi.ruby-rubocop",
+    "streetsidesoftware.code-spell-checker"
   ]
 }
