@@ -1,11 +1,12 @@
 pull_request_rules:
   - name: Automatic merge PR from dependabot on passing CI
     conditions:
-      - author = dependabot[bot]
-      - check-success = Check spell
-      - check-success = Lint Flutter
-      - check-success = Build iOS dev app
-      - check-success = Build Android dev app
+      - "author = dependabot[bot]"
+      - "check-success = danger/danger"
+      - "check-success = Check spell"
+      - "check-success = Lint Flutter"
+      - "check-success = Build iOS dev app"
+      - "check-success = Build Android dev app"
     actions:
       merge:
         method: squash
