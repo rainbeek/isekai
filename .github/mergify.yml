@@ -1,12 +1,13 @@
 pull_request_rules:
-  - name: Automatic merge PR from dependabot on passing CI
+  - name: Automatically merge PRs from dependabot
     conditions:
       - "author = dependabot[bot]"
-      - "check-success = danger/danger"
-      - "check-success = Check spell"
-      - "check-success = Lint Flutter"
-      - "check-success = Build iOS dev app"
-      - "check-success = Build Android dev app"
+    actions:
+      merge:
+        method: squash
+  - name: Automatically merge PRs from non-owner members
+    conditions:
+      - "approved-reviews-by = shotaIDE"
     actions:
       merge:
         method: squash
