@@ -40,6 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Install reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       - name: Generate uncommited Flutter files
