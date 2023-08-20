@@ -47,13 +47,13 @@ asdf reshim
 VSCode の [Build Runner 拡張機能](https://marketplace.visualstudio.com/items?itemName=GaetSchwartz.build-runner)を利用してビルドするか、以下コマンドにより監視モードを発動させておいてください。
 
 ```shell
-flutter pub run build_runner watch
+dart run build_runner watch
 ```
 
 上記コマンドでエラーが発生した場合は、以下コマンドを実行してみてください。
 
 ```shell
-flutter pub run build_runner build --delete-conflicting-outputs
+dart run build_runner build --delete-conflicting-outputs
 ```
 
 ### Firebase サーバーをローカルで立てて開発
