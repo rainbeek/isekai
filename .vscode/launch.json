@@ -18,12 +18,7 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": [
-        "--dart-define",
-        "SERVER_ENV=dev",
-        "--dart-define-from-file",
-        "dart-defines_dev.json"
-      ]
+      "args": ["--dart-define", "SERVER_ENV=dev"]
     }
   ]
 }
