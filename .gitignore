@@ -3,8 +3,11 @@
 /emulator-data
 
 /.env
-/lib/environment_config.dart
+/dart-defines*.json
 /ios/Flutter/DartDefines.xcconfig
+/lib/environment_config.dart
+
+!/dart-defines_example.json
 
 # Miscellaneous
 *.class

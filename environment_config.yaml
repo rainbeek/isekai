@@ -1,7 +1,0 @@
-environment_config:
-  path: environment_config.dart
-
-  fields:
-    firebaseEmulatorHost:
-      type: String
-      env_var: FIREBASE_EMULATOR_HOST

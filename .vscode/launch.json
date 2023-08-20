@@ -6,15 +6,24 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": ["--dart-define", "SERVER_ENV=emulator"],
-      "preLaunchTask": "Use Environments"
+      "args": [
+        "--dart-define",
+        "SERVER_ENV=emulator",
+        "--dart-define-from-file",
+        "dart-defines_emulator.json"
+      ]
     },
     {
       "name": "Dev-Debug",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": ["--dart-define", "SERVER_ENV=dev"]
+      "args": [
+        "--dart-define",
+        "SERVER_ENV=dev",
+        "--dart-define-from-file",
+        "dart-defines_dev.json"
+      ]
     }
   ]
 }

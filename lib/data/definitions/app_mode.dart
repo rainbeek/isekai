@@ -1,4 +1,7 @@
 class AppMode {
+  static const firebaseEmulatorHost =
+      String.fromEnvironment('FIREBASE_EMULATOR_HOST');
+
   static final serverEnv = _getApiEnv();
 
   // cspell:disable next
