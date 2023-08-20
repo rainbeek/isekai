@@ -1,5 +1,4 @@
 analyzer:
   exclude:
     - "**.freezed.dart"
-    - "lib/environment_config.dart"
     - "lib/firebase_options*.dart"
