@@ -41,6 +41,12 @@ asdf reshim
 
 次に、[Set up an editor > Android Studio and IntelliJ](https://flutter.dev/docs/get-started/editor?tab=androidstudio) に従って、Android Studio の環境構築を完了させます。
 
+#### 4. 開発マシンごとの個別情報の記載
+
+`dart-defines_example.json` を必要な環境のものだけ以下ファイル名でコピーし、中身を適切に書き換えます。
+
+- Emulator: `dart-defines_emulator.json`
+
 ### 普段の開発
 
 `@freezed` アノテーションが付与されたクラスを修正した場合はコード生成が必要です。
