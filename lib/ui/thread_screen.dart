@@ -96,7 +96,7 @@ class ThreadScreen extends ConsumerWidget {
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                height: 750, //TODOサイズを比率にする。
+                height: 750, // TODO(shimizu): サイズを比率にする。
                 alignment: Alignment.center,
                 width: double.infinity,
                 decoration: const BoxDecoration(
