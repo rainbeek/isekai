@@ -23,7 +23,7 @@ class WorldCollidable extends PositionComponent {
 
 class MapLoader {
   static Future<List<Rect>> readRayWorldCollisionMap() async {
-    final collidableRects = <Rect>[];
+    final collidableRectangles = <Rect>[];
     final dynamic collisionMap = json.decode(
       await rootBundle.loadString('assets/tiles/map.json'),
     );
@@ -33,7 +33,7 @@ class MapLoader {
       final int width = collisionMap['width'];
       l['data'].asMap().forEach((i, value) {
         if (value > 1) {
-          collidableRects.add(
+          collidableRectangles.add(
             Rect.fromLTWH(
               (i % width) * 32.0,
               (i / height) * 32.0,
@@ -45,6 +45,6 @@ class MapLoader {
       });
     }
 
-    return collidableRects;
+    return collidableRectangles;
   }
 }
