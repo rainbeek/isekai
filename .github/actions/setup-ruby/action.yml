@@ -1,0 +1,9 @@
+runs:
+  using: "composite"
+  steps:
+    # マシンにRubyはインストール済みだが、キャッシュとbundlerインストールのため、以下アクションを利用
+    - name: Install Ruby, bundler, fastlane and other dependencies
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "2.7"
+        bundler-cache: true

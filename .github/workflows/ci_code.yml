@@ -1,0 +1,94 @@
+name: CI / Code
+
+on:
+  pull_request:
+    branches:
+      - "main"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-spell:
+    name: Check spell
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+      - name: Install Code Spell Checker
+        run: npm install -g cspell
+      - name: Check Code Spell
+        run: cspell '**/*.{dart,swift,kt}' > cspell.log
+      - name: Run reviewdog for Code Spell Checker
+        if: failure()
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: cat cspell.log | reviewdog -efm='%f:%l:%c - %m' -name='Code Spell Checker' -reporter='github-pr-review'
+
+  lint-flutter:
+    name: Lint Flutter
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      - name: Generate uncommited Flutter files
+        uses: ./.github/actions/generate-uncommited-flutter-files
+      - name: Flutter analyze
+        run: flutter analyze --fatal-infos > flutter-analyze.log
+      - name: Run reviewdog for Flutter Analyzer
+        if: failure()
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: cat flutter-analyze.log | reviewdog -efm='%#%t%.%# • %m • %f:%l:%c %r' -name='Flutter Analyzer' -reporter='github-pr-review'
+
+  build-ios-dev-app:
+    name: Build iOS dev app
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      - name: Setup Xcode
+        uses: ./.github/actions/setup-xcode
+      - name: Setup CocoaPods
+        uses: ./.github/actions/setup-cocoapods
+      - name: Generate uncommited Flutter files
+        uses: ./.github/actions/generate-uncommited-flutter-files
+      - name: Build iOS dev app
+        shell: bash
+        run: flutter build ios --dart-define SERVER_ENV=dev --no-codesign
+
+  build-android-dev-app:
+    name: Build Android dev app
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
+      - name: Generate uncommited Flutter files
+        uses: ./.github/actions/generate-uncommited-flutter-files
+      - name: Build Android dev app
+        run: flutter build appbundle --dart-define SERVER_ENV=dev

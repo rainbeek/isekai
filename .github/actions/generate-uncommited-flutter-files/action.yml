@@ -1,0 +1,9 @@
+runs:
+  using: "composite"
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: flutter pub get
+    - name: Generate automatic codes
+      shell: bash
+      run: flutter pub run build_runner build

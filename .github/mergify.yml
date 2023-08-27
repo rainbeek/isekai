@@ -1,0 +1,13 @@
+pull_request_rules:
+  - name: Automatically merge PRs from dependabot
+    conditions:
+      - "author = dependabot[bot]"
+    actions:
+      merge:
+        method: squash
+  - name: Automatically merge PRs from non-owner members
+    conditions:
+      - "approved-reviews-by = shotaIDE"
+    actions:
+      merge:
+        method: squash
