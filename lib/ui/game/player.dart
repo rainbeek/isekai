@@ -45,7 +45,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   Future<void> _loadAnimations() async {
     final spriteSheet = SpriteSheet(
-      image: await game.images.load('player_spritesheet.png'),
+      image: await game.images.load('player_sprite_sheet.png'),
       srcSize: Vector2(29, 32),
     );
 
