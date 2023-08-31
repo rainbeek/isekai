@@ -5,5 +5,6 @@ import 'package:live_bresto/data/definitions/app_mode.dart';
 import 'package:live_bresto/data/service/database_service.dart';
 
 final currentThreadProvider = StreamProvider((ref) {
+  // ignore: deprecated_member_use
   return ref.watch(threadProvider(AppMode.threadIdForDebug).stream);
 });
