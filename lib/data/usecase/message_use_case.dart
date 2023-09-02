@@ -6,7 +6,6 @@ import 'package:live_bresto/data/service/database_service.dart';
 import 'package:live_bresto/data/usecase/session_use_case.dart';
 
 final currentThreadMessagesProvider = StreamProvider((ref) {
-  // ignore: deprecated_member_use
   return ref.watch(threadMessagesProvider(AppMode.threadIdForDebug).stream);
 });
 

@@ -15,9 +15,7 @@ class ThreadScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ignore: deprecated_member_use
     final threadStream = ref.watch(currentThreadProvider.stream);
-    // ignore: deprecated_member_use
     final messagesStream = ref.watch(currentThreadMessagesProvider.stream);
     final presenter = ref.watch(_threadPresenterProvider);
 
