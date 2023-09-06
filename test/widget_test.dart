@@ -13,7 +13,7 @@ void main() {
     sessionActions = MockSessionActions();
   });
 
-  testWidgets('ゲーム画面が正常に表示されること', (tester) async {
+  testWidgets('最初のゲーム画面が正常に表示されること', (tester) async {
     when(sessionActions.ensureLoggedIn).thenAnswer((_) async {});
 
     await tester.pumpWidget(

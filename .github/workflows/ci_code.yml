@@ -59,8 +59,9 @@ jobs:
   test-flutter:
     name: Test Flutter
     permissions:
+      checks: write
       contents: read
-      pull-requests: write
+      pull-requests: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
