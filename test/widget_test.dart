@@ -24,7 +24,5 @@ void main() {
         child: RootApp(),
       ),
     );
-
-    await tester.pumpAndSettle();
   });
 }
