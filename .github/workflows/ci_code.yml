@@ -75,7 +75,7 @@ jobs:
       - uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: "Flutter tests"
+          name: "CI / Code / Test Flutter results"
           path: "flutter-test-results.log"
           reporter: "flutter-json"
 
