@@ -56,6 +56,27 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: cat flutter-analyze.log | reviewdog -efm='%#%t%.%# • %m • %f:%l:%c %r' -name='Flutter Analyzer' -reporter='github-pr-review'
 
+  test-flutter:
+    name: Test Flutter
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      - name: Generate uncommited Flutter files
+        uses: ./.github/actions/generate-uncommited-flutter-files
+      - name: Run Flutter test
+        run: flutter test --machine > flutter-test-results.log
+      - uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: "Flutter tests"
+          path: "flutter-test-results.log"
+          reporter: "flutter-json"
+
   build-ios-dev-app:
     name: Build iOS dev app
     permissions:
