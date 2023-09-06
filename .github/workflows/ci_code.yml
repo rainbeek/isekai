@@ -62,6 +62,7 @@ jobs:
       checks: write
       contents: read
       pull-requests: read
+      statuses: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
