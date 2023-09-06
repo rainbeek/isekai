@@ -4,7 +4,7 @@ import 'package:live_bresto/data/usecase/session_use_case.dart';
 import 'package:live_bresto/ui/root_app.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockSessionActions extends Mock implements SessionActions {}
+import '../data/usecase/mock_session_use_case.dart';
 
 void main() {
   late MockSessionActions sessionActions;
