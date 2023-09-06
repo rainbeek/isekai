@@ -8,6 +8,7 @@ allowed_title_prefixes = %w[
   dev
   ci
   build
+  test
 ]
 
 appended_allowed_title_prefixes = allowed_title_prefixes.map do |prefix|
