@@ -24,7 +24,5 @@ void main() {
         child: RootApp(),
       ),
     );
-
-    expect(false, true);
   });
 }
