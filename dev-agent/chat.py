@@ -16,12 +16,10 @@ def chat_with_function_calling_loop(messages, functions, actor_name: str):
 
     while iteration < 30:
         capped_messages = messages.to_capped_messages()
-
         model = 'gpt-4-0613' if use_gpt_4 else 'gpt-3.5-turbo-0613'
-
         response = openai.ChatCompletion.create(
             model=model,
-            messages=messages.to_capped_messages(),
+            messages=capped_messages,
             functions=function_definitions,
             function_call="auto",
         )
