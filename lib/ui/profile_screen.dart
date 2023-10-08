@@ -13,20 +13,34 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profile = ref.watch(profileServiceProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('プロフィール'),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(profile.icon, style: const TextStyle(fontSize: 48)),
-            Text(profile.name, style: const TextStyle(fontSize: 24)),
+          children: [
+            const SizedBox(height: 16),
+            const _ProfilePanel(),
+            SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 16),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ProfilePanel extends ConsumerWidget {
+  const _ProfilePanel();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profile = ref.watch(profileProvider);
+
+    return ListTile(
+      leading:
+          Text(profile.icon, style: Theme.of(context).textTheme.headlineLarge),
+      title: Text(profile.name),
     );
   }
 }

@@ -172,8 +172,7 @@ class _ProfileIconButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final icon =
-        ref.watch(profileServiceProvider.select((profile) => profile.icon));
+    final icon = ref.watch(profileProvider.select((profile) => profile.icon));
 
     return IconButton(
       icon: Text(icon),
