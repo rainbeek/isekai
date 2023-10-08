@@ -64,10 +64,7 @@ class LlmMessageContainer:
                 role=Role(message["role"])
             )
         )
-        self.messages.append({
-            "role": Role(message["role"]).value,
-            "content": content
-        })
+        self.messages.append(message)
 
     def total_token(self) -> int:
         return sum(meta.token for meta in self.meta_data_list)
