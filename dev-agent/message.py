@@ -8,35 +8,35 @@ import tiktoken
 class LlmMessageContainer:
     def __init__(self):
         self.messages = []
-        self.metas = []
+        self.meta_data_list = []
         self.token_encoder = tiktoken.get_encoding("cl100k_base")
 
     def add_system_message(self, content: str) -> None:
-        self.metas.append({
-            "index": len(self.metas),
+        self.meta_data_list.append({
+            "index": len(self.meta_data_list),
             "token": len(self.token_encoder.encode(content)),
             "role": "system"
         })
         self.messages.append({"role": "system", "content": content})
 
     def add_user_message(self, content: str) -> None:
-        self.metas.append({
-            "index": len(self.metas),
+        self.meta_data_list.append({
+            "index": len(self.meta_data_list),
             "token": len(self.token_encoder.encode(content)),
             "role": "user"
         })
         self.messages.append({"role": "user", "content": content})
 
     def add_raw_message(self, message: Dict[str, Any]) -> None:
-        self.metas.append({
-            "index": len(self.metas),
+        self.meta_data_list.append({
+            "index": len(self.meta_data_list),
             "token": len(self.token_encoder.encode(message["content"])),
             "role": message["role"]
         })
         self.messages.append(message)
 
     def total_token(self) -> int:
-        return sum(meta["token"] for meta in self.metas)
+        return sum(meta["token"] for meta in self.meta_data_list)
 
     def add_raw_messages(self, messages: List[Dict[str, Any]]) -> None:
         for message in messages:
@@ -45,9 +45,9 @@ class LlmMessageContainer:
     def to_capped_messages(self, token_limit: int = 28000) -> List[Dict[str, Any]]:
         if self.total_token() > token_limit:
             system_metas = [
-                meta for meta in self.metas if meta["role"] == "system"]
+                meta for meta in self.meta_data_list if meta["role"] == "system"]
             not_system_metas = [
-                meta for meta in self.metas if meta["role"] != "system"]
+                meta for meta in self.meta_data_list if meta["role"] != "system"]
             current_token = sum(meta["token"] for meta in system_metas)
             filtered_indexes = [meta["index"] for meta in system_metas]
 
