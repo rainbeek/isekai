@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from ai import chat_with_function_calling_loop
-from function import GetFilesList, ModifyFile, ReadFile
+from function import GetFilesList, MakeNewFile, ModifyFile, ReadFile
 
 
 class Programmer:
@@ -36,6 +36,7 @@ class Programmer:
             functions=[
                 GetFilesList(),
                 ReadFile(),
+                MakeNewFile(),
                 ModifyFile(),
             ],
             actor_name=self._actor_name,

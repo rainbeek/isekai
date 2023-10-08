@@ -61,6 +61,39 @@ class ReadFile:
         return json.dumps(result_dict)
 
 
+class MakeNewFile:
+    definition = {
+        "name": 'MakeNewFile',
+        "description": "Make new file",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "File path to make.",
+                },
+                "contents": {
+                    "type": "string",
+                    "description": "File contents to write.",
+                },
+            },
+            "required": ["path", "contents"],
+        },
+    }
+
+    def __init__(self) -> None:
+        pass
+
+    def execute_and_generate_message(self, args) -> str:
+        path = args['path']
+        contents = args['contents']
+
+        with open(path, 'w') as f:
+            f.write(contents)
+
+        return 'Succeeded to make new file.'
+
+
 class ModifyFile:
     definition = {
         "name": 'ModifyFile',
