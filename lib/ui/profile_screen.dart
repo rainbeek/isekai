@@ -5,10 +5,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text('プロフィール'),
       ),
       body: Center(
-        child: Text('Profile Screen'),
+        child: Text('プロフィール'),
       ),
     );
   }
