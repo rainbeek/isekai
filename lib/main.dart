@@ -12,7 +12,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final FirebaseOptions firebaseOptions;
-  switch (AppMode.serverEnv) {
+  switch (serverEnv) {
     case ServerEnv.emulator:
       firebaseOptions = emulator.DefaultFirebaseOptions.currentPlatform;
       break;
@@ -22,8 +22,7 @@ Future<void> main() async {
   }
   await Firebase.initializeApp(options: firebaseOptions);
 
-  if (AppMode.serverEnv == ServerEnv.emulator) {
-    const firebaseEmulatorHost = AppMode.firebaseEmulatorHost;
+  if (serverEnv == ServerEnv.emulator) {
     await FirebaseAuth.instance.useAuthEmulator(firebaseEmulatorHost, 9099);
     FirebaseFirestore.instance.useFirestoreEmulator(firebaseEmulatorHost, 8080);
   }

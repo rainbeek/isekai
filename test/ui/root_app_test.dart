@@ -21,7 +21,7 @@ void main() {
         overrides: [
           sessionActionsProvider.overrideWithValue(sessionActions),
         ],
-        child: RootApp(),
+        child: const RootApp(),
       ),
     );
   });

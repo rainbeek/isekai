@@ -1,11 +1,12 @@
 {
   "dictionaryDefinitions": [
-    { "name": "live-bresto", "path": "./dictionaries/live-bresto.txt" },
-    { "name": "dependencies", "path": "./dictionaries/dependencies.txt" }
+    { "name": "isekai", "path": "./dictionary/isekai.txt" },
+    { "name": "dependency", "path": "./dictionary/dependency.txt" }
   ],
-  "dictionaries": ["live-bresto", "dependencies"],
+  "dictionaries": ["isekai", "dependency"],
   "ignorePaths": [
     "*.freezed.dart",
+    "*.g.dart",
     "/lib/firebase_options_*.dart",
     "/lib/generated_plugin_registrant.dart"
   ],

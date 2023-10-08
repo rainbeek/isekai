@@ -6,7 +6,7 @@ import 'package:live_bresto/data/service/auth_service.dart';
 
 /// セッションが生成されるまで待ち、not-nullの型で取得するためのプロバイダー
 final forceSessionProvider = FutureProvider((ref) async {
-  return await ref.watch(_sessionStreamProvider.future);
+  return ref.watch(_sessionStreamProvider.future);
 });
 
 final sessionActionsProvider = Provider(

@@ -12,7 +12,7 @@ class GameInit extends Component with HasGameReference<GameRouter> {
       game.router.pushNamed('field_home');
     }
 
-    // TODO: 初期化処理
+    // TODO(takeda): 初期化処理
     await ref.setBool('isRegistered', true);
     game.router.pushNamed('field_home');
   }

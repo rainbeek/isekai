@@ -6,7 +6,7 @@ import 'package:live_bresto/data/service/database_service.dart';
 import 'package:live_bresto/data/usecase/session_use_case.dart';
 
 final currentThreadMessagesProvider = StreamProvider((ref) {
-  return ref.watch(threadMessagesProvider(AppMode.threadIdForDebug).stream);
+  return ref.watch(threadMessagesProvider(threadIdForDebug).stream);
 });
 
 final messageActionsProvider = Provider(
@@ -28,7 +28,7 @@ class MessageActions {
 
   Future<void> sendMessage({required String text}) async {
     final session = await _ref.read(forceSessionProvider.future);
-    const threadId = AppMode.threadIdForDebug;
+    const threadId = threadIdForDebug;
 
     await _databaseActions.sendMessage(
       threadId: threadId,
