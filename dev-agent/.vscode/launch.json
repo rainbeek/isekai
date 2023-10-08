@@ -2,10 +2,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run",
+      "name": "Develop",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/main.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "Plan",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/plan.py",
       "console": "integratedTerminal",
       "justMyCode": true,
       "envFile": "${workspaceFolder}/.env"
