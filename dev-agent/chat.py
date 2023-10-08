@@ -44,7 +44,7 @@ def chat_with_function_calling_loop(messages, functions, actor_name: str):
             )
 
             print(
-                f'{actor_name}: Request to call {function_response} with {function_arguments}'
+                f'{actor_name}: Request to call {function_name} with {function_arguments}'
             )
 
             messages.append(response_message)
