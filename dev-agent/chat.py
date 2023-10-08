@@ -7,7 +7,7 @@ import openai
 
 
 def chat_with_function_calling_loop(messages, functions, actor_name: str):
-    openai.organization = os.environ.get('OPENAI_ORGANIZATION')
+    openai.organization = os.environ.get('OPENAI_ORGANIZATION_ID')
     openai.api_key = os.environ.get('OPENAI_API_KEY')
 
     iteration = 0
