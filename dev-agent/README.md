@@ -40,4 +40,8 @@ cp .env.example .env
 
 ## 実行方法
 
-VSCode の実行とデバッグ画面で、「Run」を実行してください。
+VSCode の「実行とデバッグ画面」で、「Run」を実行してください。
+
+# 参考
+
+https://zenn.dev/happy_elements/articles/0b2691b3fc53fd
