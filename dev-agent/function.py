@@ -1,7 +1,9 @@
 # coding: utf-8
+
 import glob
 import json
 import os
+import subprocess
 
 
 class GetFilesList:
@@ -125,6 +127,31 @@ class ModifyFile:
             f.write(contents)
 
         return 'Succeeded to modify file.'
+
+
+class AnalyzeFlutter:
+    definition = {
+        "name": 'AnalyzeFlutter',
+        "description": "Analyze flutter",
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": ["path"],
+        },
+    }
+
+    def __init__(self) -> None:
+        pass
+
+    def execute_and_generate_message(self, args) -> str:
+        result = subprocess.run(
+            ['flutter', 'analyze'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            cwd='../',
+            text=True,
+        )
+        return f'{result.stdout}\n{result.stderr}'
 
 
 class RecordLGTM:

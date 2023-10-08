@@ -1,7 +1,8 @@
 # coding: utf-8
 
 from chat import chat_with_function_calling_loop
-from function import GetFilesList, MakeNewFile, ModifyFile, ReadFile
+from function import (AnalyzeFlutter, GetFilesList, MakeNewFile, ModifyFile,
+                      ReadFile)
 
 
 class Programmer:
@@ -41,6 +42,7 @@ class Programmer:
                 ReadFile(),
                 MakeNewFile(),
                 ModifyFile(),
+                AnalyzeFlutter(),
             ],
             actor_name=self._actor_name,
         )
