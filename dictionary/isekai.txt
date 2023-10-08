@@ -1,4 +1,3 @@
-bresto
 shimizu
 takeda
 usecase
