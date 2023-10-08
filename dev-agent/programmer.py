@@ -3,6 +3,7 @@
 from chat import chat_with_function_calling_loop
 from function import (AnalyzeFlutter, GetFilesList, MakeNewFile, ModifyFile,
                       ReadFile)
+from message import LlmMessageContainer
 
 
 class Programmer:
@@ -18,16 +19,18 @@ class Programmer:
         with open('programmer-prompt.md', encoding='utf-8') as f:
             prompt = f.read()
 
-        system_message = prompt
+        message_container = LlmMessageContainer()
 
-        system_message += (
+        message_container.add_system_message(prompt)
+
+        message_container.add_system_message(
             'The request from the engineer leader is as follows.\n\n'
             + self._leader_comment
             + '\n\n'
         )
 
         if reviewer_comment is not None:
-            system_message += (
+            message_container.add_system_message(
                 'The request from the reviewer is as follows.\n\n'
                 + reviewer_comment
                 + '\n\n'
@@ -36,7 +39,7 @@ class Programmer:
         # TODO: 現状の差分をシステムプロンプトに入れておく
 
         comment = chat_with_function_calling_loop(
-            messages=system_message,
+            messages=message_container,
             functions=[
                 GetFilesList(),
                 ReadFile(),

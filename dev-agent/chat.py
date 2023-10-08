@@ -11,18 +11,15 @@ def chat_with_function_calling_loop(messages, functions, actor_name: str):
     openai.api_key = os.environ.get('OPENAI_API_KEY')
 
     iteration = 0
-    messages = [
-        {
-            "role": "user",
-            "content": f"{messages}",
-        }
-    ]
     function_definitions = [function.definition for function in functions]
 
     while iteration < 30:
+        test = messages.to_capped_messages()
+
         response = openai.ChatCompletion.create(
-            model="gpt-4-0613",
-            messages=messages,
+            # model="gpt-4-0613",
+            model="gpt-3.5-turbo-0613",
+            messages=messages.to_clapped_messages(),
             functions=function_definitions,
             function_call="auto",
         )
@@ -47,9 +44,9 @@ def chat_with_function_calling_loop(messages, functions, actor_name: str):
                 f'{actor_name}: Request to call {function_name} with {function_arguments}'
             )
 
-            messages.append(response_message)
+            messages.add_raw_message(response_message)
 
-            messages.append({
+            messages.add_raw_message({
                 "role": "function",
                 "name": function_name,
                 "content": function_response,
