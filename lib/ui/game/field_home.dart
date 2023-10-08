@@ -26,7 +26,9 @@ class FieldHome extends Component
 
     _cameraComponent.follow(_player);
 
-    _cameraComponent.viewport.add(Joystick(onDirectionChanged));
+    _cameraComponent.viewport.add(
+      Joystick((direction) => _player.direction = direction),
+    );
 
     await addWorldCollision(_world);
 
@@ -35,23 +37,21 @@ class FieldHome extends Component
     );
   }
 
-  Future<void> addWorldCollision(World world) async =>
-      (await MapLoader.readRayWorldCollisionMap()).forEach((rect) {
-        world.add(
-          WorldCollidable()
-            ..position = Vector2(rect.left, rect.top)
-            ..width = rect.width
-            ..height = rect.height,
-        );
-      });
+  Future<void> addWorldCollision(World world) async {
+    final rectList = await MapLoader.readRayWorldCollisionMap();
+    for (final rect in rectList) {
+      world.add(
+        WorldCollidable()
+          ..position = Vector2(rect.left, rect.top)
+          ..width = rect.width
+          ..height = rect.height,
+      );
+    }
+  }
 
   Player get player => _player;
 
   set player(Player p) {
     _player.direction = p.direction;
-  }
-
-  void onDirectionChanged(JoystickDirection d) {
-    _player.direction = d;
   }
 }
