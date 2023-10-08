@@ -117,7 +117,7 @@ class ThreadScreen extends ConsumerWidget {
                     BoxShadow(
                       color: Colors.grey,
                       blurRadius: 20,
-                    )
+                    ),
                   ],
                 ),
                 child: Column(

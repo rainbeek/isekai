@@ -5,5 +5,5 @@ import 'package:live_bresto/data/definitions/app_mode.dart';
 import 'package:live_bresto/data/service/database_service.dart';
 
 final currentThreadProvider = StreamProvider((ref) {
-  return ref.watch(threadProvider(AppMode.threadIdForDebug).stream);
+  return ref.watch(threadProvider(threadIdForDebug).stream);
 });

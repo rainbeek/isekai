@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   static const name = 'ProfileScreen';
 
-  static MaterialPageRoute route() => MaterialPageRoute<ProfileScreen>(
-        builder: (_) => ProfileScreen(),
+  static MaterialPageRoute<ProfileScreen> route() => MaterialPageRoute(
+        builder: (_) => const ProfileScreen(),
         settings: const RouteSettings(name: name),
       );
 
@@ -12,9 +14,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('プロフィール'),
+        title: const Text('プロフィール'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('プロフィール'),
       ),
     );

@@ -54,9 +54,4 @@ class FieldHome extends Component
   void onDirectionChanged(JoystickDirection d) {
     _player.direction = d;
   }
-
-  @override
-  void update(double delta) {
-    super.update(delta);
-  }
 }
