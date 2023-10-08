@@ -45,7 +45,7 @@ class ReadFile:
         path = args['path']
 
         if os.path.exists(path) is True:
-            with open(path) as f:
+            with open(path, encoding='utf-8') as f:
                 contents = f.read()
 
             result_dict = {
@@ -88,7 +88,7 @@ class MakeNewFile:
         path = args['path']
         contents = args['contents']
 
-        with open(path, 'w') as f:
+        with open(path, 'w', encoding='utf-8') as f:
             f.write(contents)
 
         return 'Succeeded to make new file.'
@@ -121,7 +121,7 @@ class ModifyFile:
         path = args['path']
         contents = args['contents']
 
-        with open(path, 'w') as f:
+        with open(path, 'w', encoding='utf-8') as f:
             f.write(contents)
 
         return 'Succeeded to modify file.'
