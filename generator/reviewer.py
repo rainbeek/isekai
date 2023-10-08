@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from ai import chat_with_function_calling_loop
+from chat import chat_with_function_calling_loop
 from function import GetFilesList, ReadFile, RecordLGTM
 
 

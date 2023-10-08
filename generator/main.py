@@ -8,7 +8,7 @@ from reviewer import Reviewer
 
 def work():
     prompt = os.environ.get('PROMPT')
-    if prompt is None:
+    if prompt is None or prompt == '':
         issue_title = os.environ.get('ISSUE_TITLE')
         if issue_title is None:
             raise Exception('PROMPT or ISSUE_TITLE must be set')
