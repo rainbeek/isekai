@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/model/thread.dart';
+import 'package:live_bresto/data/service/profile_service.dart';
 import 'package:live_bresto/data/usecase/message_use_case.dart';
 import 'package:live_bresto/data/usecase/thread_use_case.dart';
 import 'package:live_bresto/ui/profile_screen.dart';
@@ -42,16 +43,8 @@ class ThreadScreen extends ConsumerWidget {
             return Text(thread.title);
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {
-              Navigator.push(
-                context,
-                ProfileScreen.route(),
-              );
-            },
-          ),
+        actions: const [
+          _ProfileIconButton(),
         ],
       ),
       body: Column(
@@ -170,6 +163,26 @@ class ThreadScreen extends ConsumerWidget {
         tooltip: 'コメントを投稿する',
         child: const Icon(Icons.add),
       ),
+    );
+  }
+}
+
+class _ProfileIconButton extends ConsumerWidget {
+  const _ProfileIconButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final icon =
+        ref.watch(profileServiceProvider.select((profile) => profile.icon));
+
+    return IconButton(
+      icon: Text(icon),
+      onPressed: () {
+        Navigator.push(
+          context,
+          ProfileScreen.route(),
+        );
+      },
     );
   }
 }
