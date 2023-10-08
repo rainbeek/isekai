@@ -6,6 +6,7 @@ When modifying, please pay particular attention to the following points.
 
 - When modifying a file, read_file first and indent properly.
 - Create files in locations consistent with existing folder structure.
+- Do not use `hooks_riverpod`, use only `flutter_riverpod`.
 
 Once the modification is complete, use the `AnalyzeFlutter` to verify that there are no problems with the modification.
 
