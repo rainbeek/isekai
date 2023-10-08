@@ -5,6 +5,7 @@ import 'package:live_bresto/data/model/thread.dart';
 import 'package:live_bresto/data/usecase/message_use_case.dart';
 import 'package:live_bresto/data/usecase/thread_use_case.dart';
 import 'package:live_bresto/ui/thread_presenter.dart';
+import 'package:live_bresto/ui/profile_screen.dart';
 
 final _threadPresenterProvider = Provider(
   (ref) => ThreadPresenter(messageActions: ref.watch(messageActionsProvider)),
@@ -22,6 +23,17 @@ class ThreadScreen extends ConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()),
+              );
+            },
+          ),
+        ],
         title: StreamBuilder<Thread>(
           stream: threadStream,
           builder: (context, snapshot) {
