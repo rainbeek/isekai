@@ -8,7 +8,7 @@ import openai
 
 def chat_with_function_calling_loop(messages, functions, actor_name: str):
     openai.organization = os.environ.get('OPENAI_ORGANIZATION')
-    openai.api_key = os.environ.get('OPENAI_TOKEN')
+    openai.api_key = os.environ.get('OPENAI_API_KEY')
 
     iteration = 0
     messages = [
@@ -24,7 +24,7 @@ def chat_with_function_calling_loop(messages, functions, actor_name: str):
             model="gpt-4-0613",
             messages=messages,
             functions=function_definitions,
-            function_call="auto",  # auto is default, but we'll be explicit
+            function_call="auto",
         )
 
         response_message = response["choices"][0]["message"]
