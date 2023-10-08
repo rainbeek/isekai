@@ -9,6 +9,15 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "Plugin",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/server.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
