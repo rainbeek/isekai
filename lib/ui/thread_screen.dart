@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/model/thread.dart';
 import 'package:live_bresto/data/usecase/message_use_case.dart';
 import 'package:live_bresto/data/usecase/thread_use_case.dart';
-import 'package:live_bresto/ui/thread_presenter.dart';
 import 'package:live_bresto/ui/profile_screen.dart';
+import 'package:live_bresto/ui/thread_presenter.dart';
 
 final _threadPresenterProvider = Provider(
   (ref) => ThreadPresenter(messageActions: ref.watch(messageActionsProvider)),
@@ -42,13 +42,13 @@ class ThreadScreen extends ConsumerWidget {
             return Text(thread.title);
           },
         ),
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()),
+                ProfileScreen.route(),
               );
             },
           ),
