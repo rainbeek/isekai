@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import glob
+import itertools
 import json
 import os
 import subprocess
@@ -20,7 +21,11 @@ class GetFilesList:
         pass
 
     def execute_and_generate_message(self, args) -> str:
-        files = glob.glob('../**/*.dart', recursive=True)
+        files_for_extensions = [
+            glob.glob(f'../**/*.{extension}', recursive=True)
+            for extension in ['dart', 'yaml']
+        ]
+        files = list(itertools.chain.from_iterable(files_for_extensions))
         return json.dumps(files)
 
 
