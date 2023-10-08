@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "env": {
+        "PROMPT": "ThreadScreenの画面の右上にプロフィールボタンを作り、タップすると、空のプロフィール画面に遷移するように修正する"
+      },
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
