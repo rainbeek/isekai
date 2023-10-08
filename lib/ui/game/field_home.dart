@@ -16,7 +16,7 @@ class FieldHome extends Component
 
   @override
   Future<void> onLoad() async {
-    _world = World()..add(Map());
+    _world = World()..add(MapSprite());
     _world.add(_player);
     _cameraComponent = CameraComponent(
       world: _world,
@@ -38,7 +38,7 @@ class FieldHome extends Component
   }
 
   Future<void> addWorldCollision(World world) async {
-    final rectList = await MapLoader.readRayWorldCollisionMap();
+    final rectList = await readRayWorldCollisionMap();
     for (final rect in rectList) {
       world.add(
         WorldCollidable()

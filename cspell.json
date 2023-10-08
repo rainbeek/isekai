@@ -6,6 +6,7 @@
   "dictionaries": ["live-bresto", "dependencies"],
   "ignorePaths": [
     "*.freezed.dart",
+    "*.g.dart",
     "/lib/firebase_options_*.dart",
     "/lib/generated_plugin_registrant.dart"
   ],
