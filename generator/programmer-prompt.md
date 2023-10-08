@@ -8,4 +8,4 @@ When modifying, please pay particular attention to the following points.
 - Create files in locations consistent with existing folder structure.
 
 You are the only programmer. Don't raise the issue with the reviewer while there is a problem solve the problem before responding to the reviewer.
-After making the corrections, please inform the reviewer of your concerns in japanese.
+After making the corrections, please inform the reviewer of your concerns.

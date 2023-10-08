@@ -13,7 +13,7 @@ class Reviewer:
 
     def work(self, programmer_comment: str) -> str:
         print('---------------------------------')
-        print(f'{self._actor_name}: start to work')
+        print(f'{self._actor_name}: Start to work')
 
         with open('reviewer-prompt.md', encoding='utf-8') as f:
             prompt = f.read()
