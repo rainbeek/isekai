@@ -4,7 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
 import 'package:flutter/services.dart';
-import 'package:live_bresto/data/model/map_seeds.dart';
+import 'package:live_bresto/data/model/world_map.dart';
 
 class MapSprite extends SpriteComponent with HasGameReference {
   @override
@@ -28,7 +28,7 @@ Future<List<Rect>> readRayWorldCollisionMap() async {
     await rootBundle.loadString('assets/tiles/map.json'),
   );
   final collisionMap =
-      MapSeeds.fromJson(collisionMapJson as Map<String, dynamic>);
+      WorldMap.fromJson(collisionMapJson as Map<String, dynamic>);
 
   for (final layer in collisionMap.layers) {
     layer.data.asMap().forEach((index, value) {
