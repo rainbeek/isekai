@@ -15,18 +15,23 @@ class Reviewer:
         print('---------------------------------')
         print(f'{self._actor_name}: start to work')
 
-        system_message = (
-            "You are an excellent Flutter program reviewer. \n" +
-            "We review and thoroughly check the modifications made by programmers in response to requests from engineer leader, " +
-            "and identify any points that require additional attention and point them out to programmers in japanese.\n" +
-            "Once all checks have been completed and there are no issues found, ensure you execute the RecordLGTM function.\n" +
-            "When reviewing, please pay particular attention to the following points:\n" +
-            "- The revised code should have a natural design, with readable code that utilizes appropriate and understandable variable names.\n" +
-            "The request from the engineer leader is as follows.\n\n" + self._leader_comment
+        with open('reviewer-prompt.md', encoding='utf-8') as f:
+            prompt = f.read()
+
+        system_message = prompt
+
+        system_message += (
+            + 'The request from the engineer leader is as follows.\n\n'
+            + self._leader_comment
+            + '\n\n'
         )
 
         if programmer_comment is not None:
-            system_message += "The request from the programmer is as follows.\n\n" + programmer_comment
+            system_message += (
+                'The request from the programmer is as follows.\n\n'
+                + programmer_comment
+                + '\n\n'
+            )
 
         # TODO: 現状の差分をシステムプロンプトに入れておく
 

@@ -9,6 +9,10 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 2
   },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.fixAll": true,
