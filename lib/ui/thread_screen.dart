@@ -43,8 +43,15 @@ class ThreadScreen extends ConsumerWidget {
             return Text(thread.title);
           },
         ),
-        actions: const [
-          _ProfileIconButton(),
+        actions: [
+          _ProfileIconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                ProfileScreen.route(),
+              );
+            },
+          ),
         ],
       ),
       body: Column(
@@ -168,7 +175,11 @@ class ThreadScreen extends ConsumerWidget {
 }
 
 class _ProfileIconButton extends ConsumerWidget {
-  const _ProfileIconButton();
+  const _ProfileIconButton({
+    required this.onPressed,
+  });
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -176,12 +187,7 @@ class _ProfileIconButton extends ConsumerWidget {
 
     return IconButton(
       icon: Text(icon),
-      onPressed: () {
-        Navigator.push(
-          context,
-          ProfileScreen.route(),
-        );
-      },
+      onPressed: onPressed,
     );
   }
 }
