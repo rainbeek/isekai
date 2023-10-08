@@ -20,7 +20,7 @@ class Programmer:
         system_message = prompt
 
         system_message += (
-            + 'The request from the engineer leader is as follows.\n\n'
+            'The request from the engineer leader is as follows.\n\n'
             + self._leader_comment
             + '\n\n'
         )
