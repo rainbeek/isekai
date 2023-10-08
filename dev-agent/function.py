@@ -128,10 +128,13 @@ class ModifyFile:
         path = args['path']
         contents = args['contents']
 
-        with open(path, 'w', encoding='utf-8') as f:
-            f.write(contents)
+        if os.path.exists(path) is True:
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(contents)
 
-        return 'Succeeded to modify file.'
+            return 'Succeeded to modify the file.'
+        else:
+            return 'Failed to find the file.'
 
 
 class AnalyzeFlutter:
