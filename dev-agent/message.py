@@ -62,9 +62,3 @@ class LlmMessageContainer:
             return system_and_filtered_message
         else:
             return self.messages
-
-    def add_default_system_message(self) -> None:
-        # Replace `Time.current.to_s(:jp_mdw_hm)` with an equivalent Python method to get the current time in the desired format.
-        # Here, I'm just using the default string representation of the current datetime.
-        from datetime import datetime
-        self.add_system_message(f"Current time is {datetime.now()}")

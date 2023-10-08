@@ -9,16 +9,18 @@ import openai
 def chat_with_function_calling_loop(messages, functions, actor_name: str):
     openai.organization = os.environ.get('OPENAI_ORGANIZATION_ID')
     openai.api_key = os.environ.get('OPENAI_API_KEY')
+    use_gpt_4 = os.environ.get('USE_GPT_4', 'false') == 'true'
 
     iteration = 0
     function_definitions = [function.definition for function in functions]
 
     while iteration < 30:
-        test = messages.to_capped_messages()
+        capped_messages = messages.to_capped_messages()
+
+        model = 'gpt-4-0613' if use_gpt_4 else 'gpt-3.5-turbo-0613'
 
         response = openai.ChatCompletion.create(
-            # model="gpt-4-0613",
-            model="gpt-3.5-turbo-0613",
+            model=model,
             messages=messages.to_capped_messages(),
             functions=function_definitions,
             function_call="auto",
