@@ -5,13 +5,23 @@ import 'package:live_bresto/data/model/thread.dart';
 import 'package:live_bresto/data/usecase/message_use_case.dart';
 import 'package:live_bresto/data/usecase/thread_use_case.dart';
 import 'package:live_bresto/ui/thread_presenter.dart';
+import 'ProfileScreen.dart'; // Import ProfileScreen
 
 final _threadPresenterProvider = Provider(
   (ref) => ThreadPresenter(messageActions: ref.watch(messageActionsProvider)),
 );
 
+
 class ThreadScreen extends ConsumerWidget {
   const ThreadScreen({super.key});
+
+  // Function to navigate to ProfileScreen
+  void _navigateToProfile(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProfileScreen()),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,6 +51,12 @@ class ThreadScreen extends ConsumerWidget {
             return Text(thread.title);
           },
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.account_circle),
+            onPressed: () => _navigateToProfile(context), // Navigate on press
+          ),
+        ],
       ),
       body: Column(
         children: [
