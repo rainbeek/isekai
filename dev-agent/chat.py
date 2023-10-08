@@ -19,7 +19,7 @@ def chat_with_function_calling_loop(messages, functions, actor_name: str):
         response = openai.ChatCompletion.create(
             # model="gpt-4-0613",
             model="gpt-3.5-turbo-0613",
-            messages=messages.to_clapped_messages(),
+            messages=messages.to_capped_messages(),
             functions=function_definitions,
             function_call="auto",
         )
