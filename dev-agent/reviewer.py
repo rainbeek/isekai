@@ -2,6 +2,7 @@
 
 from chat import chat_with_function_calling_loop
 from function import GetFilesList, ReadFile, RecordLGTM
+from message import LlmMessageContainer
 
 
 class Reviewer:
@@ -18,16 +19,18 @@ class Reviewer:
         with open('reviewer-prompt.md', encoding='utf-8') as f:
             prompt = f.read()
 
-        system_message = prompt
+        message_container = LlmMessageContainer()
 
-        system_message += (
+        message_container.add_system_message(prompt)
+
+        message_container.add_system_message(
             'The request from the engineer leader is as follows.\n\n'
             + self._leader_comment
             + '\n\n'
         )
 
         if programmer_comment is not None:
-            system_message += (
+            message_container.add_system_message(
                 'The request from the programmer is as follows.\n\n'
                 + programmer_comment
                 + '\n\n'
@@ -36,7 +39,7 @@ class Reviewer:
         # TODO: 現状の差分をシステムプロンプトに入れておく
 
         comment = chat_with_function_calling_loop(
-            messages=system_message,
+            messages=message_container,
             functions=[
                 GetFilesList(),
                 ReadFile(),

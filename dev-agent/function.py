@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import glob
+import itertools
 import json
 import os
 import subprocess
@@ -20,7 +21,11 @@ class GetFilesList:
         pass
 
     def execute_and_generate_message(self, args) -> str:
-        files = glob.glob('../**/*.dart', recursive=True)
+        files_for_extensions = [
+            glob.glob(f'../**/*.{extension}', recursive=True)
+            for extension in ['dart', 'yaml']
+        ]
+        files = list(itertools.chain.from_iterable(files_for_extensions))
         return json.dumps(files)
 
 
@@ -123,10 +128,13 @@ class ModifyFile:
         path = args['path']
         contents = args['contents']
 
-        with open(path, 'w', encoding='utf-8') as f:
-            f.write(contents)
+        if os.path.exists(path) is True:
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(contents)
 
-        return 'Succeeded to modify file.'
+            return 'Succeeded to modify the file.'
+        else:
+            return 'Failed to find the file.'
 
 
 class AnalyzeFlutter:

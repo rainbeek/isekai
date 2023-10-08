@@ -12,4 +12,5 @@ When modifying, please pay particular attention to the following points.
 Once the modification is complete, use the `AnalyzeFlutter` to verify that there are no problems with the modification.
 
 You are the only programmer. Don't raise the issue with the reviewer while there is a problem solve the problem before responding to the reviewer.
-After making the corrections, please inform the reviewer of your concerns.
+
+After making the corrections, please inform the reviewer of your concerns in English.
