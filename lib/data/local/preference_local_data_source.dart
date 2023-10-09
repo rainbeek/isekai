@@ -9,12 +9,12 @@ enum PreferenceKey { profile }
 
 class PreferenceLocalDataStore {
   Future<String?> load(PreferenceKey key) async {
-    final preference = await SharedPreferences.getInstance();
-    return preference.getString(key.name);
+    final sharedPreference = await SharedPreferences.getInstance();
+    return sharedPreference.getString(key.name);
   }
 
   Future<void> save(PreferenceKey key, String value) async {
-    final preference = await SharedPreferences.getInstance();
-    await preference.setString(key.name, value);
+    final sharedPreference = await SharedPreferences.getInstance();
+    await sharedPreference.setString(key.name, value);
   }
 }
