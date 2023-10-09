@@ -1,12 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/definitions/app_mode.dart';
 import 'package:live_bresto/data/model/profile.dart';
 import 'package:live_bresto/data/repository/preference_repository.dart';
-import 'package:live_bresto/data/service/database_service.dart';
-
-final currentThreadMessagesProvider = StreamProvider(
-  (ref) => ref.watch(threadMessagesProvider(threadIdForDebug).stream),
-);
 
 final preferenceActionsProvider = Provider(
   (ref) => PreferenceActions(
