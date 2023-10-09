@@ -69,7 +69,7 @@ class LlmMessageContainer:
     def total_token(self) -> int:
         return sum(meta.token for meta in self.meta_data_list)
 
-    def to_capped_messages(self, token_limit: int = 28000) -> List[Dict[str, Any]]:
+    def to_capped_messages(self, token_limit: int = 8192) -> List[Dict[str, Any]]:
         if self.total_token() > token_limit:
             system_meta_data_list = [
                 meta

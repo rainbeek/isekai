@@ -52,10 +52,15 @@ class _ProfilePanel extends ConsumerWidget {
       return const CircularProgressIndicator();
     }
 
+    final validUntil = profile.validUntil;
+
     return ListTile(
       leading:
           Text(profile.icon, style: Theme.of(context).textTheme.headlineLarge),
       title: Text(profile.name),
+      subtitle: Text(
+        S.of(context)!.thisProfileContinuesToFormat(validUntil, validUntil),
+      ),
     );
   }
 }

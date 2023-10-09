@@ -14,5 +14,18 @@
     }
   },
   "settings": "設定",
+  "thisProfileContinuesToFormat": "このプロフィールは {date} {time} まで維持されます。",
+  "@thisProfileContinuesToFormat": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      },
+      "time": {
+        "type": "DateTime",
+        "format": "jm"
+      }
+    }
+  },
   "debug": "デバッグ"
 }
