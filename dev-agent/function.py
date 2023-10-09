@@ -95,6 +95,10 @@ class MakeNewFile:
         path = args['path']
         contents = args['contents']
 
+        directory = os.path.dirname(path)
+        if directory and not os.path.exists(directory):
+            os.makedirs(directory)
+
         with open(path, 'w', encoding='utf-8') as f:
             f.write(contents)
 
