@@ -2,6 +2,7 @@
 
 from chat import chat_with_function_calling_loop
 from function import GetFilesList, ReadFile, RecordLGTM
+from git import get_current_diff
 from message import LlmMessageContainer
 
 
@@ -36,7 +37,13 @@ class Reviewer:
                 + '\n\n'
             )
 
-        # TODO: 現状の差分をシステムプロンプトに入れておく
+        current_diff = get_current_diff()
+        if current_diff != '':
+            message_container.add_system_message(
+                'The modifications made by the programmer are as follows.\n\n'
+                + current_diff
+                + '\n\n'
+            )
 
         comment = chat_with_function_calling_loop(
             messages=message_container,
