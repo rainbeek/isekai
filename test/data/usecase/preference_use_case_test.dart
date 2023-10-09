@@ -39,7 +39,7 @@ void main() {
         Profile(
           icon: '☺️',
           name: 'Test User',
-          validUntil: current.add(const Duration(seconds: 1)),
+          validUntil: current.add(const Duration(days: 1)),
         ),
       ),
     );
@@ -59,7 +59,7 @@ void main() {
         Profile(
           icon: '☺️',
           name: 'Test User',
-          validUntil: current.subtract(const Duration(seconds: 1)),
+          validUntil: current.subtract(const Duration(days: 1)),
         ),
       ),
     );
