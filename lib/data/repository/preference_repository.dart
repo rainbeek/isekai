@@ -30,10 +30,15 @@ class PreferenceRepository {
   final PreferenceLocalDataStore _local;
   final StateController<Profile?> _profileStateProvider;
 
-  Future<void> ensureInitialized({required Profile defaultProfile}) async {
+  Future<void> ensureProfileLoaded({required Profile defaultProfile}) async {
     final profileJsonString = await _local.load(PreferenceKey.profile);
     if (profileJsonString == null) {
       _profileStateProvider.state = defaultProfile;
+
+      await _local.save(
+        PreferenceKey.profile,
+        jsonEncode(defaultProfile.toJson()),
+      );
       return;
     }
 
@@ -41,14 +46,5 @@ class PreferenceRepository {
     final profile = Profile.fromJson(profileMap);
 
     _profileStateProvider.state = profile;
-  }
-
-  Future<void> saveProfile(Profile profile) async {
-    _profileStateProvider.state = profile;
-
-    await _local.save(
-      PreferenceKey.profile,
-      jsonEncode(profile.toJson()),
-    );
   }
 }

@@ -18,7 +18,7 @@ class RootPresenter extends StateNotifier<bool> {
     required PreferenceActions preferenceActions,
   }) async {
     await sessionActions.ensureLoggedIn();
-    await preferenceActions.ensureInitialized();
+    await preferenceActions.ensureProfileLoaded();
 
     state = true;
   }

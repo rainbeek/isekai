@@ -25,13 +25,13 @@ class PreferenceActions {
 
   final PreferenceRepository _preferenceRepository;
 
-  Future<void> ensureInitialized() async {
+  Future<void> ensureProfileLoaded() async {
     const defaultProfile = Profile(
       icon: '👨🏻‍💼',
       name: '山田 ヒゲ太郎',
     );
 
-    await _preferenceRepository.ensureInitialized(
+    await _preferenceRepository.ensureProfileLoaded(
       defaultProfile: defaultProfile,
     );
   }
