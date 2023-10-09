@@ -11,7 +11,7 @@ final profileProvider = Provider(
 final preferenceRepositoryProvider = Provider(
   (ref) => PreferenceRepository(
     localDataStore: ref.watch(preferenceLocalDataSourceProvider),
-    profileStateProvider: ref.watch(_profileStateProvider.notifier),
+    profileStateController: ref.watch(_profileStateProvider.notifier),
   ),
 );
 
@@ -22,17 +22,17 @@ final _profileStateProvider = StateProvider<Profile?>(
 class PreferenceRepository {
   PreferenceRepository({
     required PreferenceLocalDataStore localDataStore,
-    required StateController<Profile?> profileStateProvider,
+    required StateController<Profile?> profileStateController,
   })  : _local = localDataStore,
-        _profileStateProvider = profileStateProvider;
+        _profileStateController = profileStateController;
 
   final PreferenceLocalDataStore _local;
-  final StateController<Profile?> _profileStateProvider;
+  final StateController<Profile?> _profileStateController;
 
   Future<void> ensureProfileLoaded({required Profile defaultProfile}) async {
     final profileJsonString = await _local.load(PreferenceKey.profile);
     if (profileJsonString == null) {
-      _profileStateProvider.state = defaultProfile;
+      _profileStateController.state = defaultProfile;
 
       await _local.save(
         PreferenceKey.profile,
@@ -44,6 +44,6 @@ class PreferenceRepository {
     final profileMap = jsonDecode(profileJsonString) as Map<String, dynamic>;
     final profile = Profile.fromJson(profileMap);
 
-    _profileStateProvider.state = profile;
+    _profileStateController.state = profile;
   }
 }
