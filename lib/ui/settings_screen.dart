@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 16),
             const _ProfilePanel(),
             const SizedBox(height: 32),
-            if (isDebugScreenVisible) debugTile,
+            if (isDebugScreenAvailable) debugTile,
             SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 16),
           ],
         ),
