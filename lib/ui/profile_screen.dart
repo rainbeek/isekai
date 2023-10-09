@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/repository/preference_repository.dart';
+import 'debug_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -22,6 +23,10 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 16),
             const _ProfilePanel(),
+            ListTile(
+              title: const Text('Debug screen'),
+              onTap: () => Navigator.push(context, DebugScreen.route()),
+            ),
             SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 16),
           ],
         ),
