@@ -13,4 +13,8 @@ class Profile with _$Profile {
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
+
+  bool isValid({required DateTime current}) {
+    return validUntil.isAfter(current);
+  }
 }

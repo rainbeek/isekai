@@ -22,40 +22,39 @@ class PreferenceActions {
   final PreferenceRepository _preferenceRepository;
   final Ref _ref;
 
-  Future<void> ensureProfileLoaded() async {
-    final profile = _generateRandomProfile();
+  Future<void> ensureValidProfileLoaded() async {
+    await _preferenceRepository.ensureInitialized();
 
-    await _preferenceRepository.ensureProfileLoaded(
-      defaultProfile: profile,
-    );
+    await _updateProfileIfNeeded();
   }
 
   Future<void> updateProfile() async {
+    await _generateRandomProfileAndUpdate();
+  }
+
+  Future<void> updateProfileIfNeeded() async {
+    await _updateProfileIfNeeded();
+  }
+
+  Future<void> _updateProfileIfNeeded() async {
+    final profile = _ref.read(profileProvider);
+    if (profile != null && profile.isValid(current: DateTime.now())) {
+      return;
+    }
+
+    await _generateRandomProfileAndUpdate();
+  }
+
+  Future<void> _generateRandomProfileAndUpdate() async {
     final profile = _generateRandomProfile();
 
     await _preferenceRepository.updateProfile(profile);
   }
 
-  Future<void> updateProfileIfNeeded() async {
-    final currentProfile = _ref.read(profileProvider);
-    if (currentProfile == null) {
-      return;
-    }
-
-    final current = DateTime.now();
-    if (currentProfile.validUntil.isAfter(current)) {
-      return;
-    }
-
-    final newProfile = _generateRandomProfile();
-
-    await _preferenceRepository.updateProfile(newProfile);
-  }
-
   Profile _generateRandomProfile() {
     final icon = _generateRandomIcon();
     final name = _generateRandomName();
-    final validUntil = DateTime.now().add(const Duration(days: 1));
+    final validUntil = DateTime.now().add(const Duration(seconds: 30));
 
     return Profile(
       icon: icon,

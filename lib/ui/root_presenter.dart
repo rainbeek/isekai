@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/usecase/preference_use_case.dart';
 import 'package:live_bresto/data/usecase/session_use_case.dart';
@@ -13,15 +15,25 @@ class RootPresenter extends StateNotifier<bool> {
     );
   }
 
+  Timer? _timer;
+
+  @override
+  Future<void> dispose() async {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   Future<void> _setup({
     required SessionActions sessionActions,
     required PreferenceActions preferenceActions,
   }) async {
     await sessionActions.ensureLoggedIn();
-    await preferenceActions.ensureProfileLoaded();
+    await preferenceActions.ensureValidProfileLoaded();
 
     state = true;
 
-    await preferenceActions.updateProfileIfNeeded();
+    _timer = Timer.periodic(const Duration(minutes: 5), (_) async {
+      await preferenceActions.updateProfileIfNeeded();
+    });
   }
 }
