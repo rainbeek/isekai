@@ -18,6 +18,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final debugTile = ListTile(
+      leading: const Icon(Icons.bug_report),
       title: Text(S.of(context)!.debug),
       onTap: () => Navigator.push(context, DebugScreen.route()),
     );
