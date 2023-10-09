@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/service/profile_service.dart';
+import 'package:live_bresto/data/repository/preference_repository.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -36,6 +36,9 @@ class _ProfilePanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(profileProvider);
+    if (profile == null) {
+      return const CircularProgressIndicator();
+    }
 
     return ListTile(
       leading:

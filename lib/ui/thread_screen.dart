@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:live_bresto/data/model/thread.dart';
-import 'package:live_bresto/data/service/profile_service.dart';
+import 'package:live_bresto/data/repository/preference_repository.dart';
 import 'package:live_bresto/data/usecase/message_use_case.dart';
 import 'package:live_bresto/data/usecase/thread_use_case.dart';
 import 'package:live_bresto/ui/profile_screen.dart';
@@ -183,7 +183,10 @@ class _ProfileIconButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final icon = ref.watch(profileProvider.select((profile) => profile.icon));
+    final icon = ref.watch(profileProvider.select((profile) => profile?.icon));
+    if (icon == null) {
+      return const CircularProgressIndicator();
+    }
 
     return IconButton(
       icon: Text(icon),

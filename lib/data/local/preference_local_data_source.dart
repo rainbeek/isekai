@@ -8,6 +8,11 @@ final preferenceLocalDataSourceProvider = Provider((ref) {
 enum PreferenceKey { profile }
 
 class PreferenceLocalDataStore {
+  Future<String?> load(PreferenceKey key) async {
+    final preference = await SharedPreferences.getInstance();
+    return preference.getString(key.name);
+  }
+
   Future<void> save(PreferenceKey key, String value) async {
     final preference = await SharedPreferences.getInstance();
     await preference.setString(key.name, value);
