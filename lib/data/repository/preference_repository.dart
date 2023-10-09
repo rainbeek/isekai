@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/local/preference_local_data_source.dart';
-import 'package:live_bresto/data/model/profile.dart';
+import 'package:isekai/data/local/preference_local_data_source.dart';
+import 'package:isekai/data/model/profile.dart';
 
 final profileProvider = Provider(
   (ref) => ref.watch(_profileStateProvider),

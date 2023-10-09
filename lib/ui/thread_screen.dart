@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/model/thread.dart';
-import 'package:live_bresto/data/repository/preference_repository.dart';
-import 'package:live_bresto/data/usecase/message_use_case.dart';
-import 'package:live_bresto/data/usecase/thread_use_case.dart';
-import 'package:live_bresto/ui/settings_screen.dart';
-import 'package:live_bresto/ui/thread_presenter.dart';
+import 'package:isekai/data/model/thread.dart';
+import 'package:isekai/data/repository/preference_repository.dart';
+import 'package:isekai/data/usecase/message_use_case.dart';
+import 'package:isekai/data/usecase/thread_use_case.dart';
+import 'package:isekai/ui/settings_screen.dart';
+import 'package:isekai/ui/thread_presenter.dart';
 
 final _threadPresenterProvider = Provider(
   (ref) => ThreadPresenter(messageActions: ref.watch(messageActionsProvider)),

@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
-import 'package:live_bresto/ui/game/game_router.dart';
-import 'package:live_bresto/ui/game/joystick.dart';
-import 'package:live_bresto/ui/game/map.dart';
-import 'package:live_bresto/ui/game/player.dart';
-import 'package:live_bresto/ui/game/rock.dart';
+import 'package:isekai/ui/game/game_router.dart';
+import 'package:isekai/ui/game/joystick.dart';
+import 'package:isekai/ui/game/map.dart';
+import 'package:isekai/ui/game/player.dart';
+import 'package:isekai/ui/game/rock.dart';
 
 class FieldHome extends Component
     with HasGameReference<GameRouter>, HasCollisionDetection {

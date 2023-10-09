@@ -1,4 +1,4 @@
-import 'package:live_bresto/data/model/profile.dart';
+import 'package:isekai/data/model/profile.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,8 +1,8 @@
 // ignore_for_file: prefer-match-file-name
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/model/session.dart';
-import 'package:live_bresto/data/service/auth_service.dart';
+import 'package:isekai/data/model/session.dart';
+import 'package:isekai/data/service/auth_service.dart';
 
 /// セッションが生成されるまで待ち、not-nullの型で取得するためのプロバイダー
 final forceSessionProvider = FutureProvider((ref) async {
