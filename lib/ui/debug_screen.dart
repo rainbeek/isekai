@@ -8,22 +8,26 @@ class DebugScreen extends StatelessWidget {
 
   static const name = 'DebugScreen';
 
+  static MaterialPageRoute<DebugScreen> route() => MaterialPageRoute(
+        builder: (_) => const DebugScreen(),
+        settings: const RouteSettings(name: name),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context)!.debug),
       ),
-      body: const Center(
-        child: _UpdateProfileTile(),
+      body: Column(
+        children: [
+          const SizedBox(height: 16),
+          const _UpdateProfileTile(),
+          SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 16),
+        ],
       ),
     );
   }
-
-  static MaterialPageRoute<DebugScreen> route() => MaterialPageRoute(
-        builder: (_) => const DebugScreen(),
-        settings: const RouteSettings(name: name),
-      );
 }
 
 class _UpdateProfileTile extends ConsumerWidget {
@@ -33,9 +37,9 @@ class _UpdateProfileTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final preferenceActions = ref.watch(preferenceActionsProvider);
 
-    return TextButton(
-      onPressed: preferenceActions.updateProfile,
-      child: const Text('プロフィールを更新する'),
+    return ListTile(
+      title: const Text('プロフィールを更新する'),
+      onTap: preferenceActions.updateProfile,
     );
   }
 }
