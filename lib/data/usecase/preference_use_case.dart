@@ -8,25 +8,44 @@ import 'package:live_bresto/data/repository/preference_repository.dart';
 final preferenceActionsProvider = Provider(
   (ref) => PreferenceActions(
     preferenceRepository: ref.watch(preferenceRepositoryProvider),
+    ref: ref,
   ),
 );
 
 class PreferenceActions {
   const PreferenceActions({
     required PreferenceRepository preferenceRepository,
-  }) : _preferenceRepository = preferenceRepository;
+    required Ref ref,
+  })  : _preferenceRepository = preferenceRepository,
+        _ref = ref;
 
   final PreferenceRepository _preferenceRepository;
+  final Ref _ref;
 
-  Future<void> ensureProfileLoaded() async {
-    final profile = _generateRandomProfile();
+  Future<void> ensureValidProfileLoaded() async {
+    await _preferenceRepository.ensureInitialized();
 
-    await _preferenceRepository.ensureProfileLoaded(
-      defaultProfile: profile,
-    );
+    await _updateProfileIfNeeded();
   }
 
   Future<void> updateProfile() async {
+    await _generateRandomProfileAndUpdate();
+  }
+
+  Future<void> updateProfileIfNeeded() async {
+    await _updateProfileIfNeeded();
+  }
+
+  Future<void> _updateProfileIfNeeded() async {
+    final profile = _ref.read(profileProvider);
+    if (profile != null && profile.isValid(current: DateTime.now())) {
+      return;
+    }
+
+    await _generateRandomProfileAndUpdate();
+  }
+
+  Future<void> _generateRandomProfileAndUpdate() async {
     final profile = _generateRandomProfile();
 
     await _preferenceRepository.updateProfile(profile);
