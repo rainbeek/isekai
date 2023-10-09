@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:live_bresto/data/repository/preference_repository.dart';
 import 'package:live_bresto/data/usecase/preference_use_case.dart';
 
 class DebugScreen extends StatelessWidget {
@@ -36,9 +37,15 @@ class _UpdateProfileTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final preferenceActions = ref.watch(preferenceActionsProvider);
+    final profile = ref.watch(profileProvider);
+
+    final icon = profile?.icon ?? '';
+    final name = profile?.name ?? '';
+    final displayProfile = '$icon $name';
 
     return ListTile(
       title: const Text('プロフィールを更新する'),
+      subtitle: Text(displayProfile),
       onTap: preferenceActions.updateProfile,
     );
   }

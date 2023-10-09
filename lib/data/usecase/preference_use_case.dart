@@ -19,26 +19,28 @@ class PreferenceActions {
   final PreferenceRepository _preferenceRepository;
 
   Future<void> ensureProfileLoaded() async {
-    const defaultProfile = Profile(
-      icon: '👨🏻‍💼',
-      name: '山田 ヒゲ太郎',
-    );
+    final profile = _generateRandomProfile();
 
     await _preferenceRepository.ensureProfileLoaded(
-      defaultProfile: defaultProfile,
+      defaultProfile: profile,
     );
   }
 
   Future<void> updateProfile() async {
+    final profile = _generateRandomProfile();
+
+    await _preferenceRepository.updateProfile(profile);
+  }
+
+  Profile _generateRandomProfile() {
     final icon = _generateRandomIcon();
     final name = _generateRandomName();
 
-    final profile = Profile(
+    return Profile(
       icon: icon,
       name: name,
+      createdAt: DateTime.now(),
     );
-
-    await _preferenceRepository.updateProfile(profile);
   }
 
   String _generateRandomIcon() {
