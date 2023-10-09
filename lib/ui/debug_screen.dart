@@ -45,7 +45,7 @@ class _UpdateProfileTile extends ConsumerWidget {
 
     return ListTile(
       title: const Text('プロフィールを更新する'),
-      subtitle: Text(displayProfile),
+      trailing: Text(displayProfile),
       onTap: preferenceActions.updateProfile,
     );
   }
