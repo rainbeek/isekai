@@ -54,7 +54,7 @@ class PreferenceActions {
   Profile _generateRandomProfile() {
     final icon = _generateRandomIcon();
     final name = _generateRandomName();
-    final validUntil = DateTime.now().add(const Duration(seconds: 30));
+    final validUntil = DateTime.now().add(const Duration(days: 1));
 
     return Profile(
       icon: icon,
