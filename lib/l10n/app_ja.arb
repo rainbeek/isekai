@@ -1,5 +1,4 @@
 {
-  "appName": "異世界少女たちの現実クエスチョンタイム",
   "messageDateFormat": "{date} {time}",
   "@messageDateFormat": {
     "placeholders": {
