@@ -1,2 +1,6 @@
+AllCops:
+  Exclude:
+    - "**/*.arb"
+
 SignalException:
   EnforcedStyle: semantic

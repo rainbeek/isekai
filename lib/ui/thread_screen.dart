@@ -5,7 +5,7 @@ import 'package:live_bresto/data/model/thread.dart';
 import 'package:live_bresto/data/repository/preference_repository.dart';
 import 'package:live_bresto/data/usecase/message_use_case.dart';
 import 'package:live_bresto/data/usecase/thread_use_case.dart';
-import 'package:live_bresto/ui/profile_screen.dart';
+import 'package:live_bresto/ui/settings_screen.dart';
 import 'package:live_bresto/ui/thread_presenter.dart';
 
 final _threadPresenterProvider = Provider(
@@ -48,7 +48,7 @@ class ThreadScreen extends ConsumerWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                ProfileScreen.route(),
+                SettingsScreen.route(),
               );
             },
           ),

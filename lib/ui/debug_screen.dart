@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DebugScreen extends StatelessWidget {
-  DebugScreen({Key? key}) : super(key: key);
+  const DebugScreen({super.key});
+
   static const name = 'DebugScreen';
 
   static MaterialPageRoute<DebugScreen> route() => MaterialPageRoute(
-        builder: (_) => DebugScreen(),
+        builder: (_) => const DebugScreen(),
         settings: const RouteSettings(name: name),
       );
 
@@ -13,10 +15,10 @@ class DebugScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Debugging Screen'),
+        title: Text(S.of(context)!.debug),
       ),
-      body: Center(
-        child: const Text('This is a debugging screen.'),
+      body: const Center(
+        child: Placeholder(),
       ),
     );
   }

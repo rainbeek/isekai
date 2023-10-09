@@ -12,5 +12,7 @@
         "format": "jm"
       }
     }
-  }
+  },
+  "settings": "設定",
+  "debug": "デバッグ"
 }

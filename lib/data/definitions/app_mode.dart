@@ -1,5 +1,8 @@
 const firebaseEmulatorHost = String.fromEnvironment('FIREBASE_EMULATOR_HOST');
 
+// TODO(ide): Productionのリリースビルドではfalseにする
+const isDebugScreenVisible = true;
+
 final serverEnv = _getApiEnv();
 
 // cspell:disable next
