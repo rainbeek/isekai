@@ -26,7 +26,6 @@ class RootApp extends ConsumerWidget {
     }
 
     return MaterialApp(
-      title: '異世界少女たちの現実クエスチョンタイム',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
