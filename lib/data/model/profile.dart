@@ -13,7 +13,9 @@ class Profile with _$Profile {
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
+}
 
+extension ProfileGetter on Profile {
   bool isValid({required DateTime current}) {
     return validUntil.isAfter(current);
   }
