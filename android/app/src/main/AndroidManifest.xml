@@ -3,7 +3,7 @@
     <application
         android:name="${applicationName}"
         android:icon="${ICON_RESOURCE}"
-        android:label="live"
+        android:label="@string/app_name_short"
         android:networkSecurityConfig="${NETWORK_SECURITY_CONFIG_RESOURCE}">
         <activity
             android:name=".MainActivity"
