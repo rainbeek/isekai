@@ -10,17 +10,6 @@ import '../repository/mock_preference_repository.dart';
 void main() {
   late MockPreferenceRepository preferenceRepository;
 
-  setUp(() {
-    registerFallbackValue(
-      Profile(
-        icon: '☺️',
-        name: 'Test User',
-        validUntil: DateTime.now(),
-      ),
-    );
-    preferenceRepository = MockPreferenceRepository();
-  });
-
   ProviderContainer generateProviderContainer({
     required Override override,
   }) {
@@ -31,6 +20,17 @@ void main() {
       ],
     );
   }
+
+  setUp(() {
+    registerFallbackValue(
+      Profile(
+        icon: '☺️',
+        name: 'Test User',
+        validUntil: DateTime.now(),
+      ),
+    );
+    preferenceRepository = MockPreferenceRepository();
+  });
 
   test('プロフィールが有効な場合、プロフィールが更新されない', () async {
     final current = DateTime.now();
