@@ -30,21 +30,20 @@ void main() {
       ),
     );
     preferenceRepository = MockPreferenceRepository();
+    when(() => preferenceRepository.updateProfile(any())).thenAnswer(
+      (_) async => {},
+    );
   });
 
   test('プロフィールが有効な場合、プロフィールが更新されない', () async {
-    final current = DateTime.now();
     final container = generateProviderContainer(
       override: profileProvider.overrideWithValue(
         Profile(
           icon: '☺️',
           name: 'Test User',
-          validUntil: current.add(const Duration(days: 1)),
+          validUntil: DateTime.now().add(const Duration(days: 1)),
         ),
       ),
-    );
-    when(() => preferenceRepository.updateProfile(any())).thenAnswer(
-      (_) async => {},
     );
 
     await container.read(preferenceActionsProvider).updateProfileIfNeeded();
@@ -53,18 +52,14 @@ void main() {
   });
 
   test('プロフィールが無効な場合、プロフィールが更新される', () async {
-    final current = DateTime.now();
     final container = generateProviderContainer(
       override: profileProvider.overrideWithValue(
         Profile(
           icon: '☺️',
           name: 'Test User',
-          validUntil: current.subtract(const Duration(days: 1)),
+          validUntil: DateTime.now().subtract(const Duration(days: 1)),
         ),
       ),
-    );
-    when(() => preferenceRepository.updateProfile(any())).thenAnswer(
-      (_) async => {},
     );
 
     await container.read(preferenceActionsProvider).updateProfileIfNeeded();
