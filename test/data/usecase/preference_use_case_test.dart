@@ -21,19 +21,27 @@ void main() {
     preferenceRepository = MockPreferenceRepository();
   });
 
+  ProviderContainer generateProviderContainer({
+    required Override override,
+  }) {
+    return ProviderContainer(
+      overrides: [
+        preferenceRepositoryProvider.overrideWithValue(preferenceRepository),
+        override,
+      ],
+    );
+  }
+
   test('プロフィールが有効な場合、プロフィールが更新されない', () async {
     final current = DateTime.now();
-    final container = ProviderContainer(
-      overrides: [
-        profileProvider.overrideWithValue(
-          Profile(
-            icon: '☺️',
-            name: 'Test User',
-            validUntil: current.add(const Duration(seconds: 1)),
-          ),
+    final container = generateProviderContainer(
+      override: profileProvider.overrideWithValue(
+        Profile(
+          icon: '☺️',
+          name: 'Test User',
+          validUntil: current.add(const Duration(seconds: 1)),
         ),
-        preferenceRepositoryProvider.overrideWithValue(preferenceRepository),
-      ],
+      ),
     );
     when(() => preferenceRepository.updateProfile(any())).thenAnswer(
       (_) async => {},
@@ -46,17 +54,14 @@ void main() {
 
   test('プロフィールが無効な場合、プロフィールが更新される', () async {
     final current = DateTime.now();
-    final container = ProviderContainer(
-      overrides: [
-        profileProvider.overrideWithValue(
-          Profile(
-            icon: '☺️',
-            name: 'Test User',
-            validUntil: current.subtract(const Duration(seconds: 1)),
-          ),
+    final container = generateProviderContainer(
+      override: profileProvider.overrideWithValue(
+        Profile(
+          icon: '☺️',
+          name: 'Test User',
+          validUntil: current.subtract(const Duration(seconds: 1)),
         ),
-        preferenceRepositoryProvider.overrideWithValue(preferenceRepository),
-      ],
+      ),
     );
     when(() => preferenceRepository.updateProfile(any())).thenAnswer(
       (_) async => {},
