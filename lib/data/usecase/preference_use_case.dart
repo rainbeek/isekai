@@ -4,18 +4,14 @@ import 'package:live_bresto/data/model/profile.dart';
 import 'package:live_bresto/data/repository/preference_repository.dart';
 import 'package:live_bresto/data/service/database_service.dart';
 
-final currentThreadMessagesProvider = StreamProvider((ref) {
-  return ref.watch(threadMessagesProvider(threadIdForDebug).stream);
-});
+final currentThreadMessagesProvider = StreamProvider(
+  (ref) => ref.watch(threadMessagesProvider(threadIdForDebug).stream),
+);
 
 final preferenceActionsProvider = Provider(
-  (ref) {
-    final preferenceRepository = ref.watch(preferenceRepositoryProvider);
-
-    return PreferenceActions(
-      preferenceRepository: preferenceRepository,
-    );
-  },
+  (ref) => PreferenceActions(
+    preferenceRepository: ref.watch(preferenceRepositoryProvider),
+  ),
 );
 
 class PreferenceActions {

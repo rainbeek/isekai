@@ -8,17 +8,16 @@ final profileProvider = Provider(
   (ref) => ref.watch(_profileStateProvider),
 );
 
-final preferenceRepositoryProvider = Provider((ref) {
-  final preferenceLocalDataSource =
-      ref.watch(preferenceLocalDataSourceProvider);
-  final profileStateController = ref.watch(_profileStateProvider.notifier);
-  return PreferenceRepository(
-    localDataStore: preferenceLocalDataSource,
-    profileStateProvider: profileStateController,
-  );
-});
+final preferenceRepositoryProvider = Provider(
+  (ref) => PreferenceRepository(
+    localDataStore: ref.watch(preferenceLocalDataSourceProvider),
+    profileStateProvider: ref.watch(_profileStateProvider.notifier),
+  ),
+);
 
-final _profileStateProvider = StateProvider<Profile?>((ref) => null);
+final _profileStateProvider = StateProvider<Profile?>(
+  (ref) => null,
+);
 
 class PreferenceRepository {
   PreferenceRepository({
