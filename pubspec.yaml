@@ -10,6 +10,7 @@ dependencies:
   cloud_firestore: ^4.2.0
   collection: ^1.16.0
   cupertino_icons: ^1.0.2
+  faker: ^2.1.0
   firebase_auth: ^4.2.0
   firebase_core: ^2.4.0
   flame: ^1.8.2
