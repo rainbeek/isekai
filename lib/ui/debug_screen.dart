@@ -45,7 +45,9 @@ class _UpdateProfileTile extends ConsumerWidget {
 
     final validUntil = profile?.validUntil;
     final subtitle = validUntil != null
-        ? Text(S.of(context)!.messageDateFormat(validUntil, validUntil))
+        ? Text(
+            '${S.of(context)!.messageDateFormat(validUntil, validUntil)}まで有効',
+          )
         : const SizedBox.shrink();
 
     return ListTile(
