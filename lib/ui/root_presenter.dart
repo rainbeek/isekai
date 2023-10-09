@@ -21,5 +21,7 @@ class RootPresenter extends StateNotifier<bool> {
     await preferenceActions.ensureProfileLoaded();
 
     state = true;
+
+    await preferenceActions.updateProfileIfNeeded();
   }
 }
