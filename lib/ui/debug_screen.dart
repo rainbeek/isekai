@@ -43,8 +43,14 @@ class _UpdateProfileTile extends ConsumerWidget {
     final name = profile?.name ?? '';
     final displayProfile = '$icon $name';
 
+    final validUntil = profile?.validUntil;
+    final subtitle = validUntil != null
+        ? Text(S.of(context)!.messageDateFormat(validUntil, validUntil))
+        : const SizedBox.shrink();
+
     return ListTile(
       title: const Text('プロフィールを更新する'),
+      subtitle: subtitle,
       trailing: Text(displayProfile),
       onTap: preferenceActions.updateProfile,
     );
