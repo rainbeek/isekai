@@ -24,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context)!.appName),
+        title: Text(S.of(context)!.settings),
       ),
       body: Center(
         child: Column(
