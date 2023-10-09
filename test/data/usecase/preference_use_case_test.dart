@@ -5,7 +5,7 @@ import 'package:live_bresto/data/repository/preference_repository.dart';
 import 'package:live_bresto/data/usecase/preference_use_case.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockPreferenceRepository extends Mock implements PreferenceRepository {}
+import '../repository/mock_preference_repository.dart';
 
 void main() {
   late MockPreferenceRepository preferenceRepository;
