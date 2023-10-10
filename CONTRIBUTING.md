@@ -47,6 +47,17 @@ asdf reshim
 
 - Emulator: `dart-defines_emulator.json`
 
+#### 5. Firebase のプロジェクトファイルを配置
+
+以下のファイルを開発責任者から受け取り、ローカルに配置します。
+
+| ファイルパス                                            | 説明                                                         |
+| ------------------------------------------------------- | ------------------------------------------------------------ |
+| `ios/Runner/Firebase/Emulator/GoogleService-Info.plist` | iOS の Emulator 環境向けの Firebase プロジェクトファイル     |
+| `ios/Runner/Firebase/Dev/GoogleService-Info.plist`      | iOS の Dev 環境向けの Firebase プロジェクトファイル          |
+| `android/app/firebase/emulator/google-services.json`    | Android の Emulator 環境向けの Firebase プロジェクトファイル |
+| `android/app/firebase/dev/google-services.json`         | Android の Dev 環境向けの Firebase プロジェクトファイル      |
+
 ### 普段の開発
 
 `@freezed` アノテーションが付与されたクラスを修正した場合はコード生成が必要です。
