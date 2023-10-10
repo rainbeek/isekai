@@ -133,9 +133,15 @@ flutterfire config \
   --out=lib/firebase_options_emulator.dart \
   --ios-bundle-id=com.rainbeek.isekai.emulator \
   --android-app-id=com.rainbeek.isekai.emulator
+mv android/app/google-services.json android/app/firebase/emulator/
+mv ios/Runner/GoogleService-Info.plist ios/Runner/Firebase/Emulator/
+mv ios/firebase_app_id_file.json ios/Runner/Firebase/Emulator/
 flutterfire config \
   --project=shicolabs-dev \
   --out=lib/firebase_options_dev.dart \
   --ios-bundle-id=com.rainbeek.isekai.dev \
   --android-app-id=com.rainbeek.isekai.dev
+mv android/app/google-services.json android/app/firebase/dev/
+mv ios/Runner/GoogleService-Info.plist ios/Runner/Firebase/Dev/
+mv ios/firebase_app_id_file.json ios/Runner/Firebase/Dev/
 ```
