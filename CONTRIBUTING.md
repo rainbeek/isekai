@@ -47,7 +47,7 @@ asdf reshim
 
 - Emulator: `dart-defines_emulator.json`
 
-#### 5. Firebase のプロジェクトファイルを配置
+#### 5. Firebase の構成ファイルを配置
 
 以下のファイルを開発責任者から受け取り、ローカルに配置します。
 
