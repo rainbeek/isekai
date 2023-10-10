@@ -14,6 +14,7 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		9E816DD3C07A904EFB41F4C7 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC38279D87EB962CF8676E2D /* Pods_Runner.framework */; };
+		A2EABB6CA1CDADE9BBC36766 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E19D8C9D087C7C30FF91E7F4 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,7 @@
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC38279D87EB962CF8676E2D /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E19D8C9D087C7C30FF91E7F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9370028DC4FCAC6258EB715 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 				97C146EF1CF9000F007C117D /* Products */,
 				E9AB77F433EB76165EB45E35 /* Pods */,
 				8DB51030765000E127FC1794 /* Frameworks */,
+				E19D8C9D087C7C30FF91E7F4 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +140,7 @@
 			buildPhases = (
 				E13B3EB4FF025B7B8A65A5DF /* [CP] Check Pods Manifest.lock */,
 				78F23CE7293C4EF600D18372 /* Check Xcode Version */,
+				782520D32AD57C7100C3ACBA /* Select Google Service Info File */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
@@ -198,6 +202,7 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+				A2EABB6CA1CDADE9BBC36766 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +242,24 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
 		};
+		782520D32AD57C7100C3ACBA /* Select Google Service Info File */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Select Google Service Info File";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ $SERVER_ENV == \"emulator\" ]]; then\n  cp Runner/Firebase/Emulator/GoogleService-Info.plist Runner/GoogleService-Info.plist\n  cp Runner/Firebase/Emulator/firebase_app_id_file.json ./\nelif [[ $SERVER_ENV == \"dev\" ]]; then\n  cp Runner/Firebase/Dev/GoogleService-Info.plist Runner/GoogleService-Info.plist\n  cp Runner/Firebase/Dev/firebase_app_id_file.json ./\nelif [[ $SERVER_ENV == \"prod\" ]]; then\n  cp Runner/Firebase/Prod/GoogleService-Info.plist Runner/GoogleService-Info.plist\n  cp Runner/Firebase/Prod/firebase_app_id_file.json ./\nelse\n  echo \"error: \\\"$SERVER_ENV\\\" flavor didn't match any environments.\"\n  exit 1\nfi\n";
+		};
 		78F23CE7293C4EF600D18372 /* Check Xcode Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -269,7 +292,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 		D2389A55C42C2BCDCB13E26F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -1,6 +1,17 @@
+inputs:
+  firebase-options-dart-base64-emulator:
+    required: true
+  firebase-options-dart-base64-dev:
+    required: true
+
 runs:
   using: "composite"
   steps:
+    - name: Generate Firebase options files
+      shell: bash
+      run: |
+        echo "${{ inputs.firebase-options-dart-base64-emulator }}" | base64 -d > lib/firebase_options_emulator.dart
+        echo "${{ inputs.firebase-options-dart-base64-dev }}" | base64 -d > lib/firebase_options_dev.dart
     - name: Install dependencies
       shell: bash
       run: flutter pub get
