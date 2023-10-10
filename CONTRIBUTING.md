@@ -51,12 +51,14 @@ asdf reshim
 
 以下のファイルを開発責任者から受け取り、ローカルに配置します。
 
-| ファイルパス                                            | 説明                                                         |
-| ------------------------------------------------------- | ------------------------------------------------------------ |
-| `ios/Runner/Firebase/Emulator/GoogleService-Info.plist` | iOS の Emulator 環境向けの Firebase プロジェクトファイル     |
-| `ios/Runner/Firebase/Dev/GoogleService-Info.plist`      | iOS の Dev 環境向けの Firebase プロジェクトファイル          |
-| `android/app/firebase/emulator/google-services.json`    | Android の Emulator 環境向けの Firebase プロジェクトファイル |
-| `android/app/firebase/dev/google-services.json`         | Android の Dev 環境向けの Firebase プロジェクトファイル      |
+| ファイルパス                                            | 説明                                                   |
+| ------------------------------------------------------- | ------------------------------------------------------ |
+| `lib/firebase_options_emulator.dart`                    | Flutter 用の Emulator 環境向けの Firebase 構成ファイル |
+| `lib/firebase_options_dev.dart`                         | Flutter 用の Dev 環境向けの Firebase 構成ファイル      |
+| `ios/Runner/Firebase/Emulator/GoogleService-Info.plist` | iOS 用の Emulator 環境向けの Firebase 構成ファイル     |
+| `ios/Runner/Firebase/Dev/GoogleService-Info.plist`      | iOS 用の Dev 環境向けの Firebase 構成ファイル          |
+| `android/app/firebase/emulator/google-services.json`    | Android 用の Emulator 環境向けの Firebase 構成ファイル |
+| `android/app/firebase/dev/google-services.json`         | Android 用の Dev 環境向けの Firebase 構成ファイル      |
 
 ### 普段の開発
 
