@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/model/session.dart';
+import 'package:isekai/data/model/session.dart';
 
 final sessionStateProvider = StateNotifierProvider<SessionState, Session?>(
   (ref) => SessionState(),

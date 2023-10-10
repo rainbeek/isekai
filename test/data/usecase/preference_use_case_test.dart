@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:live_bresto/data/model/profile.dart';
-import 'package:live_bresto/data/repository/preference_repository.dart';
-import 'package:live_bresto/data/usecase/preference_use_case.dart';
+import 'package:isekai/data/model/profile.dart';
+import 'package:isekai/data/repository/preference_repository.dart';
+import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../repository/mock_preference_repository.dart';

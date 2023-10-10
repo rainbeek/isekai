@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/usecase/preference_use_case.dart';
-import 'package:live_bresto/data/usecase/session_use_case.dart';
-import 'package:live_bresto/ui/game/game_router.dart';
-import 'package:live_bresto/ui/root_presenter.dart';
+import 'package:isekai/data/usecase/preference_use_case.dart';
+import 'package:isekai/data/usecase/session_use_case.dart';
+import 'package:isekai/ui/game/game_router.dart';
+import 'package:isekai/ui/root_presenter.dart';
 
 final _rootPresenterProvider = StateNotifierProvider<RootPresenter, bool>(
   (ref) => RootPresenter(
@@ -26,7 +26,6 @@ class RootApp extends ConsumerWidget {
     }
 
     return MaterialApp(
-      title: 'Live Bresto',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:faker/faker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/model/profile.dart';
-import 'package:live_bresto/data/repository/preference_repository.dart';
+import 'package:isekai/data/model/profile.dart';
+import 'package:isekai/data/repository/preference_repository.dart';
 
 final preferenceActionsProvider = Provider(
   (ref) => PreferenceActions(

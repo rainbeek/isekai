@@ -1,4 +1,4 @@
-import 'package:live_bresto/data/usecase/message_use_case.dart';
+import 'package:isekai/data/usecase/message_use_case.dart';
 
 class ThreadPresenter {
   ThreadPresenter({

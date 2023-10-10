@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:live_bresto/data/model/message.dart';
+import 'package:isekai/data/model/message.dart';
 
 part 'message_firestore.freezed.dart';
 

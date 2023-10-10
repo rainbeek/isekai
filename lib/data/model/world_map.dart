@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:live_bresto/data/model/layer.dart';
+import 'package:isekai/data/model/layer.dart';
 
 part 'world_map.freezed.dart';
 part 'world_map.g.dart';

@@ -1,9 +1,9 @@
 // ignore_for_file: prefer-match-file-name
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/definitions/app_mode.dart';
-import 'package:live_bresto/data/service/database_service.dart';
-import 'package:live_bresto/data/usecase/session_use_case.dart';
+import 'package:isekai/data/definitions/app_mode.dart';
+import 'package:isekai/data/service/database_service.dart';
+import 'package:isekai/data/usecase/session_use_case.dart';
 
 final currentThreadMessagesProvider = StreamProvider((ref) {
   return ref.watch(threadMessagesProvider(threadIdForDebug).stream);

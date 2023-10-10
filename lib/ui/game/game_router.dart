@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flame/game.dart';
-import 'package:live_bresto/ui/game/field_home.dart';
-import 'package:live_bresto/ui/game/game_init.dart';
-import 'package:live_bresto/ui/thread_screen.dart';
+import 'package:isekai/ui/game/field_home.dart';
+import 'package:isekai/ui/game/game_init.dart';
+import 'package:isekai/ui/thread_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GameRouter extends FlameGame {

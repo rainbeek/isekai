@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/usecase/preference_use_case.dart';
-import 'package:live_bresto/data/usecase/session_use_case.dart';
+import 'package:isekai/data/usecase/preference_use_case.dart';
+import 'package:isekai/data/usecase/session_use_case.dart';
 
 class RootPresenter extends StateNotifier<bool> {
   RootPresenter({

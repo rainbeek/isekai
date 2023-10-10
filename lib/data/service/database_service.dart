@@ -5,10 +5,10 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:live_bresto/data/dao/message_firestore.dart';
-import 'package:live_bresto/data/dao/thread_firestore.dart';
-import 'package:live_bresto/data/model/message.dart';
-import 'package:live_bresto/data/model/thread.dart';
+import 'package:isekai/data/dao/message_firestore.dart';
+import 'package:isekai/data/dao/thread_firestore.dart';
+import 'package:isekai/data/model/message.dart';
+import 'package:isekai/data/model/thread.dart';
 
 final threadProvider = StreamProvider.family<Thread, String>((_, threadId) {
   return FirebaseFirestore.instance
