@@ -59,7 +59,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.gmash.LiveBresto"
+        applicationId "com.rainbeek.isekai"
 
         minSdkVersion 29
         targetSdkVersion flutter.targetSdkVersion
