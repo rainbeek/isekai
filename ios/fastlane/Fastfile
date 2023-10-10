@@ -25,7 +25,7 @@ platform :ios do
         'xcodebuild -exportArchive '\
         '-archivePath ./build/ios/Runner.xcarchive '\
         '-exportPath ./build/ios/ipa '\
-        '-exportOptionsPlist ./ios/ExportOptions_AdHoc.plist '\
+        '-exportOptionsPlist ./ios/ExportOptions-AdHoc.plist '\
         '-allowProvisioningUpdates '\
         "-authenticationKeyIssuerID '#{apple_api_issuer_id}' "\
         "-authenticationKeyID '#{apple_api_key_id}' "\
