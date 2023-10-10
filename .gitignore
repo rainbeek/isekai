@@ -1,11 +1,16 @@
 *.freezed.dart
 *.g.dart
+dart-defines*.json
+google-services.json
+GoogleService-Info.plist
 
 /emulator-data
 
 /.env
 /dart-defines*.json
+/ios/firebase_app_id_file.json
 /ios/Flutter/DartDefines.xcconfig
+/lib/firebase_options*.dart
 
 !/dart-defines_example.json
 

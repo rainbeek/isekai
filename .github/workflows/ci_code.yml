@@ -48,6 +48,9 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
+        with:
+          firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
+          firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
       - name: Flutter analyze
         run: flutter analyze --fatal-infos > flutter-analyze.log
       - name: Run reviewdog for Flutter Analyzer
@@ -69,6 +72,9 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
+        with:
+          firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
+          firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
       - name: Run Flutter test
         run: flutter test --machine > flutter-test-results.log
       - uses: dorny/test-reporter@v1
@@ -94,6 +100,13 @@ jobs:
         uses: ./.github/actions/setup-cocoapods
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
+        with:
+          firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
+          firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+      - name: Generate uncommited iOS files
+        uses: ./.github/actions/generate-uncommited-ios-files
+        with:
+          google-service-plist-base64-dev: ${{ secrets.GOOGLE_SERVICE_PLIST_BASE64_DEV }}
       - name: Build iOS dev app
         shell: bash
         run: flutter build ios --dart-define SERVER_ENV=dev --no-codesign
@@ -112,5 +125,12 @@ jobs:
         uses: ./.github/actions/setup-gradle
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
+        with:
+          firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
+          firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+      - name: Generate uncommited Android files
+        uses: ./.github/actions/generate-uncommited-android-files
+        with:
+          google-service-json-base64-dev: ${{ secrets.GOOGLE_SERVICE_JSON_BASE64_DEV }}
       - name: Build Android dev app
         run: flutter build appbundle --dart-define SERVER_ENV=dev

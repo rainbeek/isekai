@@ -47,6 +47,19 @@ asdf reshim
 
 - Emulator: `dart-defines_emulator.json`
 
+#### 5. Firebase の構成ファイルを配置
+
+以下のファイルを開発責任者から受け取り、ローカルに配置します。
+
+| ファイルパス                                            | 説明                                                   |
+| ------------------------------------------------------- | ------------------------------------------------------ |
+| `lib/firebase_options_emulator.dart`                    | Flutter 用の Emulator 環境向けの Firebase 構成ファイル |
+| `lib/firebase_options_dev.dart`                         | Flutter 用の Dev 環境向けの Firebase 構成ファイル      |
+| `ios/Runner/Firebase/Emulator/GoogleService-Info.plist` | iOS 用の Emulator 環境向けの Firebase 構成ファイル     |
+| `ios/Runner/Firebase/Dev/GoogleService-Info.plist`      | iOS 用の Dev 環境向けの Firebase 構成ファイル          |
+| `android/app/firebase/emulator/google-services.json`    | Android 用の Emulator 環境向けの Firebase 構成ファイル |
+| `android/app/firebase/dev/google-services.json`         | Android 用の Dev 環境向けの Firebase 構成ファイル      |
+
 ### 普段の開発
 
 `@freezed` アノテーションが付与されたクラスを修正した場合はコード生成が必要です。
@@ -131,11 +144,17 @@ flutter pub get
 flutterfire config \
   --project=shicolabs-dev \
   --out=lib/firebase_options_emulator.dart \
-  --ios-bundle-id=com.gmash.LiveBresto.emulator \
-  --android-app-id=com.gmash.LiveBresto.emulator
+  --ios-bundle-id=com.rainbeek.isekai.emulator \
+  --android-app-id=com.rainbeek.isekai.emulator
+mv android/app/google-services.json android/app/firebase/emulator/
+mv ios/Runner/GoogleService-Info.plist ios/Runner/Firebase/Emulator/
+mv ios/firebase_app_id_file.json ios/Runner/Firebase/Emulator/
 flutterfire config \
   --project=shicolabs-dev \
   --out=lib/firebase_options_dev.dart \
-  --ios-bundle-id=com.gmash.LiveBresto.dev \
-  --android-app-id=com.gmash.LiveBresto.dev
+  --ios-bundle-id=com.rainbeek.isekai.dev \
+  --android-app-id=com.rainbeek.isekai.dev
+mv android/app/google-services.json android/app/firebase/dev/
+mv ios/Runner/GoogleService-Info.plist ios/Runner/Firebase/Dev/
+mv ios/firebase_app_id_file.json ios/Runner/Firebase/Dev/
 ```
