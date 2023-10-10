@@ -49,7 +49,7 @@
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC38279D87EB962CF8676E2D /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E19D8C9D087C7C30FF91E7F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E19D8C9D087C7C30FF91E7F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9370028DC4FCAC6258EB715 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,7 +94,6 @@
 				97C146EF1CF9000F007C117D /* Products */,
 				E9AB77F433EB76165EB45E35 /* Pods */,
 				8DB51030765000E127FC1794 /* Frameworks */,
-				E19D8C9D087C7C30FF91E7F4 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +116,7 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				E19D8C9D087C7C30FF91E7F4 /* GoogleService-Info.plist */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -255,10 +255,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(SRCROOT)/Runner/GoogleService-Info.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ $SERVER_ENV == \"emulator\" ]]; then\n  cp Runner/Firebase/Emulator/GoogleService-Info.plist Runner/GoogleService-Info.plist\n  cp Runner/Firebase/Emulator/firebase_app_id_file.json ./\nelif [[ $SERVER_ENV == \"dev\" ]]; then\n  cp Runner/Firebase/Dev/GoogleService-Info.plist Runner/GoogleService-Info.plist\n  cp Runner/Firebase/Dev/firebase_app_id_file.json ./\nelif [[ $SERVER_ENV == \"prod\" ]]; then\n  cp Runner/Firebase/Prod/GoogleService-Info.plist Runner/GoogleService-Info.plist\n  cp Runner/Firebase/Prod/firebase_app_id_file.json ./\nelse\n  echo \"error: \\\"$SERVER_ENV\\\" flavor didn't match any environments.\"\n  exit 1\nfi\n";
+			shellScript = "if [[ $SERVER_ENV == \"emulator\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Emulator/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\n  cp \"$SRCROOT/Runner/Firebase/Emulator/firebase_app_id_file.json\" ./\nelif [[ $SERVER_ENV == \"dev\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Dev/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\n  cp \"$SRCROOT/Runner/Firebase/Dev/firebase_app_id_file.json\" ./\nelse\n  echo \"error: \\\"$SERVER_ENV\\\" flavor didn't match any environments.\"\n  exit 1\nfi\n";
 		};
 		78F23CE7293C4EF600D18372 /* Check Xcode Version */ = {
 			isa = PBXShellScriptBuildPhase;
