@@ -57,7 +57,7 @@ tasks.whenTaskAdded { task ->
 }
 
 android {
-    namespace 'com.example.live'
+    namespace 'com.rainbeek.isekai'
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
