@@ -44,13 +44,13 @@ if (dartEnvironmentVariables.SERVER_ENV == 'emulator') {
 }
 
 // Copy the firebase file and move it to android/app directory
-tasks.register('copyGoogleServicesJson', Copy) {
+task copyGoogleServicesJson(type: Copy) {
     from "firebase/${dartEnvironmentVariables.SERVER_ENV}/google-services.json"
     into './'
 }
 
 // Set to wait for firebase file copy task before processing file needs
-tasks.configureEach { task ->
+tasks.whenTaskAdded { task ->
     if (task.name ==~ /process.*GoogleServices/) {
         task.dependsOn copyGoogleServicesJson
     }
