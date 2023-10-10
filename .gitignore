@@ -8,6 +8,7 @@ GoogleService-Info.plist
 
 /.env
 /dart-defines*.json
+/fastlane/report.xml
 /ios/firebase_app_id_file.json
 /ios/Flutter/DartDefines.xcconfig
 /lib/firebase_options*.dart
