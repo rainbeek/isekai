@@ -14,9 +14,7 @@ platform :ios do
 
     Dir.chdir('../') do
       sh('flutter build ios --dart-define SERVER_ENV=dev --no-codesign')
-    end
 
-    Dir.chdir('../ios') do
       sh(
         'xcodebuild archive CODE_SIGNING_ALLOWED=NO '\
         '-workspace ./ios/Runner.xcworkspace '\
