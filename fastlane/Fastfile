@@ -6,6 +6,6 @@ desc 'Generate automatic codes'
 lane :generate do
   Dir.chdir('../') do
     sh('dart pub get')
-    sh('dart pub run build_runner build --delete-conflicting-outputs')
+    sh('dart run build_runner build --delete-conflicting-outputs')
   end
 end
