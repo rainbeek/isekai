@@ -98,6 +98,8 @@ jobs:
         uses: ./.github/actions/setup-xcode
       - name: Setup CocoaPods
         uses: ./.github/actions/setup-cocoapods
+      - name: Setup Ruby
+        uses: ./.github/actions/setup-ruby
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
@@ -107,9 +109,13 @@ jobs:
         uses: ./.github/actions/generate-uncommited-ios-files
         with:
           google-service-plist-base64-dev: ${{ secrets.GOOGLE_SERVICE_PLIST_BASE64_DEV }}
+      - name: Generate env file
+        uses: ./.github/actions/generate-env-file
+        with:
+          env-base64: ${{ secrets.ENV_BASE64 }}
       - name: Build iOS dev app
         shell: bash
-        run: flutter build ios --dart-define SERVER_ENV=dev --no-codesign
+        run: bundle exec fastlane ios build_dev
 
   build-android-dev-app:
     name: Build Android dev app
