@@ -114,8 +114,7 @@ jobs:
         with:
           env-base64: ${{ secrets.ENV_BASE64 }}
       - name: Build iOS dev app
-        shell: bash
-        run: bundle exec fastlane ios build_dev
+        run: flutter build ios --dart-define SERVER_ENV=dev --no-codesign
 
   build-android-dev-app:
     name: Build Android dev app
