@@ -6,8 +6,9 @@ GoogleService-Info.plist
 
 /emulator-data
 
-/.env
 /dart-defines*.json
+/fastlane/.env
+/fastlane/app-store-connect-api-key.p8
 /fastlane/report.xml
 /ios/firebase_app_id_file.json
 /ios/Flutter/DartDefines.xcconfig
