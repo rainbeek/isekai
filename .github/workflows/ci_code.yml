@@ -123,15 +123,18 @@ jobs:
             -configuration Release \
             -archivePath ./build/ios/Runner.xcarchive
       - name: Export
+        env:
+          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
         run: |
           xcodebuild -exportArchive \
             -archivePath ./build/ios/Runner.xcarchive \
             -exportPath ./build/ios/ipa \
             -exportOptionsPlist ./ios/ExportOptions-AdHoc.plist \
-            -allowProvisioningUpdates '\
-            -authenticationKeyIssuerID '#{apple_api_issuer_id}' \
-            -authenticationKeyID '#{apple_api_key_id}' \
-            -authenticationKeyPath `pwd`/fastlane/app-store-connect-api-key.p8
+            -allowProvisioningUpdates \
+            -authenticationKeyIssuerID "$APPLE_API_ISSUER_ID" \
+            -authenticationKeyID "$APPLE_API_KEY_ID" \
+            -authenticationKeyPath `pwd`/fastlane/app-store-connect-api-key.p8'
 
   build-android-dev-app:
     name: Build Android dev app
