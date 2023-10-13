@@ -115,6 +115,13 @@ jobs:
           env-base64: ${{ secrets.ENV_BASE64 }}
       - name: Build iOS dev app
         run: flutter build ios --dart-define SERVER_ENV=dev --no-codesign
+      - name: Archive
+        run: |
+          xcodebuild archive CODE_SIGNING_ALLOWED=NO \
+            -workspace ./ios/Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -archivePath ./build/ios/Runner.xcarchive
 
   build-android-dev-app:
     name: Build Android dev app
