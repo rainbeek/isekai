@@ -122,6 +122,16 @@ jobs:
             -scheme Runner \
             -configuration Release \
             -archivePath ./build/ios/Runner.xcarchive
+      - name: Export
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath ./build/ios/Runner.xcarchive \
+            -exportPath ./build/ios/ipa \
+            -exportOptionsPlist ./ios/ExportOptions-AdHoc.plist \
+            -allowProvisioningUpdates '\
+            -authenticationKeyIssuerID '#{apple_api_issuer_id}' \
+            -authenticationKeyID '#{apple_api_key_id}' \
+            -authenticationKeyPath `pwd`/fastlane/app-store-connect-api-key.p8
 
   build-android-dev-app:
     name: Build Android dev app
