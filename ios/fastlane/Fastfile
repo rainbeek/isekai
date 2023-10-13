@@ -12,28 +12,26 @@ platform :ios do
 
     generate
 
-    Dir.chdir('../') do
-      sh('flutter build ios --dart-define SERVER_ENV=dev --no-codesign')
+    sh('flutter build ios --dart-define SERVER_ENV=dev --no-codesign')
 
-      sh(
-        'xcodebuild archive CODE_SIGNING_ALLOWED=NO '\
-        '-workspace ./ios/Runner.xcworkspace '\
-        '-scheme Runner '\
-        '-configuration Release '\
-        '-archivePath ./build/ios/Runner.xcarchive'
-      )
+    sh(
+      'xcodebuild archive CODE_SIGNING_ALLOWED=NO '\
+      '-workspace Runner.xcworkspace '\
+      '-scheme Runner '\
+      '-configuration Release '\
+      '-archivePath ../build/ios/Runner.xcarchive'
+    )
 
-      sh(
-        'xcodebuild -exportArchive '\
-        '-archivePath ./build/ios/Runner.xcarchive '\
-        '-exportPath ./build/ios/ipa '\
-        '-exportOptionsPlist ./ios/ExportOptions-AdHoc.plist '\
-        '-allowProvisioningUpdates '\
-        "-authenticationKeyIssuerID '#{apple_api_issuer_id}' "\
-        "-authenticationKeyID '#{apple_api_key_id}' "\
-        '-authenticationKeyPath `pwd`/fastlane/app-store-connect-api-key.p8'
-      )
-    end
+    sh(
+      'xcodebuild -exportArchive '\
+      '-archivePath ../build/ios/Runner.xcarchive '\
+      '-exportPath ../build/ios/ipa '\
+      '-exportOptionsPlist ExportOptions-AdHoc.plist '\
+      '-allowProvisioningUpdates '\
+      "-authenticationKeyIssuerID '#{apple_api_issuer_id}' "\
+      "-authenticationKeyID '#{apple_api_key_id}' "\
+      '-authenticationKeyPath `pwd`/fastlane/app-store-connect-api-key.p8'
+    )
 
     lane_context[SharedValues::IPA_OUTPUT_PATH] = 'build/ios/ipa/isekai.ipa'
   end
