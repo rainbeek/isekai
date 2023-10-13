@@ -134,7 +134,7 @@ jobs:
             -allowProvisioningUpdates \
             -authenticationKeyIssuerID "$APPLE_API_ISSUER_ID" \
             -authenticationKeyID "$APPLE_API_KEY_ID" \
-            -authenticationKeyPath `pwd`/fastlane/app-store-connect-api-key.p8'
+            -authenticationKeyPath `pwd`/fastlane/app-store-connect-api-key.p8
 
   build-android-dev-app:
     name: Build Android dev app
