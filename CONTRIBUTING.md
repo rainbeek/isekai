@@ -104,15 +104,23 @@ VSCode の「Emulator-Debug」などの構成でデバッグ実行します。
 rbenv install
 ```
 
-次に、[RubyGems](https://rubygems.org/) をインストールして `gem` コマンドを使えるようにします。
+[RubyGems](https://rubygems.org/) をインストールして `gem` コマンドを使えるようにします。
 
-さらに、[bundler](https://rubygems.org/gems/bundler) をインストールして、`bundle` コマンドを使えるようにします。
+[bundler](https://rubygems.org/gems/bundler) をインストールして、`bundle` コマンドを使えるようにします。
 
-最後に以下コマンドを実行します。
+以下コマンドを実行します。
 
 ```shell
 bundle install
 ```
+
+以下のファイルを開発責任者から受け取り、ローカルに配置します。
+
+| ファイルパス                                      | 説明                                                             |
+| ------------------------------------------------- | ---------------------------------------------------------------- |
+| `fastlane/.env`                                   | Fastlane 用の環境変数                                            |
+| `fastlane/app-store-connect-api-key.p8`           | App Store Connect の API キー                                    |
+| `fastlane/firebase-app-distribution-develop.json` | Firebase App Distribution へのデプロイ用のサービスアカウントキー |
 
 #### デプロイ手順
 
