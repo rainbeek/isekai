@@ -1,0 +1,51 @@
+# frozen_string_literal: true
+
+default_platform(:ios)
+
+platform :ios do
+  desc 'Dev環境向けアプリをビルドします。'
+  lane :build_dev do
+    Dotenv.load '.env'
+
+    apple_api_issuer_id = ENV['APPLE_API_ISSUER_ID'].to_s
+    apple_api_key_id = ENV['APPLE_API_KEY_ID'].to_s
+
+    Dir.chdir('../') do
+      archive_path = 'build/ios/Runner.xcarchive'
+
+      sh('flutter build ios --dart-define SERVER_ENV=dev --no-codesign')
+
+      sh(
+        'xcodebuild archive CODE_SIGNING_ALLOWED=NO '\
+        "-workspace 'ios/Runner.xcworkspace' "\
+        "-scheme 'Runner' "\
+        "-configuration 'Release' "\
+        "-archivePath '#{archive_path}'"
+      )
+
+      sh(
+        'xcodebuild -exportArchive '\
+        "-archivePath '#{archive_path}' "\
+        "-exportPath 'build/ios/ipa' "\
+        "-exportOptionsPlist 'ios/ExportOptions-AdHoc.plist' "\
+        '-allowProvisioningUpdates '\
+        "-authenticationKeyIssuerID '#{apple_api_issuer_id}' "\
+        "-authenticationKeyID '#{apple_api_key_id}' "\
+        '-authenticationKeyPath `pwd`/fastlane/app-store-connect-api-key.p8'
+      )
+    end
+
+    lane_context[SharedValues::IPA_OUTPUT_PATH] = 'build/ios/ipa/異世界Q.ipa'
+  end
+
+  desc 'Dev環境向けアプリをFirebase App Distributionにデプロイします。'
+  lane :deploy_dev do
+    build_dev
+
+    firebase_app_distribution(
+      app: '1:496690593871:ios:4dd3a78d4982dac605ea3a',
+      service_credentials_file: 'fastlane/firebase-app-distribution-develop.json',
+      groups: 'testers'
+    )
+  end
+end

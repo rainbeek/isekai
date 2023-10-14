@@ -94,6 +94,39 @@ VSCode の「Emulator-Debug」などの構成でデバッグ実行します。
 
 ## デプロイ
 
+### アプリをデプロイ
+
+#### 事前に必要な手順
+
+[rbenv](https://github.com/rbenv/rbenv) をインストールして、以下コマンドを実行します。
+
+```shell
+rbenv install
+```
+
+[RubyGems](https://rubygems.org/) をインストールして `gem` コマンドを使えるようにします。
+
+[bundler](https://rubygems.org/gems/bundler) をインストールして、`bundle` コマンドを使えるようにします。
+
+以下コマンドを実行します。
+
+```shell
+bundle install
+```
+
+以下のファイルを開発責任者から受け取り、ローカルに配置します。
+
+| ファイルパス                                      | 説明                                                             |
+| ------------------------------------------------- | ---------------------------------------------------------------- |
+| `fastlane/.env`                                   | Fastlane 用の環境変数                                            |
+| `fastlane/app-store-connect-api-key.p8`           | App Store Connect の API キー                                    |
+| `fastlane/firebase-app-distribution-develop.json` | Firebase App Distribution へのデプロイ用のサービスアカウントキー |
+
+#### デプロイ手順
+
+Fastlane が自動生成する [README](/fastlane/README.md) を参照してください。
+README のコマンドを実行する際は、`bundle exec` を先頭に付与して実行します。
+
 ### Firestore のルールをデプロイ
 
 [「Firebase CLI をインストールする」](https://firebase.google.com/docs/cli#install_the_firebase_cli)を参考に、Firebase CLI をインストールします。

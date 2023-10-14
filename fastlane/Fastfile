@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+import '../ios/fastlane/Fastfile'
+
+desc 'Generate automatic codes'
+lane :generate do
+  Dir.chdir('../') do
+    sh('dart pub get')
+    sh('dart run build_runner build --delete-conflicting-outputs')
+  end
+end
