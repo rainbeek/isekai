@@ -1,9 +1,15 @@
 runs:
   using: "composite"
   steps:
+    - name: Get Ruby version
+      id: get-ruby-version
+      shell: bash
+      run: |
+        ruby_version="$(cat .ruby-version)"
+        echo "ruby-version=$ruby_version" >> $GITHUB_OUTPUT
     # マシンにRubyはインストール済みだが、キャッシュとbundlerインストールのため、以下アクションを利用
     - name: Install Ruby, bundler, fastlane and other dependencies
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "2.7"
+        ruby-version: ${{ steps.get-ruby-version.outputs.ruby-version }}
         bundler-cache: true
