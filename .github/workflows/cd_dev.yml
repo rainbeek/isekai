@@ -74,5 +74,5 @@ jobs:
         uses: ./.github/actions/generate-app-distribution-key-file
         with:
           key-json-base64: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_KEY_JSON_BASE64_DEV }}
-      - name: Build Android dev app
+      - name: Deploy Android dev app to Firebase App Distribution
         run: bundle exec fastlane android deploy_dev
