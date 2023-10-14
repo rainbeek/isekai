@@ -80,9 +80,7 @@ jobs:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
       - name: Run Flutter test
-        run: flutter test --machine > flutter-test-results.log
-      - name: Cat test results
-        run: cat flutter-test-results.log
+        run: flutter test --file-reporter json:flutter-test-results.log
       - uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
