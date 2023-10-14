@@ -145,5 +145,9 @@ jobs:
         uses: ./.github/actions/generate-uncommited-android-files
         with:
           google-service-json-base64-dev: ${{ secrets.GOOGLE_SERVICE_JSON_BASE64_DEV }}
+      - name: Generate key store files
+        run: |
+          echo "${{ secrets.KEY_PROPERTIES_BASE64 }}" | base64 -d > android/key.properties
+          echo "${{ secrets.UPLOAD_KEYSTORE_JKS_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
       - name: Build Android dev app
-        run: flutter build appbundle --dart-define SERVER_ENV=dev
+        run: bundle exec fastlane android build_dev
