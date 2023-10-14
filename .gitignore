@@ -13,6 +13,7 @@ GoogleService-Info.plist
 /ios/firebase_app_id_file.json
 /ios/Flutter/DartDefines.xcconfig
 /lib/firebase_options*.dart
+fastlane/firebase-app-distribution-develop.json
 
 !/dart-defines_example.json
 
