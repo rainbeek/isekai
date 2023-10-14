@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+
+default_platform(:android)
+
+platform :android do
+  desc 'Dev環境向けアプリをビルドします。'
+  lane :build_dev do
+    Dir.chdir('../') do
+      sh('flutter build apk --dart-define SERVER_ENV=dev')
+    end
+
+    lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH] = 'build/app/outputs/apk/release/app-release.apk'
+  end
+
+  desc 'Dev環境向けアプリをFirebase App Distributionにデプロイします。'
+  lane :deploy_dev do
+    build_dev
+
+    firebase_app_distribution(
+      app: '1:496690593871:android:164876b2b4d6e7da05ea3a',
+      service_credentials_file: 'fastlane/firebase-app-distribution-develop.json',
+      groups: 'testers'
+    )
+  end
+end
