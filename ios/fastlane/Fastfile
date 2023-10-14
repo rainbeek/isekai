@@ -11,6 +11,8 @@ platform :ios do
     apple_api_key_id = ENV['APPLE_API_KEY_ID'].to_s
 
     Dir.chdir('../') do
+      archive_path = 'build/ios/Runner.xcarchive'
+
       sh('flutter build ios --dart-define SERVER_ENV=dev --no-codesign')
 
       sh(
@@ -18,12 +20,12 @@ platform :ios do
         "-workspace 'ios/Runner.xcworkspace' "\
         "-scheme 'Runner' "\
         "-configuration 'Release' "\
-        "-archivePath 'build/ios/Runner.xcarchive'"
+        "-archivePath '#{archive_path}'"
       )
 
       sh(
         'xcodebuild -exportArchive '\
-        "-archivePath 'build/ios/Runner.xcarchive' "\
+        "-archivePath '#{archive_path}' "\
         "-exportPath 'build/ios/ipa' "\
         "-exportOptionsPlist 'ios/ExportOptions-AdHoc.plist' "\
         '-allowProvisioningUpdates '\
