@@ -9,11 +9,11 @@ GoogleService-Info.plist
 /dart-defines*.json
 /fastlane/.env
 /fastlane/app-store-connect-api-key.p8
+/fastlane/firebase-app-distribution-develop.json
 /fastlane/report.xml
 /ios/firebase_app_id_file.json
 /ios/Flutter/DartDefines.xcconfig
 /lib/firebase_options*.dart
-fastlane/firebase-app-distribution-develop.json
 
 !/dart-defines_example.json
 
