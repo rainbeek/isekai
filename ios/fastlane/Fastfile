@@ -3,7 +3,7 @@
 default_platform(:ios)
 
 platform :ios do
-  desc 'Build develop app'
+  desc 'Dev環境向けアプリをビルドします。'
   lane :build_dev do
     Dotenv.load '.env'
 
@@ -38,7 +38,7 @@ platform :ios do
     lane_context[SharedValues::IPA_OUTPUT_PATH] = 'build/ios/ipa/異世界Q.ipa'
   end
 
-  desc 'Deploy develop app to Firebase App Distribution'
+  desc 'Dev環境向けアプリをFirebase App Distributionにデプロイします。'
   lane :deploy_dev do
     build_dev
 
