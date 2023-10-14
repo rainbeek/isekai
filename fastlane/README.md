@@ -32,7 +32,7 @@ Generate automatic codes
 [bundle exec] fastlane ios build_dev
 ```
 
-Build develop app
+Dev環境向けアプリをビルドします。
 
 ### ios deploy_dev
 
@@ -40,7 +40,7 @@ Build develop app
 [bundle exec] fastlane ios deploy_dev
 ```
 
-Deploy develop app to Firebase App Distribution
+Dev環境向けアプリをFirebase App Distributionにデプロイします。
 
 ----
 

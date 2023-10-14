@@ -94,6 +94,25 @@ VSCode の「Emulator-Debug」などの構成でデバッグ実行します。
 
 ## デプロイ
 
+### アプリをデプロイ
+
+#### 環境構築
+
+[RubyGems](https://rubygems.org/) をインストールして `gem` コマンドを使えるようにします。
+
+次に、[bundler](https://rubygems.org/gems/bundler) をインストールして、`bundle` コマンドを使えるようにします。
+
+以下のコマンドを一度だけ実行する必要があります。
+
+```shell
+bundle install
+```
+
+#### コマンド
+
+Fastlane が自動生成する [README](/fastlane/README.md) を参照してください。
+README のコマンドを実行する際は、`bundle exec` を先頭に付与して実行します。
+
 ### Firestore のルールをデプロイ
 
 [「Firebase CLI をインストールする」](https://firebase.google.com/docs/cli#install_the_firebase_cli)を参考に、Firebase CLI をインストールします。
