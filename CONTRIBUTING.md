@@ -96,19 +96,25 @@ VSCode の「Emulator-Debug」などの構成でデバッグ実行します。
 
 ### アプリをデプロイ
 
-#### 環境構築
+#### 事前に必要な手順
 
-[RubyGems](https://rubygems.org/) をインストールして `gem` コマンドを使えるようにします。
+[rbenv](https://github.com/rbenv/rbenv) をインストールして、以下コマンドを実行します。
 
-次に、[bundler](https://rubygems.org/gems/bundler) をインストールして、`bundle` コマンドを使えるようにします。
+```shell
+rbenv install
+```
 
-以下のコマンドを一度だけ実行する必要があります。
+次に、[RubyGems](https://rubygems.org/) をインストールして `gem` コマンドを使えるようにします。
+
+さらに、[bundler](https://rubygems.org/gems/bundler) をインストールして、`bundle` コマンドを使えるようにします。
+
+最後に以下コマンドを実行します。
 
 ```shell
 bundle install
 ```
 
-#### コマンド
+#### デプロイ手順
 
 Fastlane が自動生成する [README](/fastlane/README.md) を参照してください。
 README のコマンドを実行する際は、`bundle exec` を先頭に付与して実行します。
