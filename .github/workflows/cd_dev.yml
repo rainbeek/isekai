@@ -1,0 +1,83 @@
+name: CD / Develop
+
+on:
+  pull_request:
+    branches:
+      - "main"
+  push:
+    tags:
+      - "beta/*"
+  workflow_dispatch:
+
+jobs:
+  deploy-ios-dev-app:
+    name: Deploy iOS app
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      - name: Setup Xcode
+        uses: ./.github/actions/setup-xcode
+      - name: Setup CocoaPods
+        uses: ./.github/actions/setup-cocoapods
+      - name: Setup Ruby
+        uses: ./.github/actions/setup-ruby
+      - name: Generate uncommited Flutter files
+        uses: ./.github/actions/generate-uncommited-flutter-files
+        with:
+          firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
+          firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+      - name: Generate uncommited iOS files
+        uses: ./.github/actions/generate-uncommited-ios-files
+        with:
+          google-service-plist-base64-dev: ${{ secrets.GOOGLE_SERVICE_PLIST_BASE64_DEV }}
+      - name: Generate env file
+        uses: ./.github/actions/generate-env-file
+        with:
+          env-base64: ${{ secrets.ENV_BASE64 }}
+      - name: Generate App Store Connect API key file
+        run: echo "${{ secrets.APP_STORE_CONNECT_API_KEY_P8_BASE64 }}" | base64 -d > fastlane/app-store-connect-api-key.p8
+      - name: Generate Firebase App Distribution service account key file
+        uses: ./.github/actions/generate-app-distribution-key-file
+        with:
+          key-json-base64: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_KEY_JSON_BASE64_DEV }}
+      - name: Deploy iOS dev app to Firebase App Distribution
+        run: bundle exec fastlane ios deploy_dev
+
+  deploy-android-dev-app:
+    name: Deploy Android app
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
+      - name: Setup Ruby
+        uses: ./.github/actions/setup-ruby
+      - name: Generate uncommited Flutter files
+        uses: ./.github/actions/generate-uncommited-flutter-files
+        with:
+          firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
+          firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+      - name: Generate uncommited Android files
+        uses: ./.github/actions/generate-uncommited-android-files
+        with:
+          google-service-json-base64-dev: ${{ secrets.GOOGLE_SERVICE_JSON_BASE64_DEV }}
+      - name: Generate key store files
+        run: |
+          echo "${{ secrets.KEY_PROPERTIES_BASE64 }}" | base64 -d > android/key.properties
+          echo "${{ secrets.UPLOAD_KEYSTORE_JKS_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
+      - name: Generate Firebase App Distribution service account key file
+        uses: ./.github/actions/generate-app-distribution-key-file
+        with:
+          key-json-base64: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_KEY_JSON_BASE64_DEV }}
+      - name: Build Android dev app
+        run: bundle exec fastlane android deploy_dev
