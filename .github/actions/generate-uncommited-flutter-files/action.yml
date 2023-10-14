@@ -12,9 +12,6 @@ runs:
       run: |
         echo "${{ inputs.firebase-options-dart-base64-emulator }}" | base64 -d > lib/firebase_options_emulator.dart
         echo "${{ inputs.firebase-options-dart-base64-dev }}" | base64 -d > lib/firebase_options_dev.dart
-    - name: Install dependencies
-      shell: bash
-      run: flutter pub get
     - name: Generate automatic codes
       shell: bash
-      run: flutter pub run build_runner build
+      run: bundle exec fastlane generate
