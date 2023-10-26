@@ -7,7 +7,7 @@ import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/data/usecase/session_use_case.dart';
 import 'package:isekai/ui/game/game_router.dart';
 import 'package:isekai/ui/root_presenter.dart';
-import 'package:isekai/ui/root_state.dart';
+import 'package:isekai/ui/start_page.dart';
 import 'package:isekai/ui/update_app_screen.dart';
 
 final _rootPresenterProvider = StateNotifierProvider<RootPresenter, StartPage?>(

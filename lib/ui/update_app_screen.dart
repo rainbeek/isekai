@@ -45,7 +45,7 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
           onWillPop: () async => false,
           child: AlertDialog(
             content: Text(
-              S.of(context).newVersionIsAvailableDescription,
+              S.of(context)!.newVersionIsAvailableDescription,
             ),
             actions: [
               TextButton(

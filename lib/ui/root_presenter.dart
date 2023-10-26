@@ -6,7 +6,7 @@ import 'package:isekai/data/service/remote_config_service.dart';
 import 'package:isekai/data/usecase/app_use_case.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/data/usecase/session_use_case.dart';
-import 'package:isekai/ui/root_state.dart';
+import 'package:isekai/ui/start_page.dart';
 
 class RootPresenter extends StateNotifier<StartPage?> {
   RootPresenter({
@@ -54,7 +54,7 @@ class RootPresenter extends StateNotifier<StartPage?> {
       updatedRemoteConfigKeysProvider.future,
       (_, next) async {
         // リモート設定の変更を監視し、次回アプリが起動する際にそれらがアクティブになるようにする。
-        // ここでは何もしていないですが、リモート設定のライブラリが変更された値を保持する。
+        // ここでは何もしていないが、リモート設定のライブラリが変更された値を保持する。
         // https://firebase.google.com/docs/remote-config/loading#strategy_3_load_new_values_for_next_startup
         final configKeys = await next;
 
