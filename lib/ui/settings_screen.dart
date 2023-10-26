@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isekai/data/definitions/app_mode.dart';
+import 'package:isekai/data/definition/app_mode.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/ui/debug_screen.dart';
 

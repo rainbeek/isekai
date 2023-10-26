@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isekai/data/definitions/app_mode.dart';
+import 'package:isekai/data/definition/app_mode.dart';
 import 'package:isekai/firebase_options_dev.dart' as dev;
 import 'package:isekai/firebase_options_emulator.dart' as emulator;
 import 'package:isekai/ui/root_app.dart';

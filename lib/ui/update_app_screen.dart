@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'package:isekai/data/definitions/source.dart';
+import 'package:isekai/data/definition/source.dart';
 
 class UpdateAppScreen extends StatefulWidget {
   const UpdateAppScreen({super.key});
