@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:isekai/data/definitions/source.dart';
 
@@ -43,8 +44,8 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
           // Android OSのバックボタンでダイアログが閉じないようにする
           onWillPop: () async => false,
           child: AlertDialog(
-            content: const Text(
-              '新しいバージョンがリリースされています。より良い作品を作るために、アップデートしてご利用ください',
+            content: Text(
+              S.of(context).newVersionIsAvailableDescription,
             ),
             actions: [
               TextButton(

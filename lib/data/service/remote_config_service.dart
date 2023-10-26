@@ -1,5 +1,3 @@
-// ignore_for_file: prefer-match-file-name
-
 import 'dart:io';
 
 import 'package:firebase_remote_config/firebase_remote_config.dart';
