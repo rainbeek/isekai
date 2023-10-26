@@ -1,5 +1,3 @@
-// ignore_for_file: prefer-match-file-name
-
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';

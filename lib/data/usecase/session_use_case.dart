@@ -1,5 +1,3 @@
-// ignore_for_file: prefer-match-file-name
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/model/session.dart';
 import 'package:isekai/data/service/auth_service.dart';
