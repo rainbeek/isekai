@@ -1,4 +1,6 @@
 {
+  "newVersionIsAvailableDescription": "新しいバージョンがリリースされています。より良い異世界体験を得るために、アップデートしてご利用ください",
+  "update": "アップデートする",
   "messageDateFormat": "{date} {time}",
   "@messageDateFormat": {
     "placeholders": {
