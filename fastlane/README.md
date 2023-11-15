@@ -34,6 +34,14 @@ Generate automatic codes
 
 Dev環境向けアプリをビルドします。
 
+### ios build_dev_with_no_code_sign
+
+```sh
+[bundle exec] fastlane ios build_dev_with_no_code_sign
+```
+
+Dev環境向けアプリを電子署名なしにビルドします。
+
 ### ios deploy_dev
 
 ```sh
