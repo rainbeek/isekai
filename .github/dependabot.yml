@@ -5,6 +5,9 @@ updates:
     open-pull-requests-limit: 1
     schedule:
       interval: "daily"
+    # dependabotを動作させるため、`pubspec.yaml` におけるバージョン制約を設けていない。
+    # そのため、`pubspec.lock` のみの更新で十分。
+    versioning-strategy: "lockfile-only"
   - package-ecosystem: "gradle"
     directory: "/android/"
     open-pull-requests-limit: 1
