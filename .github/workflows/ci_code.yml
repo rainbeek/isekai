@@ -115,6 +115,43 @@ jobs:
           google-service-plist-base64-dev: ${{ secrets.GOOGLE_SERVICE_PLIST_BASE64_DEV }}
       - name: Build iOS dev app
         run: bundle exec fastlane ios build_dev_with_no_code_sign
+  push-back-diffs-if-needed:
+    name: Push back diffs after resolving dependencies if needed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: generate-token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.RAINBEEK_WORKFLOW_APP_ID }}
+          private_key: ${{ secrets.RAINBEEK_WORKFLOW_APP_PRIVATE_KEY_PEM }}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          # CI がプッシュバック後に再度トリガーされることを保証するため、
+          # デフォルトのトークン `GITHUB_TOKEN` の代わりに GitHub App トークンを使用する
+          token: ${{ steps.generate-token.outputs.token }}
+          fetch-depth: 0
+      - name: Setup Git
+        uses: ./.github/actions/setup-git
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      - name: Setup Ruby
+        uses: ./.github/actions/setup-ruby
+      - name: Install iOS dependencies
+        run: bundle exec fastlane ios install_dependencies
+      - name: Commit
+        run: |
+          git add ios/Podfile.lock
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m 'build: Podfile.lock を修復'
+          fi
+      - name: Push back if needed
+        run: |
+          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+          git push origin "$BRANCH_NAME"
 
   build-android-dev-app:
     name: Build Android dev app
