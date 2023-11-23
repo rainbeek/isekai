@@ -3,10 +3,16 @@
 import '../ios/fastlane/Fastfile'
 import '../android/fastlane/Fastfile'
 
-desc 'Generate automatic codes'
+desc 'Flutterの依存関係をインストールします。'
+lane :install_flutter_dependencies do
+  sh('flutter pub get --no-example')
+end
+
+desc '自動コードを生成します。'
 lane :generate do
+  install_flutter_dependencies
+
   Dir.chdir('../') do
-    sh('dart pub get')
     sh('dart run build_runner build --delete-conflicting-outputs')
   end
 end
