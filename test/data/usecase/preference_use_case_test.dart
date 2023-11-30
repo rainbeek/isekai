@@ -31,7 +31,7 @@ void main() {
     );
     preferenceRepository = MockPreferenceRepository();
     when(() => preferenceRepository.updateProfile(any())).thenAnswer(
-      (_) async => {},
+      (_) async {},
     );
   });
 

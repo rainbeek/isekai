@@ -24,7 +24,7 @@ class WorldCollidable extends PositionComponent {
 
 Future<List<Rect>> readRayWorldCollisionMap() async {
   final collidableRectangles = <Rect>[];
-  final collisionMapJson = json.decode(
+  final dynamic collisionMapJson = json.decode(
     await rootBundle.loadString('assets/tiles/map.json'),
   );
   final collisionMap =
