@@ -15,7 +15,7 @@ dependencies:
   faker:
   firebase_auth:
   firebase_core:
-  firebase_remote_config: 4.3.6
+  firebase_remote_config:
   flame:
   flutter:
     sdk: flutter
