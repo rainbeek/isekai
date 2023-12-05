@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
-import 'package:flame/experimental.dart';
 import 'package:isekai/ui/game/game_router.dart';
 
 class GameInit extends Component with HasGameReference<GameRouter> {

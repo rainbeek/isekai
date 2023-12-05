@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/experimental.dart';
 import 'package:flutter/services.dart';
 import 'package:isekai/data/model/world_map.dart';
 
