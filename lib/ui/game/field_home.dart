@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
-import 'package:flame/experimental.dart';
 import 'package:isekai/ui/game/game_router.dart';
 import 'package:isekai/ui/game/joystick.dart';
 import 'package:isekai/ui/game/map.dart';
