@@ -19,4 +19,4 @@ tiktoken==0.5.2
 tqdm==4.66.1
 urllib3==2.1.0
 virtualenv==20.25.0
-yarl==1.9.3
+yarl==1.9.4
