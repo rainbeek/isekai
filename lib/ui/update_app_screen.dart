@@ -40,9 +40,9 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
     await showDialog<bool>(
       context: context,
       builder: (context) {
-        return WillPopScope(
+        return PopScope(
           // Android OSのバックボタンでダイアログが閉じないようにする
-          onWillPop: () async => false,
+          canPop: false,
           child: AlertDialog(
             content: Text(
               S.of(context)!.newVersionIsAvailableDescription,
