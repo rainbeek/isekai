@@ -32,7 +32,7 @@ class RootApp extends ConsumerWidget {
 
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorSchemeSeed: Colors.blue,
       ),
       home: home,
       localizationsDelegates: const [
