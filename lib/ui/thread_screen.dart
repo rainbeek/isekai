@@ -111,15 +111,6 @@ class ThreadScreen extends ConsumerWidget {
                 height: 750, // TODO(shimizu): サイズを比率にする。
                 alignment: Alignment.center,
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 20,
-                    ),
-                  ],
-                ),
                 child: Column(
                   children: [
                     Row(
@@ -128,9 +119,6 @@ class ThreadScreen extends ConsumerWidget {
                           alignment: Alignment.topLeft,
                           child: ElevatedButton(
                             onPressed: () => Navigator.pop(context),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey,
-                            ),
                             child: const Text('閉じる'),
                           ),
                         ),
