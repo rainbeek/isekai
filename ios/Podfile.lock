@@ -164,7 +164,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: 3862d87d4d58deff08f705d471896a2f66e8bbf0
   FirebaseCore: 65a801af84cca84361ef9eac3fd868656968a53b
   FirebaseCoreInternal: 8eb002e564b533bdcf1ba011f33f2b5c10e2ed4a
-  FirebaseFirestore: 20ee742826194888b243f6c698209555871b6211
+  FirebaseFirestore: a78fa6e8bd3644023c22d5212e7afee9d7522194
   FirebaseInstallations: e842042ec6ac1fd2e37d7706363ebe7f662afea4
   FirebaseRemoteConfig: 17ec974c6cac5cdc6cf8297062c2219851857f06
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
