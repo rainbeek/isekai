@@ -13,18 +13,34 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 # Available Actions
 
+### install_flutter_dependencies
+
+```sh
+[bundle exec] fastlane install_flutter_dependencies
+```
+
+Flutterの依存関係をインストールします。
+
 ### generate
 
 ```sh
 [bundle exec] fastlane generate
 ```
 
-Generate automatic codes
+自動コードを生成します。
 
 ----
 
 
 ## iOS
+
+### ios install_dependencies
+
+```sh
+[bundle exec] fastlane ios install_dependencies
+```
+
+iOSの依存関係をインストールします。
 
 ### ios build_dev
 
