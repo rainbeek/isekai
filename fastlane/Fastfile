@@ -5,7 +5,9 @@ import '../android/fastlane/Fastfile'
 
 desc 'Flutterの依存関係をインストールします。'
 lane :install_flutter_dependencies do
-  sh('flutter pub get --no-example')
+  Dir.chdir('../') do
+    sh('flutter pub get --no-example')
+  end
 end
 
 desc '自動コードを生成します。'
