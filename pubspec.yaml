@@ -13,7 +13,7 @@ dependencies:
   collection:
   cupertino_icons:
   faker:
-  firebase_auth: 4.15.3
+  firebase_auth:
   firebase_core:
   firebase_remote_config:
   flame:
