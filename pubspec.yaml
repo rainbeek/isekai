@@ -33,7 +33,7 @@ dev_dependencies:
   flutter_lints:
   flutter_test:
     sdk: flutter
-  freezed:
+  freezed: 2.4.6
   json_serializable:
   mocktail:
   pedantic_mono:
