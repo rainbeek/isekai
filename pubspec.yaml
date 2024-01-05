@@ -25,7 +25,7 @@ dependencies:
   freezed_annotation:
   in_app_review:
   intl:
-  package_info_plus: 5.0.1
+  package_info_plus:
   shared_preferences:
 
 dev_dependencies:
