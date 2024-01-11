@@ -21,7 +21,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_riverpod: 2.4.9
+  flutter_riverpod:
   freezed_annotation:
   in_app_review:
   intl:
