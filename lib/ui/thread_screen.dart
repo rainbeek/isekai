@@ -17,32 +17,12 @@ class ThreadScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final futureThread = ref.watch(currentThreadProvider.future);
-    final futureMessages = ref.watch(currentThreadMessagesProvider.future);
     final presenter = ref.watch(_threadPresenterProvider);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: FutureBuilder<Thread>(
-          future: futureThread,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return const Text('エラーが発生しました。');
-            }
-
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            }
-
-            final thread = snapshot.data;
-            if (thread == null) {
-              return const Text('null');
-            }
-
-            return Text(thread.title);
-          },
-        ),
+        title: _TitleText(),
         actions: [
           _ProfileIconButton(
             onPressed: () {
@@ -54,49 +34,7 @@ class ThreadScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          FutureBuilder(
-            future: futureMessages,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return const Text('エラーが発生しました。');
-              }
-
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              }
-
-              final messages = snapshot.data;
-              if (messages == null) {
-                return Container();
-              }
-
-              return Expanded(
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    final message = messages[index];
-
-                    return ListTile(
-                      title: Text(message.text),
-                      subtitle: Text('User: ${message.userId}'),
-                      trailing: Text(
-                        S.of(context)!.messageDateFormat(
-                              message.createdAt,
-                              message.createdAt,
-                            ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) =>
-                      const Divider(height: 0),
-                  itemCount: messages.length,
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+      body: const MessagesPanel(),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           var contributor = '';
@@ -162,6 +100,33 @@ class ThreadScreen extends ConsumerWidget {
   }
 }
 
+class _TitleText extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final futureThread = ref.watch(currentThreadProvider.future);
+
+    return FutureBuilder<Thread>(
+      future: futureThread,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const Text('エラーが発生しました。');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+
+        final thread = snapshot.data;
+        if (thread == null) {
+          return const Text('null');
+        }
+
+        return Text(thread.title);
+      },
+    );
+  }
+}
+
 class _ProfileIconButton extends ConsumerWidget {
   const _ProfileIconButton({
     required this.onPressed,
@@ -179,6 +144,58 @@ class _ProfileIconButton extends ConsumerWidget {
     return IconButton(
       icon: Text(icon),
       onPressed: onPressed,
+    );
+  }
+}
+
+class MessagesPanel extends ConsumerWidget {
+  const MessagesPanel({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final futureMessages = ref.watch(currentThreadMessagesProvider.future);
+
+    return Column(
+      children: [
+        FutureBuilder(
+          future: futureMessages,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return const Text('エラーが発生しました。');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+
+            final messages = snapshot.data;
+            if (messages == null) {
+              return Container();
+            }
+
+            return Expanded(
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  final message = messages[index];
+
+                  return ListTile(
+                    title: Text(message.text),
+                    subtitle: Text('User: ${message.userId}'),
+                    trailing: Text(
+                      S.of(context)!.messageDateFormat(
+                            message.createdAt,
+                            message.createdAt,
+                          ),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) => const Divider(height: 0),
+                itemCount: messages.length,
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }
