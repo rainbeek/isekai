@@ -17,15 +17,15 @@ class ThreadScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final threadStream = ref.watch(currentThreadProvider.stream);
-    final messagesStream = ref.watch(currentThreadMessagesProvider.stream);
+    final futureThread = ref.watch(currentThreadProvider.future);
+    final futureMessages = ref.watch(currentThreadMessagesProvider.future);
     final presenter = ref.watch(_threadPresenterProvider);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: StreamBuilder<Thread>(
-          stream: threadStream,
+        title: FutureBuilder<Thread>(
+          future: futureThread,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const Text('エラーが発生しました。');
@@ -56,8 +56,8 @@ class ThreadScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          StreamBuilder(
-            stream: messagesStream,
+          FutureBuilder(
+            future: futureMessages,
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return const Text('エラーが発生しました。');

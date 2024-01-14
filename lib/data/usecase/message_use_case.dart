@@ -3,8 +3,8 @@ import 'package:isekai/data/definition/app_mode.dart';
 import 'package:isekai/data/service/database_service.dart';
 import 'package:isekai/data/usecase/session_use_case.dart';
 
-final currentThreadMessagesProvider = StreamProvider((ref) {
-  return ref.watch(threadMessagesProvider(threadIdForDebug).stream);
+final currentThreadMessagesProvider = FutureProvider((ref) {
+  return ref.watch(threadMessagesProvider(threadIdForDebug).future);
 });
 
 final messageActionsProvider = Provider(
