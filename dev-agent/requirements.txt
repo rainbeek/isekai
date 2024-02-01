@@ -17,6 +17,6 @@ regex==2023.12.25
 requests==2.31.0
 tiktoken==0.5.2
 tqdm==4.66.1
-urllib3==2.1.0
+urllib3==2.2.0
 virtualenv==20.25.0
 yarl==1.9.4
