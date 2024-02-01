@@ -9,7 +9,7 @@ environment:
   flutter: ">=3.16.5"
 
 dependencies:
-  cloud_firestore: 4.15.0
+  cloud_firestore:
   collection:
   cupertino_icons:
   faker:
