@@ -23,22 +23,9 @@ platform :ios do
     app_store_connect_api_key_path = 'fastlane/app-store-connect-api-key.p8'
     export_options_plist_path = './ios/ExportOptions-AdHoc.plist'
 
-    build_flutter_with_no_code_sign
+    build_dev_with_no_code_sign
 
     Dir.chdir('../') do
-      sh(
-        'set -o pipefail && '\
-        'xcodebuild archive '\
-        '-workspace ./ios/Runner.xcworkspace '\
-        '-scheme Runner '\
-        '-configuration Release '\
-        '-archivePath ./build/ios/Runner.xcarchive '\
-        "-authenticationKeyIssuerID '#{apple_api_issuer_id}' "\
-        "-authenticationKeyID '#{apple_api_key_id}' "\
-        "-authenticationKeyPath `pwd`/#{app_store_connect_api_key_path} "\
-        '| xcpretty'
-      )
-
       sh(
         'set -o pipefail && '\
         'xcodebuild -exportArchive '\
@@ -48,8 +35,7 @@ platform :ios do
         '-allowProvisioningUpdates '\
         "-authenticationKeyIssuerID '#{apple_api_issuer_id}' "\
         "-authenticationKeyID '#{apple_api_key_id}' "\
-        "-authenticationKeyPath `pwd`/#{app_store_connect_api_key_path} "\
-        '| xcpretty'
+        "-authenticationKeyPath `pwd`/#{app_store_connect_api_key_path}"
       )
     end
 
@@ -67,8 +53,7 @@ platform :ios do
         '-workspace ./ios/Runner.xcworkspace '\
         '-scheme Runner '\
         '-configuration Release '\
-        '-archivePath ./build/ios/Runner.xcarchive '\
-        '| xcpretty'
+        '-archivePath ./build/ios/Runner.xcarchive'
       )
     end
   end
