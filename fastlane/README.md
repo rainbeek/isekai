@@ -37,6 +37,14 @@ Flutterの依存関係をインストールします。
 
 
 
+### set_full_version_name_from_latest_tag
+
+```sh
+[bundle exec] fastlane set_full_version_name_from_latest_tag
+```
+
+最新のタグに一致するようにバージョン名を変更する
+
 ----
 
 
