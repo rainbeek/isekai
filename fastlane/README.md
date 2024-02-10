@@ -29,6 +29,14 @@ Flutterの依存関係をインストールします。
 
 自動コードを生成します。
 
+### release_notes
+
+```sh
+[bundle exec] fastlane release_notes
+```
+
+
+
 ----
 
 

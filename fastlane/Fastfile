@@ -18,3 +18,13 @@ lane :generate do
     sh('dart run build_runner build --delete-conflicting-outputs')
   end
 end
+
+lane :release_notes do
+  analyze_commits(match: 'beta/*')
+  changelog = conventional_changelog(
+    format: 'plain',
+    display_links: false
+  )
+
+  UI.message changelog
+end
