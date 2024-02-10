@@ -29,7 +29,25 @@ lane :release_notes do
   UI.message changelog
 end
 
-desc '最新のタグに一致するようにバージョン名を変更する'
+desc 'バージョン名のパッチバージョンとビルド番号をインクリメントします。'
+lane :bump_patch_version do
+  Dir.chdir('../') do
+    sh('dart run cider bump patch --bump-build')
+  end
+end
+
+desc 'ベータバージョンのタグを追加します。'
+lane :add_beta_tag do
+  full_version_name = get_full_version_name
+
+  add_git_tag(
+    grouping: 'beta',
+    includes_lane: false,
+    build_number: full_version_name
+  )
+end
+
+desc '最新のタグに一致するようにバージョン名を変更します。'
 lane :set_full_version_name_from_latest_tag do
   latest_tag_name = Dir.chdir('../') do
     sh("git describe --tags --abbrev=0 --match='beta/*'")
