@@ -20,8 +20,14 @@ lane :generate do
 end
 
 lane :release_notes do
-  analyze_commits(match: 'beta/*')
-  changelog = conventional_changelog(
+  previous_tag_name = Dir.chdir('../') do
+    sh("git describe --tags --abbrev=0 $(git rev-list --tags='beta/*' --max-count=2 | tail -n 1)")
+  end
+
+  UI.success "Previous tag name: #{previous_tag_name}"
+
+  analyze_commits(match: previous_tag_name)
+  conventional_changelog(
     format: 'plain',
     display_links: false
   )
