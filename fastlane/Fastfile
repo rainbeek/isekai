@@ -19,22 +19,6 @@ lane :generate do
   end
 end
 
-lane :release_notes do
-  previous_tag_name = Dir.chdir('../') do
-    sh("git describe --tags --abbrev=0 $(git rev-list --tags='beta/*' --max-count=2 | tail -n 1)")
-  end
-
-  UI.success "Previous tag name: #{previous_tag_name}"
-
-  analyze_commits(match: previous_tag_name)
-  conventional_changelog(
-    format: 'plain',
-    display_links: false
-  )
-
-  UI.message changelog
-end
-
 desc '前回のバージョンからのGit履歴に基づきバージョン名をインクリメントします。'
 lane :bump_version do
   latest_tag_name = Dir.chdir('../') do
@@ -90,4 +74,19 @@ private_lane :get_full_version_name do
   Dir.chdir('../') do
     sh('dart run cider version').chomp
   end
+end
+
+private_lane :generate_release_notes do
+  previous_tag_name = Dir.chdir('../') do
+    sh("git describe --tags --abbrev=0 $(git rev-list --tags='beta/*' --max-count=2 | tail -n 1)")
+  end
+
+  UI.success "Previous tag name: #{previous_tag_name}"
+
+  analyze_commits(match: previous_tag_name)
+  conventional_changelog(
+    format: 'plain',
+    display_title: false,
+    display_links: false
+  )
 end

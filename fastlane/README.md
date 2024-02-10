@@ -29,21 +29,13 @@ Flutterの依存関係をインストールします。
 
 自動コードを生成します。
 
-### release_notes
-
-```sh
-[bundle exec] fastlane release_notes
-```
-
-
-
 ### bump_version
 
 ```sh
 [bundle exec] fastlane bump_version
 ```
 
-バージョン名のパッチバージョンとビルド番号をインクリメントします。
+前回のバージョンからのGit履歴に基づきバージョン名をインクリメントします。
 
 ### add_beta_tag
 

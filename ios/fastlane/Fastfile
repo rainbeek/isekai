@@ -60,11 +60,14 @@ platform :ios do
 
   desc 'Dev環境向けアプリをFirebase App Distributionにデプロイします。'
   lane :deploy_dev do
+    release_notes = generate_release_notes
+
     build_dev
 
     firebase_app_distribution(
       app: '1:496690593871:ios:4dd3a78d4982dac605ea3a',
       service_credentials_file: 'fastlane/firebase-app-distribution-develop.json',
+      release_notes: release_notes,
       groups: 'testers'
     )
   end
