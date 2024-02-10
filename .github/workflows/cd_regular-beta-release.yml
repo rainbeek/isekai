@@ -1,0 +1,48 @@
+name: CD / Regular beta release
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  trigger-cd-develop:
+    name: Trigger CD develop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: generate-token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.RAINBEEK_WORKFLOW_APP_ID }}
+          private_key: ${{ secrets.RAINBEEK_WORKFLOW_APP_PRIVATE_KEY_PEM }}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          # CI がプッシュバック後に再度トリガーされることを保証するため、
+          # デフォルトのトークン `GITHUB_TOKEN` の代わりに GitHub App トークンを使用する
+          token: ${{ steps.generate-token.outputs.token }}
+          fetch-depth: 0
+      - name: Setup Git
+        uses: ./.github/actions/setup-git
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      - name: Setup Ruby
+        uses: ./.github/actions/setup-ruby
+      - name: Install Flutter dependencies
+        run: bundle exec fastlane install_flutter_dependencies
+      - name: Set full version name from tag
+        run: bundle exec fastlane set_full_version_name_from_latest_tag
+      - name: Bump version
+        run: bundle exec fastlane bump_version
+      - name: Add tag
+        run: bundle exec fastlane add_beta_tag
+      - name: Push back tag
+        run: |
+          latest_tag_name="$(git describe --tags --abbrev=0)"
+          git push origin "${latest_tag_name}"
