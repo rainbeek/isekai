@@ -1,13 +1,14 @@
 name: CD / Develop
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     tags:
       - "beta/*"
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy-ios-dev-app:
