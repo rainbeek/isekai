@@ -37,10 +37,10 @@ Flutterの依存関係をインストールします。
 
 
 
-### bump_patch_version
+### bump_version
 
 ```sh
-[bundle exec] fastlane bump_patch_version
+[bundle exec] fastlane bump_version
 ```
 
 バージョン名のパッチバージョンとビルド番号をインクリメントします。

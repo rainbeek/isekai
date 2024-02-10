@@ -35,10 +35,28 @@ lane :release_notes do
   UI.message changelog
 end
 
-desc 'バージョン名のパッチバージョンとビルド番号をインクリメントします。'
-lane :bump_patch_version do
+desc '前回のバージョンからのGit履歴に基づきバージョン名をインクリメントします。'
+lane :bump_version do
+  latest_tag_name = Dir.chdir('../') do
+    sh("git describe --tags --abbrev=0 --match='beta/*'")
+  end
+
+  full_version_name_matched = %r{^.*/(\d+\.\d+\.\d+\+\d+)$}.match(latest_tag_name)
+  full_version_name = full_version_name_matched[1]
+
+  build_number_matched = /^(\d+\.\d+\.\d+)\+(\d+)$/.match(full_version_name)
+  build_number = build_number_matched[2].to_i
+
+  UI.success "Full version name: #{full_version_name}"
+  UI.success "Build number: #{build_number}"
+
+  analyze_commits(match: full_version_name)
+
+  new_version_name = lane_context[SharedValues::RELEASE_NEXT_VERSION]
+
   Dir.chdir('../') do
-    sh('dart run cider bump patch --bump-build')
+    sh("dart run cider version \"#{new_version_name}+#{build_number}\"")
+    sh('dart run cider bump build')
   end
 end
 
