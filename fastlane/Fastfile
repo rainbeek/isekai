@@ -34,7 +34,16 @@ lane :bump_version do
   UI.success "Full version name: #{full_version_name}"
   UI.success "Build number: #{build_number}"
 
-  analyze_commits(match: full_version_name)
+  analyze_commits(
+    match: full_version_name,
+    commit_format: /^(feat|fix|perf|refactor|dev|build|test)(?:\((.*)\))?(!?): (.*)/,
+    releases: {
+      feat: 'minor',
+      fix: 'patch',
+      perf: 'patch',
+      build: 'patch'
+    }
+  )
 
   new_version_name = lane_context[SharedValues::RELEASE_NEXT_VERSION]
 
