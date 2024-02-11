@@ -84,7 +84,23 @@ private_lane :generate_release_notes do
   conventional_changelog(
     format: 'plain',
     display_title: false,
-    display_links: false
+    display_links: false,
+    order: %w[
+      feat
+      fix
+      perf
+      refactor
+      build
+      no_type
+    ],
+    sections: {
+      feat: '機能追加',
+      fix: 'バグ修正',
+      perf: 'パフォーマンス改善',
+      refactor: 'リファクタリング',
+      build: '依存関係の更新',
+      no_type: 'その他'
+    }
   )
 end
 
