@@ -1,6 +1,9 @@
 name: CD / Regular beta release
 
 on:
+  pull_request:
+    branches:
+      - main
   schedule:
     - cron: "0 19 * * 2" # 毎週水曜日の04:00(JST)
   workflow_dispatch:
