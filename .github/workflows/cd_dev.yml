@@ -6,6 +6,10 @@ on:
       - "beta/*"
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy-ios-dev-app:
     name: Deploy iOS app
@@ -14,6 +18,8 @@ jobs:
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       - name: Setup Xcode
@@ -41,6 +47,8 @@ jobs:
         uses: ./.github/actions/generate-app-distribution-key-file
         with:
           key-json-base64: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_KEY_JSON_BASE64_DEV }}
+      - name: Set full version name from latest tag
+        run: bundle exec fastlane set_full_version_name_from_latest_tag
       - name: Deploy iOS dev app to Firebase App Distribution
         run: bundle exec fastlane ios deploy_dev
 
@@ -51,6 +59,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       - name: Setup Gradle
@@ -74,5 +84,7 @@ jobs:
         uses: ./.github/actions/generate-app-distribution-key-file
         with:
           key-json-base64: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_KEY_JSON_BASE64_DEV }}
+      - name: Set full version name from latest tag
+        run: bundle exec fastlane set_full_version_name_from_latest_tag
       - name: Deploy Android dev app to Firebase App Distribution
         run: bundle exec fastlane android deploy_dev

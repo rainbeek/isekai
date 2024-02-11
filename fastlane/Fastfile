@@ -18,3 +18,112 @@ lane :generate do
     sh('dart run build_runner build --delete-conflicting-outputs')
   end
 end
+
+desc '前回のバージョンからのGit履歴に基づきバージョン名をインクリメントします。'
+lane :bump_version do
+  latest_tag_name = latest_beta_tag
+
+  full_version_name = extract_version_name_from_tag(latest_tag_name)
+
+  build_number_matched = /^(\d+\.\d+\.\d+)\+(\d+)$/.match(full_version_name)
+  build_number = build_number_matched[2].to_i
+
+  UI.success "Found latest version: #{full_version_name}"
+  UI.success "The Build number is #{build_number}"
+
+  analyze_commits_for_semantic_release(full_version_name)
+  new_version_name = lane_context[SharedValues::RELEASE_NEXT_VERSION]
+
+  Dir.chdir('../') do
+    sh("dart run cider version \"#{new_version_name}+#{build_number}\"")
+    sh('dart run cider bump build')
+  end
+
+  UI.success "Bumped version to #{new_version_name}+#{build_number}"
+end
+
+desc 'ベータバージョンのタグを追加します。'
+lane :add_beta_tag do
+  full_version_name = get_full_version_name
+
+  add_git_tag(
+    grouping: 'beta',
+    includes_lane: false,
+    build_number: full_version_name
+  )
+end
+
+desc '最新のタグに一致するようにバージョン名を変更します。'
+lane :set_full_version_name_from_latest_tag do
+  latest_tag_name = Dir.chdir('../') do
+    sh("git describe --tags --abbrev=0 --match='beta/*'")
+  end
+
+  full_version_name = extract_version_name_from_tag(latest_tag_name)
+
+  Dir.chdir('../') do
+    sh("dart run cider version #{full_version_name}")
+  end
+end
+
+private_lane :get_full_version_name do
+  Dir.chdir('../') do
+    sh('dart run cider version').chomp
+  end
+end
+
+private_lane :generate_release_notes do
+  previous_tag_name = Dir.chdir('../') do
+    sh("git describe --tags --abbrev=0 $(git rev-list --tags='beta/*' --max-count=2 | tail -n 1)")
+  end
+
+  UI.success "Found the beta tag earlier than the latest: #{previous_tag_name}"
+
+  analyze_commits_for_semantic_release(previous_tag_name)
+
+  conventional_changelog(
+    format: 'plain',
+    display_title: false,
+    display_links: false,
+    order: %w[
+      feat
+      fix
+      perf
+      refactor
+      build
+      no_type
+    ],
+    sections: {
+      feat: '機能追加',
+      fix: 'バグ修正',
+      perf: 'パフォーマンス改善',
+      refactor: 'リファクタリング',
+      build: '依存関係の更新',
+      no_type: 'その他'
+    }
+  )
+end
+
+def latest_beta_tag
+  Dir.chdir('../') do
+    sh("git describe --tags --abbrev=0 --match='beta/*'")
+  end
+end
+
+def extract_version_name_from_tag(tag_name)
+  matched = %r{^.*/(\d+\.\d+\.\d+\+\d+)$}.match(tag_name)
+  matched[1]
+end
+
+def analyze_commits_for_semantic_release(from_version_name)
+  analyze_commits(
+    match: from_version_name,
+    commit_format: /^(feat|fix|perf|refactor|dev|build|test)(?:\((.*)\))?(!?): (.*)/,
+    releases: {
+      feat: 'minor',
+      fix: 'patch',
+      perf: 'patch',
+      build: 'patch'
+    }
+  )
+end

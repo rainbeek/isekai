@@ -29,6 +29,30 @@ Flutterの依存関係をインストールします。
 
 自動コードを生成します。
 
+### bump_version
+
+```sh
+[bundle exec] fastlane bump_version
+```
+
+前回のバージョンからのGit履歴に基づきバージョン名をインクリメントします。
+
+### add_beta_tag
+
+```sh
+[bundle exec] fastlane add_beta_tag
+```
+
+ベータバージョンのタグを追加します。
+
+### set_full_version_name_from_latest_tag
+
+```sh
+[bundle exec] fastlane set_full_version_name_from_latest_tag
+```
+
+最新のタグに一致するようにバージョン名を変更します。
+
 ----
 
 
