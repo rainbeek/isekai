@@ -15,7 +15,7 @@ platformdirs==4.2.0
 pycodestyle==2.11.1
 regex==2023.12.25
 requests==2.31.0
-tiktoken==0.5.2
+tiktoken==0.6.0
 tqdm==4.66.2
 urllib3==2.2.0
 virtualenv==20.25.0
