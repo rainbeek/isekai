@@ -18,5 +18,5 @@ requests==2.31.0
 tiktoken==0.6.0
 tqdm==4.66.2
 urllib3==2.2.1
-virtualenv==20.25.0
+virtualenv==20.25.1
 yarl==1.9.4
