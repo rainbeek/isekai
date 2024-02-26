@@ -37,7 +37,7 @@ dev_dependencies:
   freezed:
   json_serializable:
   mocktail:
-  pedantic_mono: 1.26.0
+  pedantic_mono:
   test:
 
 flutter:
