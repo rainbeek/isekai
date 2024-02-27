@@ -6,7 +6,7 @@ version: 0.0.1+1
 environment:
   sdk: ">=2.18.5 <3.0.0"
   # dependabotがFlutterバージョンを推定することができるように指定
-  flutter: ">=3.16.9"
+  flutter: ">=3.19.1"
 
 dependencies:
   cloud_firestore:
