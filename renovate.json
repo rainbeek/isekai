@@ -1,27 +1,28 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabledManagers": ["asdf", "gradle-wrapper", "pyenv", "pub", "ruby-version"],
   "labels": ["dependencies"],
   "semanticCommitType": "build",
   "packageRules": [
     {
       "matchPackagePatterns": ["asdf"],
-      "labels": ["asdf"]
+      "addLabels": ["asdf"]
     },
     {
       "matchPackagePatterns": ["gradle-wrapper"],
-      "labels": ["gradle-wrapper"]
+      "addLabels": ["gradle-wrapper"]
     },
     {
       "matchPackagePatterns": ["pyenv"],
-      "labels": ["pyenv"]
+      "addLabels": ["pyenv"]
     },
     {
       "matchPackagePatterns": ["pub"],
-      "labels": ["pub"]
+      "addLabels": ["pub"]
     },
     {
       "matchPackagePatterns": ["ruby-version"],
-      "labels": ["ruby-version"]
+      "addLabels": ["ruby-version"]
     }
   ]
 }
