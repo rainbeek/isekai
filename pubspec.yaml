@@ -16,7 +16,7 @@ dependencies:
   firebase_auth:
   firebase_core:
   firebase_remote_config:
-  flame:
+  flame: 1.16.0
   flutter:
     sdk: flutter
   flutter_localizations:
