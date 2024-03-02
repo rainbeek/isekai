@@ -5,27 +5,27 @@
   "semanticCommitType": "build",
   "packageRules": [
     {
-      "matchPackagePatterns": ["asdf"],
+      "matchManagers": ["asdf"],
       "addLabels": ["flutter"],
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["gradle-wrapper"],
+      "matchManagers": ["gradle-wrapper"],
       "addLabels": ["gradle"],
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["pyenv"],
+      "matchManagers": ["pyenv"],
       "addLabels": ["python"],
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["pub"],
+      "matchManagers": ["pub"],
       "addLabels": ["dart"],
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["ruby-version"],
+      "matchManagers": ["ruby-version"],
       "addLabels": ["ruby"],
       "automerge": true
     }
