@@ -10,7 +10,7 @@ filelock==3.13.1
 frozenlist==1.4.1
 idna==3.6
 multidict==6.0.5
-openai==1.13.3
+openai==1.14.0
 platformdirs==4.2.0
 pycodestyle==2.11.1
 regex==2023.12.25
