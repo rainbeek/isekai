@@ -7,8 +7,8 @@
       "type": "dart",
       "program": "lib/main.dart",
       "args": [
-        "--dart-define",
-        "SERVER_ENV=emulator",
+        "--flavor",
+        "emulator",
         "--dart-define-from-file",
         "dart-defines_emulator.json"
       ]
@@ -18,7 +18,7 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": ["--dart-define", "SERVER_ENV=dev"]
+      "args": ["--flavor", "dev"]
     }
   ]
 }
