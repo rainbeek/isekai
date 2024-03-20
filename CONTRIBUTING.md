@@ -171,6 +171,10 @@ flutter pub get
 
 ### コミットされている Firebase のプロジェクト情報を更新
 
+事前準備として、以下のドキュメントに従って Firebase CLI をインストールし、ログインしておきます。
+
+https://firebase.google.com/docs/flutter/setup?hl=ja&platform=ios#install-cli-tools
+
 以下コマンドを実行します。
 
 ```shell
