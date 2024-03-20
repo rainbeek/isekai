@@ -6,7 +6,7 @@ platform :android do
   desc 'Dev環境向けアプリをビルドします。'
   lane :build_dev do
     Dir.chdir('../') do
-      sh('flutter build apk --dart-define SERVER_ENV=dev')
+      sh('flutter build apk --flavor dev')
     end
 
     lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH] = 'build/app/outputs/apk/release/app-release.apk'
