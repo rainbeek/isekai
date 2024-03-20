@@ -10,7 +10,7 @@ const threadIdForDebug = 'sELkOLGe1qHrasoPQpg0';
 
 ServerEnv _getApiEnv() {
   const serverEnvString =
-      String.fromEnvironment('SERVER_ENV', defaultValue: 'emulator');
+      String.fromEnvironment('app.flavor');
 
   return ServerEnv.values.firstWhere(
     (value) => value.name == serverEnvString,
