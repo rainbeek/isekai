@@ -51,8 +51,8 @@ platform :ios do
         'set -o pipefail && '\
         'xcodebuild archive CODE_SIGNING_ALLOWED=NO '\
         '-workspace ./ios/Runner.xcworkspace '\
-        '-scheme Runner '\
-        '-configuration Release '\
+        "-scheme 'dev' "\
+        "-configuration 'Release-dev' "\
         '-archivePath ./build/ios/Runner.xcarchive'
       )
     end
