@@ -12,7 +12,6 @@ GoogleService-Info.plist
 /fastlane/firebase-app-distribution-develop.json
 /fastlane/report.xml
 /ios/firebase_app_id_file.json
-/ios/Flutter/DartDefines.xcconfig
 /lib/firebase_options*.dart
 
 !/dart-defines_example.json
