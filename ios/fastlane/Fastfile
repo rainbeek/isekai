@@ -74,7 +74,7 @@ platform :ios do
 
   private_lane :build_flutter_with_no_code_sign do |_options|
     Dir.chdir('../') do
-      sh('flutter build ios --flavor dev --no-codesign')
+      sh('flutter build ios --flavor dev --dart-define-from-file dart-defines_dev.json --no-codesign')
     end
   end
 end

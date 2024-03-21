@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 const firebaseEmulatorHost = String.fromEnvironment('FIREBASE_EMULATOR_HOST');
 
 // TODO(ide): Productionのリリースビルドではfalseにする
@@ -9,8 +11,9 @@ final serverEnv = _getApiEnv();
 const threadIdForDebug = 'sELkOLGe1qHrasoPQpg0';
 
 ServerEnv _getApiEnv() {
-  const serverEnvString =
-      String.fromEnvironment('app.flavor');
+  const serverEnvString = String.fromEnvironment('app.flavor');
+
+  debugPrint('serverEnvString: $serverEnvString');
 
   return ServerEnv.values.firstWhere(
     (value) => value.name == serverEnvString,
