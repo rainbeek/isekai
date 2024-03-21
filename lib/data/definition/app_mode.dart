@@ -11,7 +11,7 @@ final serverEnv = _getApiEnv();
 const threadIdForDebug = 'sELkOLGe1qHrasoPQpg0';
 
 ServerEnv _getApiEnv() {
-  const serverEnvString = String.fromEnvironment('app.flavor');
+  const serverEnvString = String.fromEnvironment('FLAVOR');
 
   debugPrint('serverEnvString: $serverEnvString');
 

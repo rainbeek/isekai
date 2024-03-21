@@ -43,9 +43,14 @@ asdf reshim
 
 #### 4. 開発マシンごとの個別情報の記載
 
-`dart-defines_example.json` を必要な環境のものだけ以下ファイル名でコピーし、中身を適切に書き換えます。
+`dart-defines_example.json` を必要な環境のものだけ以下ファイル名でコピーし、それぞれ値を書き換えます。
 
 - Emulator: `dart-defines_emulator.json`
+  - `FLAVOR`: `emulator` と記載します。
+  - `FIREBASE_EMULATOR_HOST`: ローカルマシンの IP アドレスを指定します。
+- Dev: `dart-defines_dev.json`
+  - `FLAVOR`: `dev` と記載します。
+  - `FIREBASE_EMULATOR_HOST`: 使われないため、空文字を指定します。
 
 #### 5. Firebase の構成ファイルを配置
 
