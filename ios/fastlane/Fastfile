@@ -51,8 +51,8 @@ platform :ios do
         'set -o pipefail && '\
         'xcodebuild archive CODE_SIGNING_ALLOWED=NO '\
         '-workspace ./ios/Runner.xcworkspace '\
-        '-scheme Runner '\
-        '-configuration Release '\
+        "-scheme 'dev' "\
+        "-configuration 'Release-dev' "\
         '-archivePath ./build/ios/Runner.xcarchive'
       )
     end
@@ -67,14 +67,14 @@ platform :ios do
     firebase_app_distribution(
       app: '1:496690593871:ios:4dd3a78d4982dac605ea3a',
       service_credentials_file: 'fastlane/firebase-app-distribution-develop.json',
-      release_notes: release_notes,
+      release_notes:,
       groups: 'testers'
     )
   end
 
   private_lane :build_flutter_with_no_code_sign do |_options|
     Dir.chdir('../') do
-      sh('flutter build ios --dart-define SERVER_ENV=dev --no-codesign')
+      sh('flutter build ios --flavor dev --dart-define-from-file dart-defines_dev.json --no-codesign')
     end
   end
 end

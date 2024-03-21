@@ -43,9 +43,14 @@ asdf reshim
 
 #### 4. 開発マシンごとの個別情報の記載
 
-`dart-defines_example.json` を必要な環境のものだけ以下ファイル名でコピーし、中身を適切に書き換えます。
+`dart-defines_example.json` を必要な環境のものだけ以下ファイル名でコピーし、それぞれ値を書き換えます。
 
 - Emulator: `dart-defines_emulator.json`
+  - `FLAVOR`: `emulator` と記載します。
+  - `FIREBASE_EMULATOR_HOST`: ローカルマシンの IP アドレスを指定します。
+- Dev: `dart-defines_dev.json`
+  - `FLAVOR`: `dev` と記載します。
+  - `FIREBASE_EMULATOR_HOST`: 使われないため、空文字を指定します。
 
 #### 5. Firebase の構成ファイルを配置
 
@@ -57,8 +62,8 @@ asdf reshim
 | `lib/firebase_options_dev.dart`                         | Flutter 用の Dev 環境向けの Firebase 構成ファイル      |
 | `ios/Runner/Firebase/Emulator/GoogleService-Info.plist` | iOS 用の Emulator 環境向けの Firebase 構成ファイル     |
 | `ios/Runner/Firebase/Dev/GoogleService-Info.plist`      | iOS 用の Dev 環境向けの Firebase 構成ファイル          |
-| `android/app/firebase/emulator/google-services.json`    | Android 用の Emulator 環境向けの Firebase 構成ファイル |
-| `android/app/firebase/dev/google-services.json`         | Android 用の Dev 環境向けの Firebase 構成ファイル      |
+| `android/app/src/emulator/google-services.json`         | Android 用の Emulator 環境向けの Firebase 構成ファイル |
+| `android/app/src/dev/google-services.json`              | Android 用の Dev 環境向けの Firebase 構成ファイル      |
 
 ### 普段の開発
 
@@ -171,6 +176,10 @@ flutter pub get
 
 ### コミットされている Firebase のプロジェクト情報を更新
 
+事前準備として、以下のドキュメントに従って Firebase CLI をインストールし、ログインしておきます。
+
+https://firebase.google.com/docs/flutter/setup?hl=ja&platform=ios#install-cli-tools
+
 以下コマンドを実行します。
 
 ```shell
@@ -179,7 +188,7 @@ flutterfire config \
   --out=lib/firebase_options_emulator.dart \
   --ios-bundle-id=com.rainbeek.isekai.emulator \
   --android-app-id=com.rainbeek.isekai.emulator
-mv android/app/google-services.json android/app/firebase/emulator/
+mv android/app/google-services.json android/app/src/emulator/
 mv ios/Runner/GoogleService-Info.plist ios/Runner/Firebase/Emulator/
 mv ios/firebase_app_id_file.json ios/Runner/Firebase/Emulator/
 flutterfire config \
@@ -187,7 +196,7 @@ flutterfire config \
   --out=lib/firebase_options_dev.dart \
   --ios-bundle-id=com.rainbeek.isekai.dev \
   --android-app-id=com.rainbeek.isekai.dev
-mv android/app/google-services.json android/app/firebase/dev/
+mv android/app/google-services.json android/app/src/dev/
 mv ios/Runner/GoogleService-Info.plist ios/Runner/Firebase/Dev/
 mv ios/firebase_app_id_file.json ios/Runner/Firebase/Dev/
 ```
