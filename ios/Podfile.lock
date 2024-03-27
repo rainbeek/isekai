@@ -1,5 +1,5 @@
 PODS:
-  - cloud_firestore (4.15.9):
+  - cloud_firestore (4.15.10):
     - Firebase/Firestore (= 10.22.0)
     - firebase_core
     - Flutter
@@ -189,7 +189,7 @@ CHECKOUT OPTIONS:
     :tag: 10.22.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: 9d69182af1d677062f005584ca5470a19e1f68e7
+  cloud_firestore: 5b14c6806eecfc4cbc4314dea133591eb34eb749
   Firebase: 797fd7297b7e1be954432743a0b3f90038e45a71
   firebase_auth: 610184b4f624545f81e0416bca60642b6818f27f
   firebase_core: cc49b6648d6dd7570d9273a616cb1205260db91e
