@@ -13,7 +13,7 @@ dependencies:
   collection: 1.18.0
   cupertino_icons: 1.0.6
   faker: 2.1.0
-  firebase_auth: 4.17.9
+  firebase_auth: 4.18.0
   firebase_core: 2.27.2
   firebase_remote_config: 4.3.19
   flame: 1.16.0
