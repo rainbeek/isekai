@@ -2,7 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "enabledManagers": ["asdf", "gradle-wrapper", "pyenv", "pub", "ruby-version"],
   "labels": ["dependencies"],
-  "semanticCommitType": "build",
   "packageRules": [
     {
       "matchManagers": ["asdf"],
@@ -28,5 +27,7 @@
       "addLabels": ["ruby"],
       "automerge": true
     }
-  ]
+  ],
+  "prConcurrentLimit": 1,
+  "semanticCommitType": "build"
 }
