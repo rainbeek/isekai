@@ -9,7 +9,7 @@ final serverEnv = _getApiEnv();
 
 // cspell:disable next
 const threadIdForDebug = 'sELkOLGe1qHrasoPQpg0';
-const threadForDebug = Thread(title: 'Test Thread');
+const threadForDebug = Thread(title: 'Default thread for debugging');
 
 ServerEnv _getApiEnv() {
   const serverEnvString = String.fromEnvironment('FLAVOR');
