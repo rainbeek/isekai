@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/dao/message_firestore.dart';
 import 'package:isekai/data/dao/thread_firestore.dart';
+import 'package:isekai/data/definition/app_mode.dart';
 import 'package:isekai/data/model/message.dart';
 import 'package:isekai/data/model/thread.dart';
 
@@ -18,7 +19,11 @@ final threadProvider = StreamProvider.family<Thread, String>((_, threadId) {
       )
       .snapshots()
       .map((snapshot) {
-    final threadFirestore = snapshot.data()!;
+    final threadFirestore = snapshot.data();
+    if (threadFirestore == null) {
+      return threadForDebug;
+    }
+
     return threadFirestore.toThread();
   });
 });
