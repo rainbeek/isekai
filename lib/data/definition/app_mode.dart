@@ -1,3 +1,5 @@
+import 'package:isekai/data/model/thread.dart';
+
 const firebaseEmulatorHost = String.fromEnvironment('FIREBASE_EMULATOR_HOST');
 
 // TODO(ide): Productionのリリースビルドではfalseにする
@@ -7,6 +9,7 @@ final serverEnv = _getApiEnv();
 
 // cspell:disable next
 const threadIdForDebug = 'sELkOLGe1qHrasoPQpg0';
+const threadForDebug = Thread(title: 'Test Thread');
 
 ServerEnv _getApiEnv() {
   const serverEnvString = String.fromEnvironment('FLAVOR');
