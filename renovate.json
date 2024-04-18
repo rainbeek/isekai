@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "enabledManagers": ["asdf", "gradle-wrapper", "pyenv", "pub", "ruby-version"],
+  "extends": ["config:recommended", ":pinDevDependencies"],
   "labels": ["dependencies"],
   "packageRules": [
     {
