@@ -1,9 +1,8 @@
 PODS:
-  - cloud_firestore (4.16.1):
+  - cloud_firestore (4.17.0):
     - Firebase/Firestore (= 10.24.0)
     - firebase_core
     - Flutter
-    - nanopb (< 2.30910.0, >= 2.30908.0)
   - Firebase/Auth (10.24.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 10.24.0)
@@ -192,7 +191,7 @@ CHECKOUT OPTIONS:
     :tag: 10.24.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: 36490c6c56284ab278beba54439929bef238e9aa
+  cloud_firestore: ec5623634fc3b82f7b23a6e87f116c953eae714d
   Firebase: 91fefd38712feb9186ea8996af6cbdef41473442
   firebase_auth: c889ae9f6d5116804d50bf9fa931b383f3e82a9b
   firebase_core: 66b99b4fb4e5d7cc4e88d4c195fe986681f3466a
