@@ -86,49 +86,41 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
           current = PlayerState.runUpAnimation;
           moveUp(delta);
         }
-        break;
       case JoystickDirection.upLeft:
         if (canPlayerMoveUp() && canPlayerMoveLeft()) {
           current = PlayerState.runUpAnimation;
           moveUpLeft(delta);
         }
-        break;
       case JoystickDirection.upRight:
         if (canPlayerMoveUp() && canPlayerMoveRight()) {
           current = PlayerState.runUpAnimation;
           moveUpRight(delta);
         }
-        break;
       case JoystickDirection.down:
         if (canPlayerMoveDown()) {
           current = PlayerState.runDownAnimation;
           moveDown(delta);
         }
-        break;
       case JoystickDirection.downLeft:
         if (canPlayerMoveDown() && canPlayerMoveLeft()) {
           current = PlayerState.runDownAnimation;
           moveDownLeft(delta);
         }
-        break;
       case JoystickDirection.downRight:
         if (canPlayerMoveDown() && canPlayerMoveRight()) {
           current = PlayerState.runDownAnimation;
           moveDownRight(delta);
         }
-        break;
       case JoystickDirection.left:
         if (canPlayerMoveLeft()) {
           current = PlayerState.runLeftAnimation;
           moveLeft(delta);
         }
-        break;
       case JoystickDirection.right:
         if (canPlayerMoveRight()) {
           current = PlayerState.runRightAnimation;
           moveRight(delta);
         }
-        break;
       case JoystickDirection.idle:
         break;
     }
