@@ -56,6 +56,7 @@ jobs:
       - name: Flutter analyze
         run: flutter analyze --fatal-infos > flutter-analyze.log
       - name: Output Flutter analyze results
+        if: failure()
         run: cat flutter-analyze.log
       - name: Run reviewdog for Flutter Analyzer
         if: failure()
