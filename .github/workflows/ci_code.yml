@@ -57,7 +57,9 @@ jobs:
         run: flutter analyze --fatal-infos > flutter-analyze.log
       - name: Output Flutter analyze results
         if: failure()
-        run: cat flutter-analyze.log
+        run: |
+          cat flutter-analyze.log
+          cat .dart_tool/flutter_gen/gen_l10n/app_localizations_ja.dart
       - name: Run reviewdog for Flutter Analyzer
         if: failure()
         env:
