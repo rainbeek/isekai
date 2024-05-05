@@ -30,6 +30,5 @@
       "semanticCommitType": "dev"
     }
   ],
-  "prConcurrentLimit": 1,
-  "semanticCommitType": "build"
+  "prConcurrentLimit": 1
 }
