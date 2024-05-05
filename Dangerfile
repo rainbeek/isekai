@@ -8,6 +8,7 @@ allowed_title_prefixes = %w[
   dev
   ci
   build
+  chore
   test
 ]
 
