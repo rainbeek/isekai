@@ -26,7 +26,8 @@
     {
       "matchManagers": ["ruby-version"],
       "addLabels": ["ruby"],
-      "automerge": true
+      "automerge": true,
+      "semanticCommitType": "dev"
     }
   ],
   "prConcurrentLimit": 1,
