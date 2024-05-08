@@ -30,5 +30,6 @@
       "semanticCommitType": "dev"
     }
   ],
-  "prConcurrentLimit": 1
+  "prConcurrentLimit": 1,
+  "reviewers": ["shotaIDE"]
 }
