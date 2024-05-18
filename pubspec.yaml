@@ -6,7 +6,7 @@ version: 0.0.1+1
 environment:
   sdk: ">=3.3.0 <4.0.0"
   # dependabotがFlutterバージョンを推定することができるように指定
-  flutter: ">=3.19.6"
+  flutter: ">=3.22.0"
 
 dependencies:
   cloud_firestore: 4.17.3
@@ -24,7 +24,7 @@ dependencies:
   flutter_riverpod: 2.5.1
   freezed_annotation: 2.4.1
   in_app_review: 2.0.9
-  intl: 0.18.1
+  intl: 0.19.0
   package_info_plus: 8.0.0
   shared_preferences: 2.2.3
 
@@ -39,7 +39,7 @@ dev_dependencies:
   json_serializable: 6.8.0
   mocktail: 1.0.3
   pedantic_mono: 1.26.0
-  test: 1.24.9
+  test: 1.25.2
 
 flutter:
   uses-material-design: true
