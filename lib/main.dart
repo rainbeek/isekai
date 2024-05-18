@@ -15,10 +15,8 @@ Future<void> main() async {
   switch (serverEnv) {
     case ServerEnv.emulator:
       firebaseOptions = emulator.DefaultFirebaseOptions.currentPlatform;
-      break;
     case ServerEnv.dev:
       firebaseOptions = dev.DefaultFirebaseOptions.currentPlatform;
-      break;
   }
   await Firebase.initializeApp(options: firebaseOptions);
 

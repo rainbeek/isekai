@@ -4,7 +4,7 @@ publish_to: "none"
 version: 0.0.1+1
 
 environment:
-  sdk: ">=2.18.5 <3.0.0"
+  sdk: ">=3.3.0 <4.0.0"
   # dependabotがFlutterバージョンを推定することができるように指定
   flutter: ">=3.19.6"
 
@@ -29,6 +29,7 @@ dependencies:
   shared_preferences: 2.2.3
 
 dev_dependencies:
+  analyzer: 6.4.1
   build_runner: 2.4.9
   cider: 0.2.7
   flutter_lints: 3.0.2
