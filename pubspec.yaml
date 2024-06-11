@@ -14,7 +14,7 @@ dependencies:
   cupertino_icons: 1.0.8
   faker: 2.1.0
   firebase_auth: 5.0.0
-  firebase_core: 3.0.0
+  firebase_core: 3.1.0
   firebase_remote_config: 5.0.0
   flame: 1.18.0
   flutter:
