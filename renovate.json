@@ -19,6 +19,10 @@
       "automerge": true
     },
     {
+      "matchPackageNames": ["cloud_firestore", "firebase_core"],
+      "groupName": "cloud_firestore"
+    },
+    {
       "matchManagers": ["pub"],
       "addLabels": ["dart"],
       "automerge": true
