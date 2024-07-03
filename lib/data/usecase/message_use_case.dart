@@ -29,9 +29,9 @@ class MessageActions {
     const threadId = threadIdForDebug;
 
     await _databaseActions.sendMessage(
+      userId: session.userId,
       threadId: threadId,
       text: text,
-      userId: session.userId,
       createdAt: DateTime.now(),
     );
   }

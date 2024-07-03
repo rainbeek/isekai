@@ -63,13 +63,15 @@ final databaseActionsProvider = Provider(
 
 class DatabaseActions {
   Future<void> sendMessage({
-    required String threadId,
-    required String text,
     required String userId,
+    required String threadId,
+    required String userName,
+    required String text,
     required DateTime createdAt,
   }) async {
     final messageFirestore = MessageFirestore(
       threadId: threadId,
+      userName: userName,
       text: text,
       createdAt: createdAt,
     );
