@@ -8,6 +8,7 @@ part 'message_firestore.freezed.dart';
 class MessageFirestore with _$MessageFirestore {
   const factory MessageFirestore({
     required String? threadId,
+    required String? userName,
     required String? text,
     required DateTime? createdAt,
   }) = _MessageFirestore;
@@ -21,6 +22,7 @@ class MessageFirestore with _$MessageFirestore {
     final data = snapshot.data();
     return MessageFirestore(
       threadId: data?['threadId'] as String?,
+      userName: data?['userName'] as String?,
       text: data?['text'] as String?,
       createdAt: (data?['createdAt'] as Timestamp?)?.toDate(),
     );
@@ -29,18 +31,19 @@ class MessageFirestore with _$MessageFirestore {
   Map<String, dynamic> toFirestore() {
     return <String, dynamic>{
       if (threadId != null) 'threadId': threadId,
+      if (userName != null) 'userName': userName,
       if (text != null) 'text': text,
       if (createdAt != null) 'createdAt': createdAt,
     };
   }
 
   Message? toMessage({required String userId}) {
-    if (text == null || createdAt == null) {
+    if (userName == null || text == null || createdAt == null) {
       return null;
     }
 
     return Message(
-      userId: userId,
+      userName: userName!,
       text: text!,
       createdAt: createdAt!,
     );
