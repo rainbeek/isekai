@@ -33,7 +33,6 @@ class MessageActions {
     await _databaseActions.sendMessage(
       userId: session.userId,
       threadId: threadId,
-      // TODO(ide): Force wrapを解消したい
       userName: profile!.name,
       text: text,
       createdAt: DateTime.now(),
