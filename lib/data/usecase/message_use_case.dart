@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/definition/app_mode.dart';
+import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/service/database_service.dart';
 import 'package:isekai/data/usecase/session_use_case.dart';
 
@@ -26,12 +27,14 @@ class MessageActions {
 
   Future<void> sendMessage({required String text}) async {
     final session = await _ref.read(forceSessionProvider.future);
+    final profile = _ref.read(profileProvider);
     const threadId = threadIdForDebug;
 
     await _databaseActions.sendMessage(
-      threadId: threadId,
-      text: text,
       userId: session.userId,
+      threadId: threadId,
+      userName: profile!.name,
+      text: text,
       createdAt: DateTime.now(),
     );
   }

@@ -180,7 +180,7 @@ class MessagesPanel extends ConsumerWidget {
 
                   return ListTile(
                     title: Text(message.text),
-                    subtitle: Text('User: ${message.userId}'),
+                    subtitle: Text('User: ${message.userName}'),
                     trailing: Text(
                       S.of(context)!.messageDateFormat(
                             message.createdAt,
