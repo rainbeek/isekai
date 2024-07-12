@@ -17,9 +17,9 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Install reviewdog
-        uses: reviewdog/action-setup@v1
+        uses: reviewdog/action-setup@3f401fe1d58fe77e10d665ab713057375e39b887 # v1
         with:
           reviewdog_version: latest
       - name: Install Code Spell Checker
@@ -39,9 +39,9 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Install reviewdog
-        uses: reviewdog/action-setup@v1
+        uses: reviewdog/action-setup@3f401fe1d58fe77e10d665ab713057375e39b887 # v1
         with:
           reviewdog_version: latest
       - name: Setup Flutter
@@ -72,7 +72,7 @@ jobs:
       pull-requests: read
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
@@ -98,7 +98,7 @@ jobs:
       pull-requests: read
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       - name: Setup Xcode
@@ -125,11 +125,11 @@ jobs:
     steps:
       - name: Generate token
         id: generate-token
-        uses: tibdex/github-app-token@v2
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
         with:
           app_id: ${{ secrets.RAINBEEK_WORKFLOW_APP_ID }}
           private_key: ${{ secrets.RAINBEEK_WORKFLOW_APP_PRIVATE_KEY_PEM }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           ref: ${{ github.head_ref }}
           # CI がプッシュバック後に再度トリガーされることを保証するため、
@@ -164,7 +164,7 @@ jobs:
       pull-requests: read
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       - name: Setup Gradle
