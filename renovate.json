@@ -1,12 +1,24 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "enabledManagers": ["asdf", "gradle-wrapper", "pyenv", "pub", "ruby-version"],
-  "extends": ["config:recommended", ":pinDevDependencies"],
+  "enabledManagers": [
+    "asdf",
+    "github-actions",
+    "gradle-wrapper",
+    "pub",
+    "pyenv",
+    "ruby-version"
+  ],
+  "extends": ["config:best-practices"],
   "labels": ["dependencies"],
   "packageRules": [
     {
       "matchManagers": ["asdf"],
       "addLabels": ["flutter"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "addLabels": ["github_actions"],
+      "automerge": true
     },
     {
       "matchManagers": ["gradle-wrapper"],
