@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-import '../ios/fastlane/Fastfile'
-import '../android/fastlane/Fastfile'
-
 desc 'Flutterの依存関係をインストールします。'
 lane :install_flutter_dependencies do
   Dir.chdir('../') do

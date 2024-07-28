@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+import '../../fastlane/Fastfile'
+
 default_platform(:ios)
 
 platform :ios do
@@ -7,7 +9,7 @@ platform :ios do
   lane :install_dependencies do
     install_flutter_dependencies
 
-    Dir.chdir('../ios') do
+    Dir.chdir('../') do
       sh('flutter precache --ios')
       sh('pod install')
     end
@@ -25,7 +27,7 @@ platform :ios do
 
     build_dev_with_no_code_sign
 
-    Dir.chdir('../') do
+    Dir.chdir('../../') do
       sh(
         'set -o pipefail && '\
         'xcodebuild -exportArchive '\
@@ -46,7 +48,7 @@ platform :ios do
   lane :build_dev_with_no_code_sign do
     build_flutter_with_no_code_sign
 
-    Dir.chdir('../') do
+    Dir.chdir('../../') do
       sh(
         'set -o pipefail && '\
         'xcodebuild archive CODE_SIGNING_ALLOWED=NO '\
@@ -73,7 +75,7 @@ platform :ios do
   end
 
   private_lane :build_flutter_with_no_code_sign do |_options|
-    Dir.chdir('../') do
+    Dir.chdir('../../') do
       sh('flutter build ios --flavor dev --dart-define-from-file dart-defines_dev.json --no-codesign')
     end
   end
