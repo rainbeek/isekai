@@ -62,13 +62,16 @@ platform :ios do
 
   desc 'Dev環境向けアプリをFirebase App Distributionにデプロイします。'
   lane :deploy_dev do
+    # action で利用するパスなので、fastlane/ ディレクトリと同じ階層からの相対パスで指定
+    firebase_service_credentials_file_path = '../fastlane/firebase-app-distribution-develop.json'
+
     release_notes = generate_release_notes
 
     build_dev
 
     firebase_app_distribution(
       app: '1:496690593871:ios:4dd3a78d4982dac605ea3a',
-      service_credentials_file: '../fastlane/firebase-app-distribution-develop.json',
+      service_credentials_file: firebase_service_credentials_file_path,
       release_notes:,
       groups: 'testers'
     )
