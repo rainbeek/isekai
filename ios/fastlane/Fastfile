@@ -41,7 +41,7 @@ platform :ios do
       )
     end
 
-    lane_context[SharedValues::IPA_OUTPUT_PATH] = 'build/ios/ipa/異世界Q.ipa'
+    lane_context[SharedValues::IPA_OUTPUT_PATH] = '../build/ios/ipa/異世界Q.ipa'
   end
 
   desc 'Dev環境向けアプリを電子署名なしにビルドします。'
@@ -68,7 +68,7 @@ platform :ios do
 
     firebase_app_distribution(
       app: '1:496690593871:ios:4dd3a78d4982dac605ea3a',
-      service_credentials_file: 'fastlane/firebase-app-distribution-develop.json',
+      service_credentials_file: '../fastlane/firebase-app-distribution-develop.json',
       release_notes:,
       groups: 'testers'
     )
