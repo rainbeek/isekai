@@ -22,7 +22,7 @@ platform :ios do
     apple_api_issuer_id = ENV['APPLE_API_ISSUER_ID'].to_s
     apple_api_key_id = ENV['APPLE_API_KEY_ID'].to_s
 
-    app_store_connect_api_key_path = 'fastlane/app-store-connect-api-key.p8'
+    app_store_connect_api_key_path = 'ios/fastlane/app-store-connect-api-key.p8'
     export_options_plist_path = './ios/ExportOptions-AdHoc.plist'
 
     build_dev_with_no_code_sign
