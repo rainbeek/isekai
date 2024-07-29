@@ -6,6 +6,7 @@ GoogleService-Info.plist
 
 /emulator-data
 
+/android/fastlane/report.xml
 /dart-defines*.json
 /fastlane/firebase-app-distribution-develop.json
 /fastlane/report.xml
