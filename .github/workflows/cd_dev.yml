@@ -51,6 +51,7 @@ jobs:
         run: bundle exec fastlane set_full_version_name_from_latest_tag
       - name: Deploy iOS dev app to Firebase App Distribution
         run: bundle exec fastlane ios deploy_dev
+        working-directory: ./ios
 
   deploy-android-dev-app:
     name: Deploy Android app
@@ -88,3 +89,4 @@ jobs:
         run: bundle exec fastlane set_full_version_name_from_latest_tag
       - name: Deploy Android dev app to Firebase App Distribution
         run: bundle exec fastlane android deploy_dev
+        working-directory: ./ios

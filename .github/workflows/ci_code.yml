@@ -119,6 +119,7 @@ jobs:
           google-service-plist-base64-dev: ${{ secrets.GOOGLE_SERVICE_PLIST_BASE64_DEV }}
       - name: Build iOS dev app
         run: bundle exec fastlane ios build_dev_with_no_code_sign
+        working-directory: ./ios
   push-back-diffs-if-needed:
     name: Push back diffs after resolving dependencies if needed
     runs-on: ubuntu-latest
@@ -144,6 +145,7 @@ jobs:
         uses: ./.github/actions/setup-ruby
       - name: Install iOS dependencies
         run: bundle exec fastlane ios install_dependencies
+        working-directory: ./ios
       - name: Commit
         run: |
           git add ios/Podfile.lock
@@ -187,3 +189,4 @@ jobs:
           echo "${{ secrets.UPLOAD_KEYSTORE_JKS_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
       - name: Build Android dev app
         run: bundle exec fastlane android build_dev
+        working-directory: ./ios
