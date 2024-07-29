@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
+import '../../fastlane/Fastfile'
+
 default_platform(:android)
 
 platform :android do
   desc 'Dev環境向けアプリをビルドします。'
   lane :build_dev do
-    Dir.chdir('../') do
+    Dir.chdir('../../') do
       sh('flutter build apk --flavor dev --dart-define-from-file dart-defines_dev.json')
     end
 
-    lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH] = 'build/app/outputs/flutter-apk/app-dev-release.apk'
+    lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH] = '../build/app/outputs/flutter-apk/app-dev-release.apk'
   end
 
   desc 'Dev環境向けアプリをFirebase App Distributionにデプロイします。'
