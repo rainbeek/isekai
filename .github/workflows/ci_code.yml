@@ -189,4 +189,4 @@ jobs:
           echo "${{ secrets.UPLOAD_KEYSTORE_JKS_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
       - name: Build Android dev app
         run: bundle exec fastlane android build_dev
-        working-directory: ./ios
+        working-directory: ./android
