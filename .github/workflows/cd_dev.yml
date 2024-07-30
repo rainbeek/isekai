@@ -28,6 +28,8 @@ jobs:
         uses: ./.github/actions/setup-cocoapods
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
@@ -68,6 +70,8 @@ jobs:
         uses: ./.github/actions/setup-gradle
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./android
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:

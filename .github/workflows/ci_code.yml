@@ -46,8 +46,6 @@ jobs:
           reviewdog_version: latest
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
-      - name: Setup Ruby
-        uses: ./.github/actions/setup-ruby
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
@@ -75,8 +73,6 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
-      - name: Setup Ruby
-        uses: ./.github/actions/setup-ruby
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
@@ -107,6 +103,8 @@ jobs:
         uses: ./.github/actions/setup-cocoapods
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
@@ -143,6 +141,8 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Install iOS dependencies
         run: bundle exec fastlane ios install_dependencies
         working-directory: ./ios
@@ -173,6 +173,8 @@ jobs:
         uses: ./.github/actions/setup-gradle
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./android
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:

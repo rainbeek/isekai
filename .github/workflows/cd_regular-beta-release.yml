@@ -32,7 +32,9 @@ jobs:
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
-        uses: ./.github/actions/setup-ruby
+        uses: ./.github/actions/
+        with:
+          working-directory: ./
       - name: Install Flutter dependencies
         run: bundle exec fastlane install_flutter_dependencies
       - name: Set full version name from tag

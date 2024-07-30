@@ -1,3 +1,7 @@
+inputs:
+  working-directory:
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -13,3 +17,4 @@ runs:
       with:
         ruby-version: ${{ steps.get-ruby-version.outputs.ruby-version }}
         bundler-cache: true
+        working-directory: ${{ inputs.working-directory }}
