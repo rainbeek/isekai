@@ -38,6 +38,8 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       # dependabot が `pubspec.yaml` にバージョン制約を書き込んでしまう問題の回避策。
       # そのままにすると、次回のバージョン更新が動作しなくなる。
       - name: Revert pubspec.yaml
@@ -48,6 +50,7 @@ jobs:
           git checkout main pubspec.yaml
       - name: Install Flutter dependencies
         run: bundle exec fastlane install_flutter_dependencies
+        working-directory: ./ios
       - name: Commit
         run: |
           git add pubspec.yaml pubspec.lock
