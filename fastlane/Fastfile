@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# このファイルは、ios/fastlane/Fastfile と android/fastlane/Fastfile からインポートされ、呼び出される想定です。
+# そのため、カレントディレクトリが ios/fastlane または android/fastlane となっている前提で処理しています。
+
 desc 'Flutterの依存関係をインストールします。'
 lane :install_flutter_dependencies do
   Dir.chdir('../../') do
