@@ -33,14 +33,20 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Install Flutter dependencies
         run: bundle exec fastlane install_flutter_dependencies
+        working-directory: ./ios
       - name: Set full version name from tag
         run: bundle exec fastlane set_full_version_name_from_latest_tag
+        working-directory: ./ios
       - name: Bump version
         run: bundle exec fastlane bump_version
+        working-directory: ./ios
       - name: Add tag
         run: bundle exec fastlane add_beta_tag
+        working-directory: ./ios
       - name: Push back tag
         run: |
           latest_tag_name="$(git describe --tags --abbrev=0)"

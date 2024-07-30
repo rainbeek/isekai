@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-import '../ios/fastlane/Fastfile'
-import '../android/fastlane/Fastfile'
+# このファイルは、ios/fastlane/Fastfile と android/fastlane/Fastfile からインポートされ、呼び出される想定です。
+# そのため、カレントディレクトリが ios/fastlane または android/fastlane となっている前提で処理しています。
 
 desc 'Flutterの依存関係をインストールします。'
 lane :install_flutter_dependencies do
-  Dir.chdir('../') do
+  Dir.chdir('../../') do
     sh('flutter pub get --no-example')
   end
 end
@@ -14,7 +14,7 @@ desc '自動コードを生成します。'
 lane :generate do
   install_flutter_dependencies
 
-  Dir.chdir('../') do
+  Dir.chdir('../../') do
     sh('dart run build_runner build')
   end
 end
@@ -34,7 +34,7 @@ lane :bump_version do
   analyze_commits_for_semantic_release(full_version_name)
   new_version_name = lane_context[SharedValues::RELEASE_NEXT_VERSION]
 
-  Dir.chdir('../') do
+  Dir.chdir('../../') do
     sh("dart run cider version \"#{new_version_name}+#{build_number}\"")
     sh('dart run cider bump build')
   end
@@ -55,25 +55,25 @@ end
 
 desc '最新のタグに一致するようにバージョン名を変更します。'
 lane :set_full_version_name_from_latest_tag do
-  latest_tag_name = Dir.chdir('../') do
+  latest_tag_name = Dir.chdir('../../') do
     sh("git describe --tags --abbrev=0 --match='beta/*'")
   end
 
   full_version_name = extract_version_name_from_tag(latest_tag_name)
 
-  Dir.chdir('../') do
+  Dir.chdir('../../') do
     sh("dart run cider version #{full_version_name}")
   end
 end
 
 private_lane :get_full_version_name do
-  Dir.chdir('../') do
+  Dir.chdir('../../') do
     sh('dart run cider version').chomp
   end
 end
 
 private_lane :generate_release_notes do
-  previous_tag_name = Dir.chdir('../') do
+  previous_tag_name = Dir.chdir('../../') do
     sh("git describe --tags --abbrev=0 $(git rev-list --tags='beta/*' --max-count=2 | tail -n 1)")
   end
 
@@ -105,7 +105,7 @@ private_lane :generate_release_notes do
 end
 
 def latest_beta_tag
-  Dir.chdir('../') do
+  Dir.chdir('../../') do
     sh("git describe --tags --abbrev=0 --match='beta/*'")
   end
 end

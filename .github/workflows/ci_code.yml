@@ -48,11 +48,14 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+          working-directory: ./ios
       - name: Flutter analyze
         run: flutter analyze --fatal-infos > flutter-analyze.log
       - name: Output Flutter analyze results
@@ -77,11 +80,14 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+          working-directory: ./ios
       - name: Run Flutter test
         run: flutter test --file-reporter json:flutter-test-results.log
       - uses: dorny/test-reporter@v1
@@ -107,18 +113,22 @@ jobs:
         uses: ./.github/actions/setup-cocoapods
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
           dart-defines-json-base64-dev: ${{ secrets.DART_DEFINES_JSON_BASE64_DEV }}
+          working-directory: ./ios
       - name: Generate uncommited iOS files
         uses: ./.github/actions/generate-uncommited-ios-files
         with:
           google-service-plist-base64-dev: ${{ secrets.GOOGLE_SERVICE_PLIST_BASE64_DEV }}
       - name: Build iOS dev app
         run: bundle exec fastlane ios build_dev_with_no_code_sign
+        working-directory: ./ios
   push-back-diffs-if-needed:
     name: Push back diffs after resolving dependencies if needed
     runs-on: ubuntu-latest
@@ -142,8 +152,11 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Install iOS dependencies
         run: bundle exec fastlane ios install_dependencies
+        working-directory: ./ios
       - name: Commit
         run: |
           git add ios/Podfile.lock
@@ -171,12 +184,15 @@ jobs:
         uses: ./.github/actions/setup-gradle
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./android
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
           dart-defines-json-base64-dev: ${{ secrets.DART_DEFINES_JSON_BASE64_DEV }}
+          working-directory: ./android
       - name: Generate uncommited Android files
         uses: ./.github/actions/generate-uncommited-android-files
         with:
@@ -187,3 +203,4 @@ jobs:
           echo "${{ secrets.UPLOAD_KEYSTORE_JKS_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
       - name: Build Android dev app
         run: bundle exec fastlane android build_dev
+        working-directory: ./android
