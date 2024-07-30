@@ -46,6 +46,7 @@ jobs:
           env-base64: ${{ secrets.ENV_BASE64 }}
       - name: Generate App Store Connect API key file
         run: echo "${{ secrets.APP_STORE_CONNECT_API_KEY_P8_BASE64 }}" | base64 -d > fastlane/app-store-connect-api-key.p8
+        working-directory: ./ios
       - name: Generate Firebase App Distribution service account key file
         uses: ./.github/actions/generate-app-distribution-key-file
         with:
