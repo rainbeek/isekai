@@ -32,7 +32,7 @@ jobs:
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
-        uses: ./.github/actions/
+        uses: ./.github/actions/setup-ruby
         with:
           working-directory: ./ios
       - name: Install Flutter dependencies
