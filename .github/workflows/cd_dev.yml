@@ -35,6 +35,7 @@ jobs:
         with:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+          working-directory: ./ios
       - name: Generate uncommited iOS files
         uses: ./.github/actions/generate-uncommited-ios-files
         with:
@@ -77,6 +78,7 @@ jobs:
         with:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+          working-directory: ./android
       - name: Generate uncommited Android files
         uses: ./.github/actions/generate-uncommited-android-files
         with:

@@ -5,6 +5,8 @@ inputs:
     required: true
   dart-defines-json-base64-dev:
     required: true
+  working-directory:
+    required: true
 
 runs:
   using: "composite"
@@ -21,3 +23,4 @@ runs:
     - name: Generate automatic codes
       shell: bash
       run: bundle exec fastlane generate
+      working-directory: ${{ inputs.working-directory }}

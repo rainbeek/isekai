@@ -48,11 +48,14 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+          working-directory: ./ios
       - name: Flutter analyze
         run: flutter analyze --fatal-infos > flutter-analyze.log
       - name: Output Flutter analyze results
@@ -77,11 +80,14 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Setup Ruby
         uses: ./.github/actions/setup-ruby
+        with:
+          working-directory: ./ios
       - name: Generate uncommited Flutter files
         uses: ./.github/actions/generate-uncommited-flutter-files
         with:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
+          working-directory: ./ios
       - name: Run Flutter test
         run: flutter test --file-reporter json:flutter-test-results.log
       - uses: dorny/test-reporter@v1
@@ -115,6 +121,7 @@ jobs:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
           dart-defines-json-base64-dev: ${{ secrets.DART_DEFINES_JSON_BASE64_DEV }}
+          working-directory: ./ios
       - name: Generate uncommited iOS files
         uses: ./.github/actions/generate-uncommited-ios-files
         with:
@@ -185,6 +192,7 @@ jobs:
           firebase-options-dart-base64-emulator: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_EMULATOR }}
           firebase-options-dart-base64-dev: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64_DEV }}
           dart-defines-json-base64-dev: ${{ secrets.DART_DEFINES_JSON_BASE64_DEV }}
+          working-directory: ./android
       - name: Generate uncommited Android files
         uses: ./.github/actions/generate-uncommited-android-files
         with:
