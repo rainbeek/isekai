@@ -1,5 +1,5 @@
 PODS:
-  - cloud_firestore (5.2.0):
+  - cloud_firestore (5.2.1):
     - Firebase/Firestore (= 10.29.0)
     - firebase_core
     - Flutter
@@ -14,7 +14,7 @@ PODS:
   - Firebase/RemoteConfig (10.29.0):
     - Firebase/CoreOnly
     - FirebaseRemoteConfig (~> 10.29.0)
-  - firebase_auth (5.1.3):
+  - firebase_auth (5.1.4):
     - Firebase/Auth (= 10.29.0)
     - firebase_core
     - Flutter
@@ -191,9 +191,9 @@ CHECKOUT OPTIONS:
     :tag: 10.29.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: 9bdbf5a952da93fad19c89f4a497bff41b3f7df2
+  cloud_firestore: 8a2ff2bb050f87d0ca996866625cefbe2395a83b
   Firebase: cec914dab6fd7b1bd8ab56ea07ce4e03dd251c2d
-  firebase_auth: 6a09851aca5fcbb1f3745bed7ec88f221c52c3e9
+  firebase_auth: 8dbfcdd635cc4fb2ea213aeee8c9a979b3d3373b
   firebase_core: 57aeb91680e5d5e6df6b888064be7c785f146efb
   firebase_remote_config: 622c7e72a9349b7db48658ea902d9f2f1f2d7aaa
   FirebaseABTesting: d87f56707159bae64e269757a6e963d490f2eebe
