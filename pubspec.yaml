@@ -10,7 +10,7 @@ dependencies:
   cloud_firestore: 5.2.1
   collection: 1.18.0
   cupertino_icons: 1.0.8
-  faker: 2.1.0
+  faker: 2.2.0
   firebase_auth: 5.1.4
   firebase_core: 3.3.0
   firebase_remote_config: 5.0.4
