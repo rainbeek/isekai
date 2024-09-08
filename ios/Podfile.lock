@@ -1,5 +1,5 @@
 PODS:
-  - cloud_firestore (5.3.0):
+  - cloud_firestore (5.4.0):
     - Firebase/Firestore (= 11.0.0)
     - firebase_core
     - Flutter
@@ -66,7 +66,7 @@ PODS:
     - FirebaseFirestoreAbseilBinary (= 1.2024011602.0)
     - FirebaseFirestoreGRPCCPPBinary (= 1.65.1)
     - leveldb-library (~> 1.22)
-    - nanopb (< 2.30911.0, >= 2.30908.0)
+    - nanopb (~> 3.30910.0)
   - FirebaseInstallations (11.1.0):
     - FirebaseCore (~> 11.0)
     - GoogleUtilities/Environment (~> 8.0)
@@ -111,11 +111,11 @@ PODS:
   - in_app_review (0.2.0):
     - Flutter
   - leveldb-library (1.22.5)
-  - nanopb (2.30910.0):
-    - nanopb/decode (= 2.30910.0)
-    - nanopb/encode (= 2.30910.0)
-  - nanopb/decode (2.30910.0)
-  - nanopb/encode (2.30910.0)
+  - nanopb (3.30910.0):
+    - nanopb/decode (= 3.30910.0)
+    - nanopb/encode (= 3.30910.0)
+  - nanopb/decode (3.30910.0)
+  - nanopb/encode (3.30910.0)
   - package_info_plus (0.4.5):
     - Flutter
   - PromisesObjC (2.4.0)
@@ -194,7 +194,7 @@ CHECKOUT OPTIONS:
     :tag: 11.0.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: 15d5767445fbd525df58295240753e87393c854f
+  cloud_firestore: c44f5943a6f7fc1775cfa4a1e980a0024ed565ee
   Firebase: 9f574c08c2396885b5e7e100ed4293d956218af9
   firebase_auth: 16ac5db3d064db837ecd845080d7e18e4be7c66d
   firebase_core: ceec591a66629daaee82d3321551692c4a871493
@@ -212,7 +212,7 @@ SPEC CHECKSUMS:
   FirebaseFirestoreGRPCBoringSSLBinary: d86ebbe2adc8d15d7ebf305fff7d6358385327f8
   FirebaseFirestoreGRPCCoreBinary: 472bd808e1886a5efb2fd03dd09b98d34641a335
   FirebaseFirestoreGRPCCPPBinary: db76d83d2b7517623f8426ed7f7a17bad2478084
-  FirebaseFirestoreInternalBinary: bcc46da0228b53cfaab4a5f65ee391bbcaf60db2
+  FirebaseFirestoreInternalBinary: 9b233680572ca2bc2c3654c3c3b22b2699cb14eb
   FirebaseInstallations: d0a8fea5a6fa91abc661591cf57c0f0d70863e57
   FirebaseRemoteConfig: fe8b7e6d6770fefbde27b0cac3f3deffba6e7326
   FirebaseRemoteConfigInterop: abf8b1bbc0bf1b84abd22b66746926410bf91a87
@@ -222,7 +222,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   in_app_review: 318597b3a06c22bb46dc454d56828c85f444f99d
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
-  nanopb: 438bc412db1928dac798aa6fd75726007be04262
+  nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
