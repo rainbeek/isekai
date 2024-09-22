@@ -103,17 +103,16 @@ VSCode の「Emulator-Debug」などの構成でデバッグ実行します。
 
 #### 事前に必要な手順
 
-[rbenv](https://github.com/rbenv/rbenv) をインストールして、以下コマンドを実行します。
+[rbenv](https://github.com/rbenv/rbenv) をインストールします。
+
+以下コマンドを実行し、リポジトリで利用しているバージョンの Ruby をインストールします。
+このコマンドにより、[.ruby-version](/.ruby-version) に指定されているバージョンの Ruby がインストールされます。
 
 ```shell
 rbenv install
 ```
 
-[RubyGems](https://rubygems.org/) をインストールして `gem` コマンドを使えるようにします。
-
-[bundler](https://rubygems.org/gems/bundler) をインストールして、`bundle` コマンドを使えるようにします。
-
-以下コマンドを実行します。
+以下コマンドを実行し、Ruby の依存関係をインストールします。
 
 ```shell
 bundle install
