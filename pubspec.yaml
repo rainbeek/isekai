@@ -28,7 +28,7 @@ dependencies:
 
 dev_dependencies:
   analyzer: 6.4.1
-  build_runner: 2.4.11
+  build_runner: 2.4.13
   cider: 0.2.8
   flutter_lints: 4.0.0
   flutter_test:
