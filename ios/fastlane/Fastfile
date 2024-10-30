@@ -89,6 +89,8 @@ platform :ios do
     # action で利用するパスなので、fastlane/ ディレクトリと同じ階層からの相対パスで指定
     app_store_connect_api_key_path = 'fastlane/app-store-connect-api-key.p8'
 
+    release_notes = generate_release_notes
+
     build_dev
 
     api_key = app_store_connect_api_key(
@@ -99,6 +101,7 @@ platform :ios do
 
     upload_to_testflight(
       api_key:,
+      changelog: release_notes,
       distribute_external: true,
       groups: external_tester_groups
     )
