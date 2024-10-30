@@ -77,71 +77,39 @@ platform :ios do
     )
   end
 
-  desc 'Prod環境向けアプリをビルドします。'
-  lane :build_prod do
+  desc 'Prod環境向けアプリをApp Storeにデプロイします。'
+  lane :deploy_dev_app_store do
     Dotenv.load '.env'
 
     apple_api_issuer_id = ENV['APPLE_API_ISSUER_ID'].to_s
     apple_api_key_id = ENV['APPLE_API_KEY_ID'].to_s
 
     app_store_connect_api_key_path = 'ios/fastlane/app-store-connect-api-key.p8'
-    export_options_plist_path = './ios/ExportOptions-AdHoc.plist'
 
-    build_prod_with_no_code_sign
+    build_dev
 
-    Dir.chdir('../../') do
-      sh(
-        'set -o pipefail && '\
-        'xcodebuild -exportArchive '\
-        '-archivePath ./build/ios/Runner.xcarchive '\
-        '-exportPath ./build/ios/ipa '\
-        "-exportOptionsPlist #{export_options_plist_path} "\
-        '-allowProvisioningUpdates '\
-        "-authenticationKeyIssuerID '#{apple_api_issuer_id}' "\
-        "-authenticationKeyID '#{apple_api_key_id}' "\
-        "-authenticationKeyPath `pwd`/#{app_store_connect_api_key_path}"
-      )
-    end
+    api_key = app_store_connect_api_key(
+      key_id: apple_api_key_id,
+      issuer_id: apple_api_issuer_id,
+      key_filepath: app_store_connect_api_key_path
+    )
 
-    lane_context[SharedValues::IPA_OUTPUT_PATH] = '../build/ios/ipa/異世界Q.ipa'
-  end
-
-  desc 'Prod環境向けアプリを電子署名なしにビルドします。'
-  lane :build_prod_with_no_code_sign do
-    build_flutter_with_no_code_sign
-
-    Dir.chdir('../../') do
-      sh(
-        'set -o pipefail && '\
-        'xcodebuild archive CODE_SIGNING_ALLOWED=NO '\
-        '-workspace ./ios/Runner.xcworkspace '\
-        "-scheme 'prod' "\
-        "-configuration 'Release-prod' "\
-        '-archivePath ./build/ios/Runner.xcarchive'
-      )
-    end
-  end
-
-  desc 'Prod環境向けアプリをFirebase App Distributionにデプロイします。'
-  lane :deploy_prod do
-    # action で利用するパスなので、fastlane/ ディレクトリと同じ階層からの相対パスで指定
-    firebase_service_credentials_file_path = '../fastlane/firebase-app-distribution-prod.json'
-
-    release_notes = generate_release_notes
-
-    build_prod
-
-    firebase_app_distribution(
-      app: '1:496690593871:ios:4dd3a78d4982dac605ea3a',
-      service_credentials_file: firebase_service_credentials_file_path,
-      release_notes:,
-      groups: 'testers'
+    upload_to_app_store(
+      api_key:,
+      skip_metadata: true,
+      skip_screenshots: true,
+      force: true,
+      submit_for_review: true,
+      reject_if_possible: true,
+      automatic_release: true,
+      submission_information: { add_id_info_uses_idfa: false },
+      precheck_include_in_app_purchases: false
     )
   end
 
   private_lane :build_flutter_with_no_code_sign do |_options|
     Dir.chdir('../../') do
-      sh('flutter build ios --flavor prod --dart-define-from-file dart-defines_prod.json --no-codesign')
+      sh('flutter build ios --flavor dev --dart-define-from-file dart-defines_dev.json --no-codesign')
     end
   end
 end
