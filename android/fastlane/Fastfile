@@ -5,10 +5,19 @@ import '../../fastlane/Fastfile'
 default_platform(:android)
 
 platform :android do
-  desc 'Dev環境向けアプリをビルドします。'
+  desc 'Dev環境向けアプリ(APK)をビルドします。'
   lane :build_dev do
     Dir.chdir('../../') do
       sh('flutter build apk --flavor dev --dart-define-from-file dart-defines_dev.json')
+    end
+
+    lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH] = '../build/app/outputs/flutter-apk/app-dev-release.apk'
+  end
+
+  desc 'Dev環境向けアプリ(App Bundle)をビルドします。'
+  lane :build_dev_aab do
+    Dir.chdir('../../') do
+      sh('flutter build appbundle --flavor dev --dart-define-from-file dart-defines_dev.json')
     end
 
     lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH] = '../build/app/outputs/flutter-apk/app-dev-release.apk'
@@ -37,7 +46,7 @@ platform :android do
     # action で利用するパスなので、fastlane コマンドを実行するディレクトリからの相対パスで指定
     google_play_json_key_path = 'fastlane/google-play-service-account-key.json'
 
-    build_dev
+    build_dev_aab
 
     upload_to_play_store(
       package_name:,

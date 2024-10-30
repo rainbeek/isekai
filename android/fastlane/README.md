@@ -64,7 +64,15 @@ Flutterの依存関係をインストールします。
 [bundle exec] fastlane android build_dev
 ```
 
-Dev環境向けアプリをビルドします。
+Dev環境向けアプリ(APK)をビルドします。
+
+### android build_dev_aab
+
+```sh
+[bundle exec] fastlane android build_dev_aab
+```
+
+Dev環境向けアプリ(App Bundle)をビルドします。
 
 ### android deploy_dev
 
@@ -73,6 +81,14 @@ Dev環境向けアプリをビルドします。
 ```
 
 Dev環境向けアプリをFirebase App Distributionにデプロイします。
+
+### android deploy_dev_google_play
+
+```sh
+[bundle exec] fastlane android deploy_dev_google_play
+```
+
+Dev環境向けアプリをGoogle Playにデプロイします。
 
 ----
 
