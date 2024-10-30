@@ -83,8 +83,10 @@ platform :ios do
 
     apple_api_issuer_id = ENV['APPLE_API_ISSUER_ID'].to_s
     apple_api_key_id = ENV['APPLE_API_KEY_ID'].to_s
+    external_tester_groups = ENV['EXTERNAL_TESTER_GROUPS'].to_s
 
-    app_store_connect_api_key_path = 'ios/fastlane/app-store-connect-api-key.p8'
+    # action で利用するパスなので、fastlane/ ディレクトリと同じ階層からの相対パスで指定
+    app_store_connect_api_key_path = 'fastlane/app-store-connect-api-key.p8'
 
     build_dev
 
@@ -94,16 +96,10 @@ platform :ios do
       key_filepath: app_store_connect_api_key_path
     )
 
-    upload_to_app_store(
+    upload_to_testflight(
       api_key:,
-      skip_metadata: true,
-      skip_screenshots: true,
-      force: true,
-      submit_for_review: true,
-      reject_if_possible: true,
-      automatic_release: true,
-      submission_information: { add_id_info_uses_idfa: false },
-      precheck_include_in_app_purchases: false
+      distribute_external: true,
+      groups: external_tester_groups
     )
   end
 

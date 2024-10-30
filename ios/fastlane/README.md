@@ -90,6 +90,14 @@ Dev環境向けアプリを電子署名なしにビルドします。
 
 Dev環境向けアプリをFirebase App Distributionにデプロイします。
 
+### ios deploy_dev_app_store
+
+```sh
+[bundle exec] fastlane ios deploy_dev_app_store
+```
+
+Dev環境向けアプリをApp Storeにデプロイします。
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
