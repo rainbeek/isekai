@@ -31,29 +31,18 @@ platform :android do
     )
   end
 
-  desc 'Prod環境向けアプリをビルドします。'
-  lane :build_prod do
-    Dir.chdir('../../') do
-      sh('flutter build apk --flavor prod --dart-define-from-file dart-defines_prod.json')
-    end
+  desc 'Dev環境向けアプリをGoogle Playにデプロイします。'
+  lane :deploy_dev_google_play do
+    package_name = 'com.rainbeek.isekai.dev'
+    google_play_json_key_path = 'android/fastlane/google-play-service-account-key.json'
 
-    lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH] = '../build/app/outputs/flutter-apk/app-prod-release.apk'
-  end
+    build_dev
 
-  desc 'Prod環境向けアプリをFirebase App Distributionにデプロイします。'
-  lane :deploy_prod do
-    # action で利用するパスなので、fastlane/ ディレクトリと同じ階層からの相対パスで指定
-    firebase_service_credentials_file_path = '../fastlane/firebase-app-distribution-prod.json'
-
-    release_notes = generate_release_notes
-
-    build_prod
-
-    firebase_app_distribution(
-      app: '1:496690593871:android:164876b2b4d6e7da05ea3a',
-      service_credentials_file: firebase_service_credentials_file_path,
-      release_notes:,
-      groups: 'testers'
+    upload_to_play_store(
+      package_name:,
+      release_status: 'completed',
+      track: 'internal',
+      json_key: google_play_json_key_path
     )
   end
 end
