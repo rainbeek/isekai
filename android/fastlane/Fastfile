@@ -16,7 +16,7 @@ platform :android do
 
   desc 'Dev環境向けアプリをFirebase App Distributionにデプロイします。'
   lane :deploy_dev do
-    # action で利用するパスなので、fastlane/ ディレクトリと同じ階層からの相対パスで指定
+    # action で利用するパスなので、fastlane コマンドを実行するディレクトリからの相対パスで指定
     firebase_service_credentials_file_path = '../fastlane/firebase-app-distribution-develop.json'
 
     release_notes = generate_release_notes
@@ -34,7 +34,8 @@ platform :android do
   desc 'Dev環境向けアプリをGoogle Playにデプロイします。'
   lane :deploy_dev_google_play do
     package_name = 'com.rainbeek.isekai.dev'
-    google_play_json_key_path = 'android/fastlane/google-play-service-account-key.json'
+    # action で利用するパスなので、fastlane コマンドを実行するディレクトリからの相対パスで指定
+    google_play_json_key_path = 'fastlane/google-play-service-account-key.json'
 
     build_dev
 

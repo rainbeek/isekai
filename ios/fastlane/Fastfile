@@ -62,7 +62,7 @@ platform :ios do
 
   desc 'Dev環境向けアプリをFirebase App Distributionにデプロイします。'
   lane :deploy_dev do
-    # action で利用するパスなので、fastlane/ ディレクトリと同じ階層からの相対パスで指定
+    # action で利用するパスなので、fastlane コマンドを実行するディレクトリからの相対パスで指定
     firebase_service_credentials_file_path = '../fastlane/firebase-app-distribution-develop.json'
 
     release_notes = generate_release_notes
@@ -86,7 +86,7 @@ platform :ios do
     external_tester_groups_string = ENV['EXTERNAL_TESTER_GROUPS'].to_s
     external_tester_groups = external_tester_groups_string.split(',')
 
-    # action で利用するパスなので、fastlane/ ディレクトリと同じ階層からの相対パスで指定
+    # action で利用するパスなので、fastlane コマンドを実行するディレクトリからの相対パスで指定
     app_store_connect_api_key_path = 'fastlane/app-store-connect-api-key.p8'
 
     release_notes = generate_release_notes
