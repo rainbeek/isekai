@@ -77,7 +77,7 @@ platform :ios do
     )
   end
 
-  desc 'Prod環境向けアプリをApp Storeにデプロイします。'
+  desc 'Dev環境向けアプリをApp Storeにデプロイします。'
   lane :deploy_dev_app_store do
     Dotenv.load '.env'
 
