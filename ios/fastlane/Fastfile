@@ -83,7 +83,8 @@ platform :ios do
 
     apple_api_issuer_id = ENV['APPLE_API_ISSUER_ID'].to_s
     apple_api_key_id = ENV['APPLE_API_KEY_ID'].to_s
-    external_tester_groups = ENV['EXTERNAL_TESTER_GROUPS'].to_s
+    external_tester_groups_string = ENV['EXTERNAL_TESTER_GROUPS'].to_s
+    external_tester_groups = external_tester_groups_string.split(',')
 
     # action で利用するパスなので、fastlane/ ディレクトリと同じ階層からの相対パスで指定
     app_store_connect_api_key_path = 'fastlane/app-store-connect-api-key.p8'
