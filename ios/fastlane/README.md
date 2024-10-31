@@ -88,7 +88,7 @@ Dev環境向けアプリを電子署名なしにビルドします。
 [bundle exec] fastlane ios deploy_dev
 ```
 
-Dev環境向けアプリをFirebase App Distributionにデプロイします。
+Dev環境向けアプリをApp Storeにデプロイします。
 
 ----
 
