@@ -5,22 +5,22 @@ import '../../fastlane/Fastfile'
 default_platform(:android)
 
 platform :android do
-  desc 'Dev環境向けアプリ(APK)をビルドします。'
-  lane :build_dev do
-    Dir.chdir('../../') do
-      sh('flutter build apk --flavor dev --dart-define-from-file dart-defines_dev.json')
-    end
-
-    lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH] = '../build/app/outputs/flutter-apk/app-dev-release.apk'
-  end
-
   desc 'Dev環境向けアプリ(App Bundle)をビルドします。'
-  lane :build_dev_aab do
+  lane :build_dev do
     Dir.chdir('../../') do
       sh('flutter build appbundle --flavor dev --dart-define-from-file dart-defines_dev.json')
     end
 
     lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH] = '../build/app/outputs/bundle/devRelease/app-dev-release.aab'
+  end
+
+  desc 'Dev環境向けアプリ(APK)をビルドします。'
+  lane :build_dev_in_apk do
+    Dir.chdir('../../') do
+      sh('flutter build apk --flavor dev --dart-define-from-file dart-defines_dev.json')
+    end
+
+    lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH] = '../build/app/outputs/flutter-apk/app-dev-release.apk'
   end
 
   desc 'Dev環境向けアプリをFirebase App Distributionにデプロイします。'
@@ -30,7 +30,7 @@ platform :android do
 
     release_notes = generate_release_notes
 
-    build_dev
+    build_dev_in_apk
 
     firebase_app_distribution(
       app: '1:496690593871:android:164876b2b4d6e7da05ea3a',
@@ -41,12 +41,12 @@ platform :android do
   end
 
   desc 'Dev環境向けアプリをGoogle Playにデプロイします。'
-  lane :deploy_dev_google_play do
+  lane :deploy_dev_to_google_play do
     package_name = 'com.rainbeek.isekai.dev'
     # action で利用するパスなので、fastlane コマンドを実行するディレクトリからの相対パスで指定
     google_play_json_key_path = 'fastlane/google-play-service-account-key.json'
 
-    build_dev_aab
+    build_dev
 
     upload_to_play_store(
       package_name:,
