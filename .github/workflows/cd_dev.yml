@@ -47,14 +47,10 @@ jobs:
       - name: Generate App Store Connect API key file
         run: echo "${{ secrets.APP_STORE_CONNECT_API_KEY_P8_BASE64 }}" | base64 -d > fastlane/app-store-connect-api-key.p8
         working-directory: ./ios
-      - name: Generate Firebase App Distribution service account key file
-        uses: ./.github/actions/generate-app-distribution-key-file
-        with:
-          key-json-base64: ${{ secrets.FIREBASE_APP_DISTRIBUTION_SERVICE_ACCOUNT_KEY_JSON_BASE64_DEV }}
       - name: Set full version name from latest tag
         run: bundle exec fastlane set_full_version_name_from_latest_tag
         working-directory: ./ios
-      - name: Deploy iOS dev app to Firebase App Distribution
+      - name: Deploy iOS dev app to Test Flight
         run: bundle exec fastlane ios deploy_dev
         working-directory: ./ios
 
