@@ -50,9 +50,10 @@ platform :android do
 
     upload_to_play_store(
       package_name:,
-      release_status: 'completed',
+      release_status: 'draft',
       track: 'internal',
-      json_key: google_play_json_key_path
+      json_key: google_play_json_key_path,
+      skip_upload_changelogs: false
     )
   end
 end
