@@ -24,6 +24,7 @@ class DebugScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 16),
           const _UpdateProfileTile(),
+          const _ForceCrashTile(),
           SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 16),
         ],
       ),
@@ -55,6 +56,18 @@ class _UpdateProfileTile extends ConsumerWidget {
       subtitle: subtitle,
       trailing: Text(displayProfile),
       onTap: preferenceActions.updateProfile,
+    );
+  }
+}
+
+class _ForceCrashTile extends StatelessWidget {
+  const _ForceCrashTile();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: const Text('強制クラッシュ'),
+      onTap: () => throw Exception('Force crash on debug screen'),
     );
   }
 }
