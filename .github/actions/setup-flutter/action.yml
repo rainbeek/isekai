@@ -30,5 +30,4 @@ runs:
       with:
         flutter-version: ${{ steps.get-flutter-version.outputs.flutter-version }}
     - name: Install FlutterFire CLI
-      shell: bash
       run: dart pub global activate flutterfire_cli
