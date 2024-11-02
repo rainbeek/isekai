@@ -27,14 +27,12 @@ Future<void> main() async {
     FirebaseFirestore.instance.useFirestoreEmulator(firebaseEmulatorHost, 8080);
   }
 
-  if (isCrashlyticsEnabled) {
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-    PlatformDispatcher.instance.onError = (error, stack) {
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-      return true;
-    };
-  }
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   runApp(
     const ProviderScope(
