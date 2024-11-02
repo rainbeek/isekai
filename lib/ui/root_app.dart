@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,6 +31,10 @@ class RootApp extends ConsumerWidget {
 
     final home = _generateHome(startPage: startPage);
 
+    final navigatorObservers = <NavigatorObserver>[
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ];
+
     return MaterialApp(
       theme: ThemeData(
         colorSchemeSeed: Colors.blue,
@@ -44,6 +49,7 @@ class RootApp extends ConsumerWidget {
       supportedLocales: const [
         Locale('ja', 'JP'),
       ],
+      navigatorObservers: navigatorObservers,
     );
   }
 
