@@ -40,6 +40,7 @@
     {
       "matchPackageNames": [
         "cloud_firestore",
+        "firebase_analytics",
         "firebase_auth",
         "firebase_core",
         "firebase_remote_config"
