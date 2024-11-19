@@ -158,7 +158,7 @@ PODS:
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - GTMSessionFetcher/Core (4.1.0)
-  - in_app_review (0.2.0):
+  - in_app_review (2.0.0):
     - Flutter
   - leveldb-library (1.22.6)
   - nanopb (3.30910.0):
@@ -278,7 +278,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 987769c4ca6b968f2479fbcc9fe3ce34af454b8e
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   GTMSessionFetcher: 923b710231ad3d6f3f0495ac1ced35421e07d9a6
-  in_app_review: 318597b3a06c22bb46dc454d56828c85f444f99d
+  in_app_review: a31b5257259646ea78e0e35fc914979b0031d011
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
