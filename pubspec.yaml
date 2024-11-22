@@ -28,14 +28,14 @@ dependencies:
   shared_preferences: 2.3.3
 
 dev_dependencies:
-  analyzer: 6.4.1
+  analyzer: 6.7.0
   build_runner: 2.4.13
   cider: 0.2.8
   flutter_lints: 5.0.0
   flutter_test:
     sdk: flutter
   freezed: 2.5.2
-  json_serializable: 6.8.0
+  json_serializable: 6.9.0
   mocktail: 1.0.4
   pedantic_mono: 1.29.0
   test: 1.25.7
