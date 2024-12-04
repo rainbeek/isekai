@@ -5,16 +5,26 @@ final preferenceLocalDataSourceProvider = Provider(
   (ref) => PreferenceLocalDataStore(),
 );
 
-enum PreferenceKey { profile }
+enum PreferenceKey { profile, firstMessageFlag }
 
 class PreferenceLocalDataStore {
-  Future<String?> load(PreferenceKey key) async {
+  Future<String?> loadString(PreferenceKey key) async {
     final sharedPreference = await SharedPreferences.getInstance();
     return sharedPreference.getString(key.name);
   }
 
-  Future<void> save(PreferenceKey key, String value) async {
+  Future<void> saveString(PreferenceKey key, String value) async {
     final sharedPreference = await SharedPreferences.getInstance();
     await sharedPreference.setString(key.name, value);
+  }
+
+  Future<bool?> loadBool(PreferenceKey key) async {
+    final sharedPreference = await SharedPreferences.getInstance();
+    return sharedPreference.getBool(key.name);
+  }
+
+  Future<void> saveBool(PreferenceKey key, bool value) async {
+    final sharedPreference = await SharedPreferences.getInstance();
+    await sharedPreference.setBool(key.name, value);
   }
 }

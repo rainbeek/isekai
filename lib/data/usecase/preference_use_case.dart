@@ -75,4 +75,12 @@ class PreferenceActions {
     final lastName = fakerObj.person.lastName();
     return '$firstName $lastName';
   }
+
+  Future<bool> loadFirstMessageFlag() async {
+    return await _preferenceRepository.loadFirstMessageFlag() ?? true;
+  }
+
+  Future<void> saveFirstMessageFlag(bool value) async {
+    await _preferenceRepository.saveFirstMessageFlag(value);
+  }
 }

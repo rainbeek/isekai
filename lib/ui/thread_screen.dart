@@ -7,6 +7,7 @@ import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/thread_use_case.dart';
 import 'package:isekai/ui/settings_screen.dart';
 import 'package:isekai/ui/thread_presenter.dart';
+import 'package:isekai/data/usecase/preference_use_case.dart';
 
 final _threadPresenterProvider = Provider(
   (ref) => ThreadPresenter(messageActions: ref.watch(messageActionsProvider)),
@@ -37,6 +38,8 @@ class ThreadScreen extends ConsumerWidget {
       body: const MessagesPanel(),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          await _showProfileUpdateDialog(context, ref);
+
           var contributor = '';
           await showModalBottomSheet<void>(
             isScrollControlled: true,
@@ -46,7 +49,7 @@ class ThreadScreen extends ConsumerWidget {
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                height: 750, // TODO(shimizu): サイズを比率にする。
+                height: 750, // TODO: サイズを比率にする。
                 alignment: Alignment.center,
                 width: double.infinity,
                 child: Column(
@@ -97,6 +100,53 @@ class ThreadScreen extends ConsumerWidget {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Future<void> _showProfileUpdateDialog(BuildContext context, WidgetRef ref) async {
+    final preferenceActions = ref.read(preferenceActionsProvider);
+    final hasShownDialog = await preferenceActions.loadFirstMessageFlag() ?? false;
+
+    if (hasShownDialog) {
+      return;
+    }
+
+    bool doNotShowAgain = true;
+
+    await showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(S.of(context)!.profileUpdateDialogTitle),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(S.of(context)!.profileUpdateDialogContent),
+              Row(
+                children: [
+                  Checkbox(
+                    value: doNotShowAgain,
+                    onChanged: (value) {
+                      doNotShowAgain = value ?? true;
+                    },
+                  ),
+                  Text(S.of(context)!.profileUpdateDialogDoNotShowAgain),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(S.of(context)!.profileUpdateDialogOkButton),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (doNotShowAgain) {
+      await preferenceActions.saveFirstMessageFlag(true);
+    }
   }
 }
 

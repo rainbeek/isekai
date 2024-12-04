@@ -28,5 +28,8 @@
       }
     }
   },
-  "debug": "デバッグ"
+  "debug": "デバッグ",
+  "profileUpdateDialogTitle": "プロフィールの更新",
+  "profileUpdateDialogContent": "プロフィールは毎日更新されます。現在のプロフィールの有効期限を確認してください。",
+  "profileUpdateDialogOkButton": "OK"
 }
