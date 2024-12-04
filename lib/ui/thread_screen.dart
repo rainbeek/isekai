@@ -132,7 +132,7 @@ class ThreadScreen extends ConsumerWidget {
                       doNotShowAgain = value ?? true;
                     },
                   ),
-                  Text(S.of(context)!.profileUpdateDialogDoNotShowAgain),
+                  Text(S.of(context)!.doNotShowAgain),
                 ],
               ),
             ],

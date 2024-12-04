@@ -31,5 +31,6 @@
   "debug": "デバッグ",
   "profileUpdateDialogTitle": "プロフィールの更新",
   "profileUpdateDialogContent": "プロフィールは毎日更新されます。現在のプロフィールの有効期限を確認してください。",
+  "doNotShowAgain": "今後は表示しない",
   "profileUpdateDialogOkButton": "OK"
 }
