@@ -23,7 +23,10 @@ class PreferenceLocalDataStore {
     return sharedPreference.getBool(key.name);
   }
 
-  Future<void> saveBool(PreferenceKey key, bool value) async {
+  Future<void> saveBool(
+    PreferenceKey key, {
+    required bool value,
+  }) async {
     final sharedPreference = await SharedPreferences.getInstance();
     await sharedPreference.setBool(key.name, value);
   }

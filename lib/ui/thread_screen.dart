@@ -49,7 +49,7 @@ class ThreadScreen extends ConsumerWidget {
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                height: 750, // TODO: サイズを比率にする。
+                height: 750, // TODO(shimizu): サイズを比率にする。
                 alignment: Alignment.center,
                 width: double.infinity,
                 child: Column(
@@ -103,10 +103,11 @@ class ThreadScreen extends ConsumerWidget {
   }
 
   Future<void> _showProfileUpdateDialog(
-      BuildContext context, WidgetRef ref) async {
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
     final preferenceActions = ref.read(preferenceActionsProvider);
-    final hasShownDialog =
-        await preferenceActions.loadFirstMessageFlag() ?? false;
+    final hasShownDialog = await preferenceActions.loadFirstMessageFlag();
 
     if (hasShownDialog) {
       return;
@@ -147,7 +148,7 @@ class ThreadScreen extends ConsumerWidget {
     );
 
     if (doNotShowAgain) {
-      await preferenceActions.saveFirstMessageFlag(true);
+      await preferenceActions.saveFirstMessageFlag(value: true);
     }
   }
 }
