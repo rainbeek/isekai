@@ -77,7 +77,7 @@ class PreferenceActions {
   }
 
   Future<bool> loadFirstMessageFlag() async {
-    return await _preferenceRepository.loadFirstMessageFlag() ?? true;
+    return await _preferenceRepository.loadFirstMessageFlag() ?? false;
   }
 
   Future<void> saveFirstMessageFlag({required bool value}) async {

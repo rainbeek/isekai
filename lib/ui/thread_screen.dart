@@ -38,8 +38,6 @@ class ThreadScreen extends ConsumerWidget {
       body: const MessagesPanel(),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await _showProfileUpdateDialog(context, ref);
-
           var contributor = '';
           await showModalBottomSheet<void>(
             isScrollControlled: true,
@@ -67,8 +65,10 @@ class ThreadScreen extends ConsumerWidget {
                         Align(
                           alignment: Alignment.topRight,
                           child: ElevatedButton(
-                            onPressed: () {
-                              presenter.sendMessage(text: contributor);
+                            onPressed: () async {
+                              await _showProfileUpdateDialog(context, ref);
+
+                              await presenter.sendMessage(text: contributor);
                               Navigator.pop(context);
                             },
                             child: const Text('投稿'),
