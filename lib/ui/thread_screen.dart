@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/model/thread.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/message_use_case.dart';
+import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/data/usecase/thread_use_case.dart';
 import 'package:isekai/ui/settings_screen.dart';
 import 'package:isekai/ui/thread_presenter.dart';
-import 'package:isekai/data/usecase/preference_use_case.dart';
 
 final _threadPresenterProvider = Provider(
   (ref) => ThreadPresenter(messageActions: ref.watch(messageActionsProvider)),
@@ -102,15 +102,17 @@ class ThreadScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> _showProfileUpdateDialog(BuildContext context, WidgetRef ref) async {
+  Future<void> _showProfileUpdateDialog(
+      BuildContext context, WidgetRef ref) async {
     final preferenceActions = ref.read(preferenceActionsProvider);
-    final hasShownDialog = await preferenceActions.loadFirstMessageFlag() ?? false;
+    final hasShownDialog =
+        await preferenceActions.loadFirstMessageFlag() ?? false;
 
     if (hasShownDialog) {
       return;
     }
 
-    bool doNotShowAgain = true;
+    var doNotShowAgain = true;
 
     await showDialog<void>(
       context: context,

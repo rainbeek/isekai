@@ -51,7 +51,7 @@ class PreferenceRepository {
   }
 
   Future<bool?> loadFirstMessageFlag() async {
-    return await _local.loadBool(PreferenceKey.firstMessageFlag);
+    return _local.loadBool(PreferenceKey.firstMessageFlag);
   }
 
   Future<void> saveFirstMessageFlag(bool value) async {
