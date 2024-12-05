@@ -83,9 +83,12 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
                           alignment: Alignment.topRight,
                           child: ElevatedButton(
                             onPressed: () async {
-                              await _showProfileUpdateDialog(context, ref);
-
                               await presenter.sendMessage(text: contributor);
+
+                              if (!mounted) {
+                                return;
+                              }
+
                               Navigator.pop(context);
                             },
                             child: const Text('投稿'),
