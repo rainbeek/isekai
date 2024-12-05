@@ -6,6 +6,7 @@ import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/data/usecase/thread_use_case.dart';
+import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 import 'package:isekai/ui/settings_screen.dart';
 import 'package:isekai/ui/thread_presenter.dart';
 
@@ -108,46 +109,51 @@ class ThreadScreen extends ConsumerWidget {
   ) async {
     final preferenceActions = ref.read(preferenceActionsProvider);
     final hasShownDialog = await preferenceActions.loadFirstMessageFlag();
-
     if (hasShownDialog) {
-      return;
+      // return;
     }
 
-    var doNotShowAgain = true;
-
-    await showDialog<void>(
+    final result = await showDialog<ConfirmResultWithDoNotShowAgainOption>(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text(S.of(context)!.profileUpdateDialogTitle),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(S.of(context)!.profileUpdateDialogContent),
-              Row(
+        var doNotShowAgain = true;
+
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text(S.of(context)!.profileUpdateDialogTitle),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Checkbox(
+                  Text(S.of(context)!.profileUpdateDialogContent),
+                  CheckboxListTile(
                     value: doNotShowAgain,
                     onChanged: (value) {
-                      doNotShowAgain = value ?? true;
+                      setState(() {
+                        doNotShowAgain = !value!;
+                      });
                     },
                   ),
-                  Text(S.of(context)!.doNotShowAgain),
                 ],
               ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(S.of(context)!.profileUpdateDialogOkButton),
-            ),
-          ],
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(
+                    context,
+                    ConfirmResultWithDoNotShowAgainOption.doContinue(
+                      doNotShowAgain: doNotShowAgain,
+                    ),
+                  ),
+                  child: Text(S.of(context)!.profileUpdateDialogOkButton),
+                ),
+              ],
+            );
+          },
         );
       },
     );
 
-    if (doNotShowAgain) {
+    if (result == null) {
       await preferenceActions.saveFirstMessageFlag(value: true);
     }
   }
