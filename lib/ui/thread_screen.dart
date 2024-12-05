@@ -11,14 +11,30 @@ import 'package:isekai/ui/settings_screen.dart';
 import 'package:isekai/ui/thread_presenter.dart';
 
 final _threadPresenterProvider = Provider(
-  (ref) => ThreadPresenter(messageActions: ref.watch(messageActionsProvider)),
+  (ref) => ThreadPresenter(
+    messageActions: ref.watch(messageActionsProvider),
+    preferenceActions: ref.watch(preferenceActionsProvider),
+  ),
 );
 
-class ThreadScreen extends ConsumerWidget {
+class ThreadScreen extends ConsumerStatefulWidget {
   const ThreadScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ThreadScreen> createState() => _ThreadScreenState();
+}
+
+class _ThreadScreenState extends ConsumerState<ThreadScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    ref.read(_threadPresenterProvider).showConfirmDialog =
+        _showProfileUpdateDialog;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final presenter = ref.watch(_threadPresenterProvider);
 
     return Scaffold(
@@ -103,17 +119,9 @@ class ThreadScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> _showProfileUpdateDialog(
-    BuildContext context,
-    WidgetRef ref,
-  ) async {
-    final preferenceActions = ref.read(preferenceActionsProvider);
-    final hasShownDialog = await preferenceActions.loadFirstMessageFlag();
-    if (hasShownDialog) {
-      // return;
-    }
-
-    final result = await showDialog<ConfirmResultWithDoNotShowAgainOption>(
+  Future<ConfirmResultWithDoNotShowAgainOption?>
+      _showProfileUpdateDialog() async {
+    return showDialog<ConfirmResultWithDoNotShowAgainOption>(
       context: context,
       builder: (context) {
         var doNotShowAgain = true;
@@ -152,10 +160,6 @@ class ThreadScreen extends ConsumerWidget {
         );
       },
     );
-
-    if (result == null) {
-      await preferenceActions.saveFirstMessageFlag(value: true);
-    }
   }
 }
 
