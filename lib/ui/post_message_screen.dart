@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isekai/ui/thread_presenter.dart';
-import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
-import 'package:isekai/data/model/profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:isekai/data/model/profile.dart';
+import 'package:isekai/data/usecase/message_use_case.dart';
+import 'package:isekai/data/usecase/preference_use_case.dart';
+import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
+import 'package:isekai/ui/post_message_presenter.dart';
 
 final _postMessagePresenterProvider = Provider(
   (ref) => PostMessagePresenter(
     messageActions: ref.watch(messageActionsProvider),
+    preferenceActions: ref.watch(preferenceActionsProvider),
     ref: ref,
   ),
 );
 
 class PostMessageScreen extends ConsumerStatefulWidget {
   const PostMessageScreen({super.key});
+
+  static const name = 'PostMessageScreen';
+
+  static MaterialPageRoute<PostMessageScreen> route() => MaterialPageRoute(
+        builder: (_) => const PostMessageScreen(),
+        settings: const RouteSettings(name: name),
+      );
 
   @override
   ConsumerState<PostMessageScreen> createState() => _PostMessageScreenState();
@@ -26,7 +36,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   void initState() {
     super.initState();
 
-    ref.read(_threadPresenterProvider).showConfirmDialog =
+    ref.read(_postMessagePresenterProvider).showConfirmDialog =
         _showProfileUpdateDialog;
   }
 
@@ -48,7 +58,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             TextField(
