@@ -48,13 +48,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Post Message'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.send),
-            onPressed: () => presenter.sendMessage(text: _message),
-          ),
-        ],
+        title: Text(S.of(context)!.postComment),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -64,9 +58,9 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
               autofocus: true,
               maxLines: 12,
               minLines: 12,
-              decoration: const InputDecoration(
-                hintText: 'Enter your message',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                hintText: S.of(context)!.writeComment,
+                border: const OutlineInputBorder(),
               ),
               onChanged: (text) {
                 setState(() {
@@ -76,8 +70,8 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Close'),
+              onPressed: () => presenter.sendMessage(text: _message),
+              child: Text(S.of(context)!.post),
             ),
           ],
         ),
