@@ -154,9 +154,11 @@ class _ProfileDisplay extends ConsumerWidget {
       return const CircularProgressIndicator();
     }
 
-    return Column(
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Text(profile.icon, style: Theme.of(context).textTheme.headlineSmall),
+        Text(profile.icon, style: Theme.of(context).textTheme.bodySmall),
+        const SizedBox(width: 8),
         Text(profile.name, style: Theme.of(context).textTheme.bodySmall),
       ],
     );
