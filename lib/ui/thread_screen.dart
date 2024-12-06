@@ -132,7 +132,7 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
             return AlertDialog(
               icon: Text(profile.icon),
               title: Text(
-                S.of(context)!.profileUpdateDialogTitle(name: profile.name),
+                S.of(context)!.profileUpdateDialogTitle(profile.name),
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
