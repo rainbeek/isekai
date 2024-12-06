@@ -58,7 +58,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: _ProfileDisplay(),
+              child: _ProfilePanel(),
             ),
             const SizedBox(height: 8),
             TextField(
@@ -146,7 +146,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   }
 }
 
-class _ProfileDisplay extends ConsumerWidget {
+class _ProfilePanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(profileProvider);
