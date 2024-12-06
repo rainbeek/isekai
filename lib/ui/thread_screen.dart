@@ -130,7 +130,11 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              icon: Text(profile.icon),
+              icon: Text(
+                profile.icon,
+                style: Theme.of(context).textTheme.headlineLarge,
+                textAlign: TextAlign.center,
+              ),
               title: Text(
                 S.of(context)!.profileUpdateDialogTitle(profile.name),
               ),
@@ -142,7 +146,7 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
                     value: doNotShowAgain,
                     onChanged: (value) {
                       setState(() {
-                        doNotShowAgain = !value!;
+                        doNotShowAgain = value!;
                       });
                     },
                   ),
