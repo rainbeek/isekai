@@ -30,7 +30,7 @@ class PreferenceRepository {
   final StateController<Profile?> _profileStateController;
 
   Future<void> ensureInitialized() async {
-    final profileJsonString = await _local.loadString(PreferenceKey.profile);
+    final profileJsonString = await _local.getString(PreferenceKey.profile);
     if (profileJsonString == null) {
       return;
     }
@@ -50,11 +50,14 @@ class PreferenceRepository {
     );
   }
 
-  Future<bool?> loadFirstMessageFlag() async {
-    return _local.loadBool(PreferenceKey.firstMessageFlag);
+  Future<bool?> getShouldExplainProfileLifecycle() async {
+    return _local.getBool(PreferenceKey.shouldExplainProfileLifecycle);
   }
 
-  Future<void> saveFirstMessageFlag({required bool value}) async {
-    await _local.saveBool(PreferenceKey.firstMessageFlag, value: value);
+  Future<void> saveShouldExplainProfileLifecycle({required bool value}) async {
+    await _local.saveBool(
+      PreferenceKey.shouldExplainProfileLifecycle,
+      value: value,
+    );
   }
 }

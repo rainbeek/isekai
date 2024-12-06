@@ -70,7 +70,7 @@ class _ToggleDoNotShowAgainTile extends ConsumerWidget {
 
     return ListTile(
       title: const Text('今後は表示しないをリセットする'),
-      onTap: () => preferenceActions.saveFirstMessageFlag(value: false),
+      onTap: preferenceActions.resetDoNotShowAgainProfileLifecycleForDebug,
     );
   }
 }

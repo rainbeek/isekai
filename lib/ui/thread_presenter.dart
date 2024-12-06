@@ -23,8 +23,9 @@ class ThreadPresenter {
   }) showConfirmDialog;
 
   Future<void> sendMessage({required String text}) async {
-    final hasShownDialog = await _preferenceActions.loadFirstMessageFlag();
-    if (!hasShownDialog) {
+    final shouldExplainProfileLifecycle =
+        await _preferenceActions.getShouldExplainProfileLifecycle();
+    if (shouldExplainProfileLifecycle) {
       final profile = _ref.read(profileProvider);
       if (profile == null) {
         return;
@@ -46,7 +47,7 @@ class ThreadPresenter {
       }
 
       if (doNotShowAgain) {
-        await _preferenceActions.saveFirstMessageFlag(value: true);
+        await _preferenceActions.userRequestedDoNotShowAgainProfileLifecycle();
       }
     }
 

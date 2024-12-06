@@ -76,11 +76,16 @@ class PreferenceActions {
     return '$firstName $lastName';
   }
 
-  Future<bool> loadFirstMessageFlag() async {
-    return await _preferenceRepository.loadFirstMessageFlag() ?? false;
+  Future<bool> getShouldExplainProfileLifecycle() async {
+    return await _preferenceRepository.getShouldExplainProfileLifecycle() ??
+        true;
   }
 
-  Future<void> saveFirstMessageFlag({required bool value}) async {
-    await _preferenceRepository.saveFirstMessageFlag(value: value);
+  Future<void> userRequestedDoNotShowAgainProfileLifecycle() async {
+    await _preferenceRepository.saveShouldExplainProfileLifecycle(value: false);
+  }
+
+  Future<void> resetDoNotShowAgainProfileLifecycleForDebug() async {
+    await _preferenceRepository.saveShouldExplainProfileLifecycle(value: true);
   }
 }
