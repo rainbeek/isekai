@@ -4,19 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/model/thread.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/message_use_case.dart';
-import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/data/usecase/thread_use_case.dart';
 import 'package:isekai/ui/post_message_screen.dart';
 import 'package:isekai/ui/settings_screen.dart';
-import 'package:isekai/ui/thread_presenter.dart';
-
-final _threadPresenterProvider = Provider(
-  (ref) => ThreadPresenter(
-    messageActions: ref.watch(messageActionsProvider),
-    preferenceActions: ref.watch(preferenceActionsProvider),
-    ref: ref,
-  ),
-);
 
 class ThreadScreen extends ConsumerStatefulWidget {
   const ThreadScreen({super.key});
