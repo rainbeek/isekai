@@ -21,36 +21,4 @@ class ThreadPresenter {
   late Future<ConfirmResultWithDoNotShowAgainOption?> Function({
     required Profile profile,
   }) showConfirmDialog;
-
-  Future<void> sendMessage({required String text}) async {
-    final shouldExplainProfileLifecycle =
-        await _preferenceActions.getShouldExplainProfileLifecycle();
-    if (shouldExplainProfileLifecycle) {
-      final profile = _ref.read(profileProvider);
-      if (profile == null) {
-        return;
-      }
-
-      final result = await showConfirmDialog(profile: profile);
-
-      if (result == null) {
-        return;
-      }
-
-      final doNotShowAgain = result.maybeWhen(
-        doContinue: (doNotShowAgain) => doNotShowAgain,
-        orElse: () => null,
-      );
-      final cancelled = doNotShowAgain == null;
-      if (cancelled) {
-        return;
-      }
-
-      if (doNotShowAgain) {
-        await _preferenceActions.userRequestedDoNotShowAgainProfileLifecycle();
-      }
-    }
-
-    await _messageActions.sendMessage(text: text);
-  }
 }

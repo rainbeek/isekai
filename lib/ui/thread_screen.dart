@@ -10,6 +10,7 @@ import 'package:isekai/data/usecase/thread_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 import 'package:isekai/ui/settings_screen.dart';
 import 'package:isekai/ui/thread_presenter.dart';
+import 'package:isekai/ui/post_message_screen.dart';
 
 final _threadPresenterProvider = Provider(
   (ref) => ThreadPresenter(
@@ -28,17 +29,7 @@ class ThreadScreen extends ConsumerStatefulWidget {
 
 class _ThreadScreenState extends ConsumerState<ThreadScreen> {
   @override
-  void initState() {
-    super.initState();
-
-    ref.read(_threadPresenterProvider).showConfirmDialog =
-        _showProfileUpdateDialog;
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final presenter = ref.watch(_threadPresenterProvider);
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -56,126 +47,17 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
       ),
       body: const MessagesPanel(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          var contributor = '';
-          await showModalBottomSheet<void>(
-            isScrollControlled: true,
-            context: context,
-            builder: (context) {
-              return Container(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-                height: 750, // TODO(shimizu): サイズを比率にする。
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: ElevatedButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('閉じる'),
-                          ),
-                        ),
-                        const Expanded(child: SizedBox()),
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              presenter.sendMessage(text: contributor);
-                              Navigator.pop(context);
-                            },
-                            child: const Text('投稿'),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Scrollbar(
-                      child: TextField(
-                        autofocus: true,
-                        maxLines: 12,
-                        minLines: 12,
-                        decoration: const InputDecoration(
-                          hintText: 'コメントを投稿する',
-                          border: OutlineInputBorder(),
-                        ),
-                        onChanged: (text) {
-                          contributor = text;
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PostMessageScreen(),
+            ),
           );
         },
         tooltip: 'コメントを投稿する',
         child: const Icon(Icons.add),
       ),
-    );
-  }
-
-  Future<ConfirmResultWithDoNotShowAgainOption?> _showProfileUpdateDialog({
-    required Profile profile,
-  }) async {
-    return showDialog<ConfirmResultWithDoNotShowAgainOption>(
-      context: context,
-      builder: (context) {
-        var doNotShowAgain = true;
-
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return AlertDialog(
-              icon: Text(
-                profile.icon,
-                style: Theme.of(context).textTheme.headlineLarge,
-                textAlign: TextAlign.center,
-              ),
-              title: Text(
-                S.of(context)!.profileUpdateDialogTitle(profile.name),
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(S.of(context)!.profileUpdateDialogContent),
-                  const SizedBox(height: 16),
-                  CheckboxListTile(
-                    value: doNotShowAgain,
-                    onChanged: (value) {
-                      setState(() {
-                        doNotShowAgain = value!;
-                      });
-                    },
-                    title: Text(S.of(context)!.doNotShowAgain),
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(
-                    context,
-                    ConfirmResultWithDoNotShowAgainOption.doContinue(
-                      doNotShowAgain: doNotShowAgain,
-                    ),
-                  ),
-                  child: Text(S.of(context)!.post),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.pop(
-                    context,
-                    const ConfirmResultWithDoNotShowAgainOption.cancel(),
-                  ),
-                  child: Text(S.of(context)!.cancel),
-                ),
-              ],
-            );
-          },
-        );
-      },
     );
   }
 }
