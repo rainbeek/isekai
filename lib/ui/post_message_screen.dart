@@ -31,7 +31,8 @@ class PostMessageScreen extends ConsumerStatefulWidget {
 }
 
 class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
-  String _message = '';
+  final String _message = '';
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -56,6 +57,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
         child: Column(
           children: [
             TextField(
+              controller: _controller,
               autofocus: true,
               maxLines: 12,
               minLines: 12,
@@ -63,15 +65,13 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
                 hintText: S.of(context)!.writeComment,
                 border: const OutlineInputBorder(),
               ),
-              onChanged: (text) {
-                setState(() {
-                  _message = text;
-                });
-              },
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => presenter.sendMessage(text: _message),
+              onPressed: () {
+                final text = _controller.text;
+                presenter.sendMessage(text: text);
+              },
               child: Text(S.of(context)!.post),
             ),
           ],
