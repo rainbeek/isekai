@@ -142,6 +142,7 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(S.of(context)!.profileUpdateDialogContent),
+                  const SizedBox(height: 16),
                   CheckboxListTile(
                     value: doNotShowAgain,
                     onChanged: (value) {
@@ -149,6 +150,7 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
                         doNotShowAgain = value!;
                       });
                     },
+                    title: Text(S.of(context)!.doNotShowAgain),
                   ),
                 ],
               ),
