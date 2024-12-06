@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/model/profile.dart';
+import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
@@ -55,6 +56,11 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: _ProfilePanel(),
+            ),
+            const SizedBox(height: 8),
             TextField(
               controller: _controller,
               autofocus: true,
@@ -136,6 +142,25 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
           },
         );
       },
+    );
+  }
+}
+
+class _ProfilePanel extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profile = ref.watch(profileProvider);
+    if (profile == null) {
+      return const CircularProgressIndicator();
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(profile.icon, style: Theme.of(context).textTheme.bodySmall),
+        const SizedBox(width: 8),
+        Text(profile.name, style: Theme.of(context).textTheme.bodySmall),
+      ],
     );
   }
 }
