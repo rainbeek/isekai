@@ -20,7 +20,18 @@ class PostMessagePresenter {
 
   late Future<ConfirmResultWithDoNotShowAgainOption?> Function({
     required Profile profile,
-  }) showConfirmDialog;
+  }) _showConfirmDialog;
+  late void Function() _close;
+
+  void registerListeners({
+    required Future<ConfirmResultWithDoNotShowAgainOption?> Function({
+      required Profile profile,
+    }) showConfirmDialog,
+    required void Function() close,
+  }) {
+    _showConfirmDialog = showConfirmDialog;
+    _close = close;
+  }
 
   Future<void> sendMessage({required String text}) async {
     final shouldExplainProfileLifecycle =
@@ -31,8 +42,7 @@ class PostMessagePresenter {
         return;
       }
 
-      final result = await showConfirmDialog(profile: profile);
-
+      final result = await _showConfirmDialog(profile: profile);
       if (result == null) {
         return;
       }
@@ -51,6 +61,10 @@ class PostMessagePresenter {
       }
     }
 
+    // TODO(ide): ローディングを表示する
+
     await _messageActions.sendMessage(text: text);
+
+    _close();
   }
 }

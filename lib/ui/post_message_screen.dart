@@ -36,8 +36,10 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   void initState() {
     super.initState();
 
-    ref.read(_postMessagePresenterProvider).showConfirmDialog =
-        _showProfileUpdateDialog;
+    ref.read(_postMessagePresenterProvider).registerListeners(
+          showConfirmDialog: _showProfileUpdateDialog,
+          close: () => Navigator.pop(context),
+        );
   }
 
   @override
