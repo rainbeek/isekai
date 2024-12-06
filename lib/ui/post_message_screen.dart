@@ -52,10 +52,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.send),
-            onPressed: () {
-              presenter.sendMessage(text: _message);
-              Navigator.pop(context);
-            },
+            onPressed: () => presenter.sendMessage(text: _message),
           ),
         ],
       ),
