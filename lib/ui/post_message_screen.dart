@@ -57,7 +57,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
         child: Column(
           children: [
             Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.centerRight,
               child: _ProfilePanel(),
             ),
             const SizedBox(height: 8),
