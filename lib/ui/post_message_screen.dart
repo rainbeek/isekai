@@ -31,7 +31,6 @@ class PostMessageScreen extends ConsumerStatefulWidget {
 }
 
 class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
-  final String _message = '';
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -59,8 +58,8 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
             TextField(
               controller: _controller,
               autofocus: true,
-              maxLines: 12,
-              minLines: 12,
+              maxLines: 8,
+              minLines: 8,
               decoration: InputDecoration(
                 hintText: S.of(context)!.writeComment,
                 border: const OutlineInputBorder(),
