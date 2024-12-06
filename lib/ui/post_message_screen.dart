@@ -23,6 +23,7 @@ class PostMessageScreen extends ConsumerStatefulWidget {
   static MaterialPageRoute<PostMessageScreen> route() => MaterialPageRoute(
         builder: (_) => const PostMessageScreen(),
         settings: const RouteSettings(name: name),
+        fullscreenDialog: true,
       );
 
   @override
