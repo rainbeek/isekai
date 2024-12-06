@@ -8,16 +8,11 @@ import 'package:isekai/data/usecase/thread_use_case.dart';
 import 'package:isekai/ui/post_message_screen.dart';
 import 'package:isekai/ui/settings_screen.dart';
 
-class ThreadScreen extends ConsumerStatefulWidget {
+class ThreadScreen extends ConsumerWidget {
   const ThreadScreen({super.key});
 
   @override
-  ConsumerState<ThreadScreen> createState() => _ThreadScreenState();
-}
-
-class _ThreadScreenState extends ConsumerState<ThreadScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -41,7 +36,7 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
             PostMessageScreen.route(),
           );
         },
-        tooltip: 'コメントを投稿する',
+        tooltip: S.of(context)!.postComment,
         child: const Icon(Icons.add),
       ),
     );
