@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:isekai/data/model/profile.dart';
 import 'package:isekai/data/model/thread.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/message_use_case.dart';
@@ -14,6 +15,7 @@ final _threadPresenterProvider = Provider(
   (ref) => ThreadPresenter(
     messageActions: ref.watch(messageActionsProvider),
     preferenceActions: ref.watch(preferenceActionsProvider),
+    ref: ref,
   ),
 );
 
@@ -117,8 +119,9 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
     );
   }
 
-  Future<ConfirmResultWithDoNotShowAgainOption?>
-      _showProfileUpdateDialog() async {
+  Future<ConfirmResultWithDoNotShowAgainOption?> _showProfileUpdateDialog({
+    required Profile profile,
+  }) async {
     return showDialog<ConfirmResultWithDoNotShowAgainOption>(
       context: context,
       builder: (context) {
@@ -127,7 +130,10 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: Text(S.of(context)!.profileUpdateDialogTitle),
+              icon: Text(profile.icon),
+              title: Text(
+                S.of(context)!.profileUpdateDialogTitle(name: profile.name),
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -150,7 +156,14 @@ class _ThreadScreenState extends ConsumerState<ThreadScreen> {
                       doNotShowAgain: doNotShowAgain,
                     ),
                   ),
-                  child: Text(S.of(context)!.profileUpdateDialogOkButton),
+                  child: Text(S.of(context)!.post),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(
+                    context,
+                    const ConfirmResultWithDoNotShowAgainOption.cancel(),
+                  ),
+                  child: Text(S.of(context)!.cancel),
                 ),
               ],
             );
