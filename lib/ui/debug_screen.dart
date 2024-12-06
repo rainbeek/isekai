@@ -24,6 +24,8 @@ class DebugScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 16),
           const _UpdateProfileTile(),
+          const SizedBox(height: 16),
+          const _ToggleDoNotShowAgainTile(),
           SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 16),
         ],
       ),
@@ -55,6 +57,20 @@ class _UpdateProfileTile extends ConsumerWidget {
       subtitle: subtitle,
       trailing: Text(displayProfile),
       onTap: preferenceActions.updateProfile,
+    );
+  }
+}
+
+class _ToggleDoNotShowAgainTile extends ConsumerWidget {
+  const _ToggleDoNotShowAgainTile();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final preferenceActions = ref.watch(preferenceActionsProvider);
+
+    return ListTile(
+      title: const Text('今後は表示しないをリセットする'),
+      onTap: preferenceActions.resetDoNotShowAgainProfileLifecycleForDebug,
     );
   }
 }

@@ -75,4 +75,17 @@ class PreferenceActions {
     final lastName = fakerObj.person.lastName();
     return '$firstName $lastName';
   }
+
+  Future<bool> getShouldExplainProfileLifecycle() async {
+    return await _preferenceRepository.getShouldExplainProfileLifecycle() ??
+        true;
+  }
+
+  Future<void> userRequestedDoNotShowAgainProfileLifecycle() async {
+    await _preferenceRepository.saveShouldExplainProfileLifecycle(value: false);
+  }
+
+  Future<void> resetDoNotShowAgainProfileLifecycleForDebug() async {
+    await _preferenceRepository.saveShouldExplainProfileLifecycle(value: true);
+  }
 }

@@ -1,22 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:isekai/data/model/profile.dart';
 import 'package:isekai/data/model/thread.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/message_use_case.dart';
+import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/data/usecase/thread_use_case.dart';
+import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 import 'package:isekai/ui/settings_screen.dart';
 import 'package:isekai/ui/thread_presenter.dart';
 
 final _threadPresenterProvider = Provider(
-  (ref) => ThreadPresenter(messageActions: ref.watch(messageActionsProvider)),
+  (ref) => ThreadPresenter(
+    messageActions: ref.watch(messageActionsProvider),
+    preferenceActions: ref.watch(preferenceActionsProvider),
+    ref: ref,
+  ),
 );
 
-class ThreadScreen extends ConsumerWidget {
+class ThreadScreen extends ConsumerStatefulWidget {
   const ThreadScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ThreadScreen> createState() => _ThreadScreenState();
+}
+
+class _ThreadScreenState extends ConsumerState<ThreadScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    ref.read(_threadPresenterProvider).showConfirmDialog =
+        _showProfileUpdateDialog;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final presenter = ref.watch(_threadPresenterProvider);
 
     return Scaffold(
@@ -96,6 +116,66 @@ class ThreadScreen extends ConsumerWidget {
         tooltip: 'コメントを投稿する',
         child: const Icon(Icons.add),
       ),
+    );
+  }
+
+  Future<ConfirmResultWithDoNotShowAgainOption?> _showProfileUpdateDialog({
+    required Profile profile,
+  }) async {
+    return showDialog<ConfirmResultWithDoNotShowAgainOption>(
+      context: context,
+      builder: (context) {
+        var doNotShowAgain = true;
+
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              icon: Text(
+                profile.icon,
+                style: Theme.of(context).textTheme.headlineLarge,
+                textAlign: TextAlign.center,
+              ),
+              title: Text(
+                S.of(context)!.profileUpdateDialogTitle(profile.name),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(S.of(context)!.profileUpdateDialogContent),
+                  const SizedBox(height: 16),
+                  CheckboxListTile(
+                    value: doNotShowAgain,
+                    onChanged: (value) {
+                      setState(() {
+                        doNotShowAgain = value!;
+                      });
+                    },
+                    title: Text(S.of(context)!.doNotShowAgain),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(
+                    context,
+                    ConfirmResultWithDoNotShowAgainOption.doContinue(
+                      doNotShowAgain: doNotShowAgain,
+                    ),
+                  ),
+                  child: Text(S.of(context)!.post),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(
+                    context,
+                    const ConfirmResultWithDoNotShowAgainOption.cancel(),
+                  ),
+                  child: Text(S.of(context)!.cancel),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }
