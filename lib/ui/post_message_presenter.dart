@@ -5,8 +5,8 @@ import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 
-class ThreadPresenter {
-  ThreadPresenter({
+class PostMessagePresenter {
+  PostMessagePresenter({
     required MessageActions messageActions,
     required PreferenceActions preferenceActions,
     required Ref ref,
@@ -20,7 +20,18 @@ class ThreadPresenter {
 
   late Future<ConfirmResultWithDoNotShowAgainOption?> Function({
     required Profile profile,
-  }) showConfirmDialog;
+  }) _showConfirmDialog;
+  late void Function() _close;
+
+  void registerListeners({
+    required Future<ConfirmResultWithDoNotShowAgainOption?> Function({
+      required Profile profile,
+    }) showConfirmDialog,
+    required void Function() close,
+  }) {
+    _showConfirmDialog = showConfirmDialog;
+    _close = close;
+  }
 
   Future<void> sendMessage({required String text}) async {
     final shouldExplainProfileLifecycle =
@@ -31,8 +42,7 @@ class ThreadPresenter {
         return;
       }
 
-      final result = await showConfirmDialog(profile: profile);
-
+      final result = await _showConfirmDialog(profile: profile);
       if (result == null) {
         return;
       }
@@ -51,6 +61,10 @@ class ThreadPresenter {
       }
     }
 
+    // TODO(ide): ローディングを表示する
+
     await _messageActions.sendMessage(text: text);
+
+    _close();
   }
 }

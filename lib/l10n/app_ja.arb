@@ -14,6 +14,8 @@
       }
     }
   },
+  "postComment": "コメントを投稿する",
+  "writeComment": "コメントを記入する",
   "profileUpdateDialogTitle": "{name} さんとして投稿します",
   "@profileUpdateDialogTitle": {
     "placeholders": {
