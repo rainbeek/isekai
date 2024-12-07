@@ -33,7 +33,7 @@ class PostMessageScreen extends ConsumerStatefulWidget {
 
 class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   final TextEditingController _controller = TextEditingController();
-  int _currentLength = 0;
+  int _currentMessageLength = 0;
 
   @override
   void initState() {
@@ -45,8 +45,13 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
         );
 
     _controller.addListener(() {
+      final newMessageLength = _controller.text.length;
+      if (newMessageLength == _currentMessageLength) {
+        return;
+      }
+
       setState(() {
-        _currentLength = _controller.text.length;
+        _currentMessageLength = newMessageLength;
       });
     });
   }
@@ -79,7 +84,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
               autofocus: true,
               maxLines: 8,
               minLines: 8,
-              maxLength: 140,
+              maxLength: PostMessagePresenter.maxMessageLength,
               decoration: InputDecoration(
                 hintText: S.of(context)!.writeComment,
                 border: const OutlineInputBorder(),
@@ -88,7 +93,12 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.centerLeft,
-              child: Text('$_currentLength / 140'),
+              child: Text(
+                S.of(context)!.messageLengthPresentationFormat(
+                      _currentMessageLength,
+                      PostMessagePresenter.maxMessageLength,
+                    ),
+              ),
             ),
             const SizedBox(height: 16),
             ElevatedButton(

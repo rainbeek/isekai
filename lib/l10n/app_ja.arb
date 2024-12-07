@@ -16,6 +16,19 @@
   },
   "postComment": "コメントを投稿する",
   "writeComment": "コメントを記入する",
+  "messageLengthPresentationFormat": "{currentLength} / {maxLength}",
+  "@messageLengthPresentationFormat": {
+    "placeholders": {
+      "currentLength": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "maxLength": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "profileUpdateDialogTitle": "{name} さんとして投稿します",
   "@profileUpdateDialogTitle": {
     "placeholders": {

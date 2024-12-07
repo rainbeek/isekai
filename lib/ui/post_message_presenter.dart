@@ -14,11 +14,11 @@ class PostMessagePresenter {
         _preferenceActions = preferenceActions,
         _ref = ref;
 
+  static const int maxMessageLength = 140;
+
   final MessageActions _messageActions;
   final PreferenceActions _preferenceActions;
   final Ref _ref;
-
-  static const int maxCharacterCount = 140;
 
   late Future<ConfirmResultWithDoNotShowAgainOption?> Function({
     required Profile profile,
