@@ -33,6 +33,7 @@ class PostMessageScreen extends ConsumerStatefulWidget {
 
 class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   final TextEditingController _controller = TextEditingController();
+  int _currentLength = 0;
 
   @override
   void initState() {
@@ -42,6 +43,18 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
           showConfirmDialog: _showProfileUpdateDialog,
           close: () => Navigator.pop(context),
         );
+
+    _controller.addListener(() {
+      setState(() {
+        _currentLength = _controller.text.length;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -66,10 +79,16 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
               autofocus: true,
               maxLines: 8,
               minLines: 8,
+              maxLength: 140,
               decoration: InputDecoration(
                 hintText: S.of(context)!.writeComment,
                 border: const OutlineInputBorder(),
               ),
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text('$_currentLength / 140'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
