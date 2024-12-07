@@ -91,16 +91,6 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
                 border: const OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 8),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                S.of(context)!.messageLengthPresentationFormat(
-                      _currentMessageLength,
-                      PostMessagePresenter.maxMessageLength,
-                    ),
-              ),
-            ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
