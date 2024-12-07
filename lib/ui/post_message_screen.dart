@@ -59,6 +59,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   @override
   void dispose() {
     _controller.dispose();
+
     super.dispose();
   }
 
