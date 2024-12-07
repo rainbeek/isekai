@@ -83,6 +83,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
             TextField(
               controller: _controller,
               autofocus: true,
+              maxLines: 8,
               minLines: 8,
               maxLength: PostMessagePresenter.maxMessageLength,
               decoration: InputDecoration(
