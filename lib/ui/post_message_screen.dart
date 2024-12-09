@@ -33,7 +33,6 @@ class PostMessageScreen extends ConsumerStatefulWidget {
 
 class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   final TextEditingController _controller = TextEditingController();
-  int _currentMessageLength = 0;
 
   @override
   void initState() {
@@ -45,14 +44,9 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
         );
 
     _controller.addListener(() {
-      final newMessageLength = _controller.text.length;
-      if (newMessageLength == _currentMessageLength) {
-        return;
-      }
-
-      setState(() {
-        _currentMessageLength = newMessageLength;
-      });
+      ref.read(_postMessagePresenterProvider).onChangeMessageLength(
+            _controller.text.length,
+          );
     });
   }
 
@@ -65,8 +59,6 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final presenter = ref.watch(_postMessagePresenterProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context)!.postComment),
@@ -92,15 +84,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _currentMessageLength == 0
-                  ? null
-                  : () {
-                      final text = _controller.text;
-                      presenter.sendMessage(text: text);
-                    },
-              child: Text(S.of(context)!.post),
-            ),
+            _PostMessageButton(controller: _controller),
           ],
         ),
       ),
@@ -164,6 +148,32 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
           },
         );
       },
+    );
+  }
+}
+
+class _PostMessageButton extends ConsumerWidget {
+  const _PostMessageButton({
+    required TextEditingController controller,
+  }) : _controller = controller;
+
+  final TextEditingController _controller;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final enabled = ref.watch(canPostMessageOnPostMessageScreenProvider);
+    final presenter = ref.watch(_postMessagePresenterProvider);
+
+    final onPressed = enabled
+        ? () {
+            final text = _controller.text;
+            presenter.sendMessage(text: text);
+          }
+        : null;
+
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(S.of(context)!.post),
     );
   }
 }
