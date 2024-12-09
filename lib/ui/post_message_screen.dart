@@ -3,18 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/model/profile.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
-import 'package:isekai/data/usecase/message_use_case.dart';
-import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 import 'package:isekai/ui/post_message_presenter.dart';
-
-final _postMessagePresenterProvider = Provider(
-  (ref) => PostMessagePresenter(
-    messageActions: ref.watch(messageActionsProvider),
-    preferenceActions: ref.watch(preferenceActionsProvider),
-    ref: ref,
-  ),
-);
 
 class PostMessageScreen extends ConsumerStatefulWidget {
   const PostMessageScreen({super.key});
@@ -38,13 +28,13 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   void initState() {
     super.initState();
 
-    ref.read(_postMessagePresenterProvider).registerListeners(
+    ref.read(postMessagePresenterProvider).registerListeners(
           showConfirmDialog: _showProfileUpdateDialog,
           close: () => Navigator.pop(context),
         );
 
     _controller.addListener(() {
-      ref.read(_postMessagePresenterProvider).onChangeMessageLength(
+      ref.read(postMessagePresenterProvider).onChangeMessageLength(
             _controller.text.length,
           );
     });
@@ -162,7 +152,7 @@ class _PostMessageButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final enabled = ref.watch(canPostMessageOnPostMessageScreenProvider);
-    final presenter = ref.watch(_postMessagePresenterProvider);
+    final presenter = ref.watch(postMessagePresenterProvider);
 
     final onPressed = enabled
         ? () {

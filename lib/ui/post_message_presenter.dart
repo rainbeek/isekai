@@ -5,6 +5,14 @@ import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 
+final postMessagePresenterProvider = Provider(
+  (ref) => PostMessagePresenter(
+    messageActions: ref.watch(messageActionsProvider),
+    preferenceActions: ref.watch(preferenceActionsProvider),
+    ref: ref,
+  ),
+);
+
 final canPostMessageOnPostMessageScreenProvider =
     StateNotifierProvider<_CanPostMessageNotifier, bool>(
   (ref) => _CanPostMessageNotifier(),
