@@ -93,10 +93,12 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                final text = _controller.text;
-                presenter.sendMessage(text: text);
-              },
+              onPressed: _currentMessageLength == 0
+                  ? null
+                  : () {
+                      final text = _controller.text;
+                      presenter.sendMessage(text: text);
+                    },
               child: Text(S.of(context)!.post),
             ),
           ],
