@@ -34,9 +34,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
         );
 
     _controller.addListener(() {
-      ref.read(postMessagePresenterProvider).onChangeMessageLength(
-            _controller.text.length,
-          );
+      ref.read(postMessagePresenterProvider).onChangeMessage(_controller.text);
     });
   }
 

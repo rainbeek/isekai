@@ -14,8 +14,8 @@ final postMessagePresenterProvider = Provider(
 );
 
 final canPostMessageOnPostMessageScreenProvider =
-    StateNotifierProvider<CanPostMessageNotifier, bool>(
-  (ref) => CanPostMessageNotifier(),
+    StateNotifierProvider<_CanPostMessageNotifier, bool>(
+  (ref) => _CanPostMessageNotifier(),
 );
 
 class PostMessagePresenter {
@@ -48,10 +48,10 @@ class PostMessagePresenter {
     _close = close;
   }
 
-  void onChangeMessageLength(int length) {
+  void onChangeMessage(String message) {
     _ref
         .read(canPostMessageOnPostMessageScreenProvider.notifier)
-        .onChangeMessageLength(length);
+        .onChangeMessage(message);
   }
 
   Future<void> sendMessage({required String text}) async {
@@ -90,10 +90,10 @@ class PostMessagePresenter {
   }
 }
 
-class CanPostMessageNotifier extends StateNotifier<bool> {
-  CanPostMessageNotifier() : super(false);
+class _CanPostMessageNotifier extends StateNotifier<bool> {
+  _CanPostMessageNotifier() : super(false);
 
-  Future<void> onChangeMessageLength(int length) async {
-    state = length > 0;
+  Future<void> onChangeMessage(String message) async {
+    state = message.isNotEmpty && message.trim().isNotEmpty;
   }
 }
