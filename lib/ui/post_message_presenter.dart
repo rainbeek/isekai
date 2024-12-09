@@ -14,8 +14,8 @@ final postMessagePresenterProvider = Provider(
 );
 
 final canPostMessageOnPostMessageScreenProvider =
-    StateNotifierProvider<_CanPostMessageNotifier, bool>(
-  (ref) => _CanPostMessageNotifier(),
+    StateNotifierProvider<CanPostMessageNotifier, bool>(
+  (ref) => CanPostMessageNotifier(),
 );
 
 class PostMessagePresenter {
@@ -90,8 +90,8 @@ class PostMessagePresenter {
   }
 }
 
-class _CanPostMessageNotifier extends StateNotifier<bool> {
-  _CanPostMessageNotifier() : super(false);
+class CanPostMessageNotifier extends StateNotifier<bool> {
+  CanPostMessageNotifier() : super(false);
 
   Future<void> onChangeMessageLength(int length) async {
     state = length > 0;
