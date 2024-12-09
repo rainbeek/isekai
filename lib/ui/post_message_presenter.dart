@@ -5,6 +5,19 @@ import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 
+final postMessagePresenterProvider = Provider(
+  (ref) => PostMessagePresenter(
+    messageActions: ref.watch(messageActionsProvider),
+    preferenceActions: ref.watch(preferenceActionsProvider),
+    ref: ref,
+  ),
+);
+
+final canPostMessageOnPostMessageScreenProvider =
+    StateNotifierProvider<_CanPostMessageNotifier, bool>(
+  (ref) => _CanPostMessageNotifier(),
+);
+
 class PostMessagePresenter {
   PostMessagePresenter({
     required MessageActions messageActions,
@@ -33,6 +46,12 @@ class PostMessagePresenter {
   }) {
     _showConfirmDialog = showConfirmDialog;
     _close = close;
+  }
+
+  void onChangeMessage(String message) {
+    _ref
+        .read(canPostMessageOnPostMessageScreenProvider.notifier)
+        .onChangeMessage(message);
   }
 
   Future<void> sendMessage({required String text}) async {
@@ -68,5 +87,13 @@ class PostMessagePresenter {
     await _messageActions.sendMessage(text: text);
 
     _close();
+  }
+}
+
+class _CanPostMessageNotifier extends StateNotifier<bool> {
+  _CanPostMessageNotifier() : super(false);
+
+  Future<void> onChangeMessage(String message) async {
+    state = message.isNotEmpty && message.trim().isNotEmpty;
   }
 }

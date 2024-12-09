@@ -3,18 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/model/profile.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
-import 'package:isekai/data/usecase/message_use_case.dart';
-import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 import 'package:isekai/ui/post_message_presenter.dart';
-
-final _postMessagePresenterProvider = Provider(
-  (ref) => PostMessagePresenter(
-    messageActions: ref.watch(messageActionsProvider),
-    preferenceActions: ref.watch(preferenceActionsProvider),
-    ref: ref,
-  ),
-);
 
 class PostMessageScreen extends ConsumerStatefulWidget {
   const PostMessageScreen({super.key});
@@ -33,26 +23,18 @@ class PostMessageScreen extends ConsumerStatefulWidget {
 
 class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   final TextEditingController _controller = TextEditingController();
-  int _currentMessageLength = 0;
 
   @override
   void initState() {
     super.initState();
 
-    ref.read(_postMessagePresenterProvider).registerListeners(
+    ref.read(postMessagePresenterProvider).registerListeners(
           showConfirmDialog: _showProfileUpdateDialog,
           close: () => Navigator.pop(context),
         );
 
     _controller.addListener(() {
-      final newMessageLength = _controller.text.length;
-      if (newMessageLength == _currentMessageLength) {
-        return;
-      }
-
-      setState(() {
-        _currentMessageLength = newMessageLength;
-      });
+      ref.read(postMessagePresenterProvider).onChangeMessage(_controller.text);
     });
   }
 
@@ -65,8 +47,6 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final presenter = ref.watch(_postMessagePresenterProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context)!.postComment),
@@ -92,13 +72,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                final text = _controller.text;
-                presenter.sendMessage(text: text);
-              },
-              child: Text(S.of(context)!.post),
-            ),
+            _PostMessageButton(controller: _controller),
           ],
         ),
       ),
@@ -162,6 +136,32 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
           },
         );
       },
+    );
+  }
+}
+
+class _PostMessageButton extends ConsumerWidget {
+  const _PostMessageButton({
+    required TextEditingController controller,
+  }) : _controller = controller;
+
+  final TextEditingController _controller;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final enabled = ref.watch(canPostMessageOnPostMessageScreenProvider);
+    final presenter = ref.watch(postMessagePresenterProvider);
+
+    final onPressed = enabled
+        ? () {
+            final text = _controller.text;
+            presenter.sendMessage(text: text);
+          }
+        : null;
+
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(S.of(context)!.post),
     );
   }
 }
