@@ -50,7 +50,7 @@ void main() {
       );
     });
 
-    test('空白だけの場合、メッセージ投稿できない', () {
+    test('空白ではない文字がある場合、メッセージ投稿できる', () {
       container.read(postMessagePresenterProvider).onChangeMessage('テスト投稿です！');
 
       expect(container.read(canPostMessageOnPostMessageScreenProvider), isTrue);
@@ -78,6 +78,31 @@ void main() {
   });
 
   group('メッセージを投稿しようとした', () {
+    group('プロフィールのライフサイクルについてユーザーが説明を受けるべき', () {});
+
+    group('プロフィールのライフサイクルについてユーザーが説明を受けなくていい', () {
+      test('説明は表示されず、そのままメッセージが投稿される', () async {
+        final presenter = container.read(postMessagePresenterProvider);
+
+        presenter.registerListeners(
+          showConfirmDialog: ({required Profile profile}) async {
+            return null;
+          },
+          close: () {},
+        );
+        when(mockPreferenceActions.getShouldExplainProfileLifecycle)
+            .thenAnswer((_) async => false);
+        when(() => mockMessageActions.sendMessage(text: any(named: 'text')))
+            .thenAnswer((_) async {});
+
+        await presenter.sendMessage(text: 'テスト投稿です！');
+
+        verify(() => mockMessageActions.sendMessage(text: 'テスト投稿です！'))
+            .called(1);
+        // TODO(ide): close が呼ばれた
+      });
+    });
+
     test(
         'sendMessage should show confirm dialog if shouldExplainProfileLifecycle is true',
         () async {
