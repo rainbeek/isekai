@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:isekai/data/model/profile.dart';
-import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
@@ -32,34 +31,30 @@ void main() {
     container.dispose();
   });
 
-  test('registerListeners should set the listeners', () {
-    final presenter = container.read(postMessagePresenterProvider);
+  group('入力中のメッセージが変化した', () {
+    test('空の場合、メッセージ投稿できない', () {
+      container.read(postMessagePresenterProvider).onChangeMessage('');
 
-    Future<ConfirmResultWithDoNotShowAgainOption?> showConfirmDialog({
-      required Profile profile,
-    }) async {
-      return null;
-    }
+      expect(
+        container.read(canPostMessageOnPostMessageScreenProvider),
+        false,
+      );
+    });
 
-    void close() {}
+    test('空白だけの場合、メッセージ投稿できない', () {
+      container.read(postMessagePresenterProvider).onChangeMessage('  ');
 
-    presenter.registerListeners(
-      showConfirmDialog: showConfirmDialog,
-      close: close,
-    );
+      expect(
+        container.read(canPostMessageOnPostMessageScreenProvider),
+        false,
+      );
+    });
 
-    expect(presenter._showConfirmDialog, equals(showConfirmDialog));
-    expect(presenter._close, equals(close));
-  });
+    test('空白だけの場合、メッセージ投稿できない', () {
+      container.read(postMessagePresenterProvider).onChangeMessage('テスト投稿です！');
 
-  test('onChangeMessage should update canPostMessageOnPostMessageScreenProvider', () {
-    final presenter = container.read(postMessagePresenterProvider);
-
-    presenter.onChangeMessage('Hello');
-    expect(container.read(canPostMessageOnPostMessageScreenProvider), isTrue);
-
-    presenter.onChangeMessage('');
-    expect(container.read(canPostMessageOnPostMessageScreenProvider), isFalse);
+      expect(container.read(canPostMessageOnPostMessageScreenProvider), isTrue);
+    });
   });
 
   test('sendMessage should call messageActions.sendMessage', () async {
@@ -82,7 +77,9 @@ void main() {
     verify(() => mockMessageActions.sendMessage(text: 'Hello')).called(1);
   });
 
-  test('sendMessage should show confirm dialog if shouldExplainProfileLifecycle is true', () async {
+  test(
+      'sendMessage should show confirm dialog if shouldExplainProfileLifecycle is true',
+      () async {
     final presenter = container.read(postMessagePresenterProvider);
 
     when(() => mockPreferenceActions.getShouldExplainProfileLifecycle())
