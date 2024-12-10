@@ -77,27 +77,29 @@ void main() {
     verify(() => mockMessageActions.sendMessage(text: 'Hello')).called(1);
   });
 
-  test(
-      'sendMessage should show confirm dialog if shouldExplainProfileLifecycle is true',
-      () async {
-    final presenter = container.read(postMessagePresenterProvider);
+  group('メッセージを投稿しようとした', () {
+    test(
+        'sendMessage should show confirm dialog if shouldExplainProfileLifecycle is true',
+        () async {
+      final presenter = container.read(postMessagePresenterProvider);
 
-    when(() => mockPreferenceActions.getShouldExplainProfileLifecycle())
-        .thenAnswer((_) async => true);
-    when(() => mockMessageActions.sendMessage(text: any(named: 'text')))
-        .thenAnswer((_) async {});
+      when(() => mockPreferenceActions.getShouldExplainProfileLifecycle())
+          .thenAnswer((_) async => true);
+      when(() => mockMessageActions.sendMessage(text: any(named: 'text')))
+          .thenAnswer((_) async {});
 
-    presenter.registerListeners(
-      showConfirmDialog: ({required Profile profile}) async {
-        return const ConfirmResultWithDoNotShowAgainOption.doContinue(
-          doNotShowAgain: true,
-        );
-      },
-      close: () {},
-    );
+      presenter.registerListeners(
+        showConfirmDialog: ({required Profile profile}) async {
+          return const ConfirmResultWithDoNotShowAgainOption.doContinue(
+            doNotShowAgain: true,
+          );
+        },
+        close: () {},
+      );
 
-    await presenter.sendMessage(text: 'Hello');
+      await presenter.sendMessage(text: 'Hello');
 
-    verify(() => mockMessageActions.sendMessage(text: 'Hello')).called(1);
+      verify(() => mockMessageActions.sendMessage(text: 'Hello')).called(1);
+    });
   });
 }
