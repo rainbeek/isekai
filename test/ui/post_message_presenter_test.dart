@@ -11,12 +11,33 @@ class MockMessageActions extends Mock implements MessageActions {}
 
 class MockPreferenceActions extends Mock implements PreferenceActions {}
 
+abstract class _Listeners {
+  Future<ConfirmResultWithDoNotShowAgainOption?> showConfirmDialog({
+    required Profile profile,
+  });
+  void close();
+}
+
+class _MockListeners extends Mock implements _Listeners {}
+
 void main() {
+  late _MockListeners listeners;
   late MockMessageActions mockMessageActions;
   late MockPreferenceActions mockPreferenceActions;
   late ProviderContainer container;
 
+  setUpAll(() {
+    registerFallbackValue(
+      Profile(
+        icon: '👍',
+        name: 'Test User',
+        validUntil: DateTime(2024, 12),
+      ),
+    );
+  });
+
   setUp(() {
+    listeners = _MockListeners();
     mockMessageActions = MockMessageActions();
     mockPreferenceActions = MockPreferenceActions();
     container = ProviderContainer(
@@ -82,14 +103,11 @@ void main() {
 
     group('プロフィールのライフサイクルについてユーザーが説明を受けなくていい', () {
       test('説明は表示されず、そのままメッセージが投稿される', () async {
-        final presenter = container.read(postMessagePresenterProvider);
-
-        presenter.registerListeners(
-          showConfirmDialog: ({required Profile profile}) async {
-            return null;
-          },
-          close: () {},
-        );
+        final presenter = container.read(postMessagePresenterProvider)
+          ..registerListeners(
+            showConfirmDialog: listeners.showConfirmDialog,
+            close: listeners.close,
+          );
         when(mockPreferenceActions.getShouldExplainProfileLifecycle)
             .thenAnswer((_) async => false);
         when(() => mockMessageActions.sendMessage(text: any(named: 'text')))
@@ -97,9 +115,15 @@ void main() {
 
         await presenter.sendMessage(text: 'テスト投稿です！');
 
+        verifyNever(
+          () => listeners.showConfirmDialog(profile: any(named: 'profile')),
+        );
+        verifyNever(
+          mockPreferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
+        );
         verify(() => mockMessageActions.sendMessage(text: 'テスト投稿です！'))
             .called(1);
-        // TODO(ide): close が呼ばれた
+        verify(() => listeners.close()).called(1);
       });
     });
 
