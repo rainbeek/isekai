@@ -8,9 +8,9 @@ import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dar
 import 'package:isekai/ui/post_message_presenter.dart';
 import 'package:mocktail/mocktail.dart';
 
-class _MockMessageActions extends Mock implements MessageActions {}
-
 class _MockPreferenceActions extends Mock implements PreferenceActions {}
+
+class _MockMessageActions extends Mock implements MessageActions {}
 
 abstract class _Listeners {
   Future<ConfirmResultWithDoNotShowAgainOption?> showConfirmDialog({
@@ -39,8 +39,8 @@ void main() {
 
   setUp(() {
     listeners = _MockListeners();
-    messageActions = _MockMessageActions();
     preferenceActions = _MockPreferenceActions();
+    messageActions = _MockMessageActions();
     container = ProviderContainer(
       overrides: [
         profileProvider.overrideWithValue(
@@ -50,8 +50,8 @@ void main() {
             validUntil: DateTime(2024, 12),
           ),
         ),
-        messageActionsProvider.overrideWithValue(messageActions),
         preferenceActionsProvider.overrideWithValue(preferenceActions),
+        messageActionsProvider.overrideWithValue(messageActions),
       ],
     );
   });
@@ -91,7 +91,7 @@ void main() {
 
   group('メッセージを投稿しようとした', () {
     group('プロフィールのライフサイクルについてユーザーが説明を受けるべき', () {
-      test('説明は表示され、説明を受け入れると、そのままメッセージが投稿される', () async {
+      test('説明は表示され、再表示しないチェックをONにして説明を受け入れると、メッセージが投稿され、画面が閉じる', () async {
         final presenter = container.read(postMessagePresenterProvider)
           ..registerListeners(
             showConfirmDialog: listeners.showConfirmDialog,
@@ -122,7 +122,7 @@ void main() {
         verify(listeners.close).called(1);
       });
 
-      test('説明は表示され、説明を再度表示してほしいとして受け入れると、そのままメッセージが投稿される', () async {
+      test('説明は表示され、再表示しないチェックをOFFにして説明を受け入れると、メッセージが投稿され、画面が閉じる', () async {
         final presenter = container.read(postMessagePresenterProvider)
           ..registerListeners(
             showConfirmDialog: listeners.showConfirmDialog,
@@ -153,7 +153,7 @@ void main() {
         verify(listeners.close).called(1);
       });
 
-      test('説明は表示され、説明で投稿をキャンセルすると、メッセージは投稿されない', () async {
+      test('説明は表示され、説明を受け入れないと、メッセージは投稿されず、画面は閉じない', () async {
         final presenter = container.read(postMessagePresenterProvider)
           ..registerListeners(
             showConfirmDialog: listeners.showConfirmDialog,
@@ -182,7 +182,7 @@ void main() {
         verifyNever(listeners.close);
       });
 
-      test('説明は表示され、説明を閉じると、メッセージは投稿されない', () async {
+      test('説明は表示され、説明を閉じると、メッセージは投稿されず、画面は閉じない', () async {
         final presenter = container.read(postMessagePresenterProvider)
           ..registerListeners(
             showConfirmDialog: listeners.showConfirmDialog,
@@ -213,7 +213,7 @@ void main() {
     });
 
     group('プロフィールのライフサイクルについてユーザーが説明を受けなくていい', () {
-      test('説明は表示されず、そのままメッセージが投稿される', () async {
+      test('説明は表示されず、メッセージが投稿され、画面が閉じる', () async {
         final presenter = container.read(postMessagePresenterProvider)
           ..registerListeners(
             showConfirmDialog: listeners.showConfirmDialog,
