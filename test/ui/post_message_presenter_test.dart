@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:isekai/data/model/profile.dart';
+import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
@@ -30,7 +31,7 @@ void main() {
     registerFallbackValue(
       Profile(
         icon: '👍',
-        name: 'Test User',
+        name: 'テストユーザー',
         validUntil: DateTime(2024, 12),
       ),
     );
@@ -42,6 +43,13 @@ void main() {
     preferenceActions = _MockPreferenceActions();
     container = ProviderContainer(
       overrides: [
+        profileProvider.overrideWithValue(
+          Profile(
+            icon: '👍',
+            name: 'テストユーザー',
+            validUntil: DateTime(2024, 12),
+          ),
+        ),
         messageActionsProvider.overrideWithValue(messageActions),
         preferenceActionsProvider.overrideWithValue(preferenceActions),
       ],
@@ -103,14 +111,22 @@ void main() {
 
   group('メッセージを投稿しようとした', () {
     group('プロフィールのライフサイクルについてユーザーが説明を受けるべき', () {
-      test('説明は表示されず、そのままメッセージが投稿される', () async {
+      test('説明は表示され、説明を受け入れると、そのままメッセージが投稿される', () async {
         final presenter = container.read(postMessagePresenterProvider)
           ..registerListeners(
             showConfirmDialog: listeners.showConfirmDialog,
             close: listeners.close,
           );
+        when(() => listeners.showConfirmDialog(profile: any(named: 'profile')))
+            .thenAnswer(
+          (_) async => const ConfirmResultWithDoNotShowAgainOption.doContinue(
+            doNotShowAgain: true,
+          ),
+        );
         when(preferenceActions.getShouldExplainProfileLifecycle)
             .thenAnswer((_) async => true);
+        when(preferenceActions.userRequestedDoNotShowAgainProfileLifecycle)
+            .thenAnswer((_) async {});
         when(() => messageActions.sendMessage(text: any(named: 'text')))
             .thenAnswer((_) async {});
 
@@ -119,9 +135,9 @@ void main() {
         verify(
           () => listeners.showConfirmDialog(profile: any(named: 'profile')),
         ).called(1);
-        verifyNever(
+        verify(
           preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
-        );
+        ).called(1);
         verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
         verify(() => listeners.close()).called(1);
       });
