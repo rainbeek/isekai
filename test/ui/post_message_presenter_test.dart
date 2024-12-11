@@ -7,9 +7,9 @@ import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dar
 import 'package:isekai/ui/post_message_presenter.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockMessageActions extends Mock implements MessageActions {}
+class _MockMessageActions extends Mock implements MessageActions {}
 
-class MockPreferenceActions extends Mock implements PreferenceActions {}
+class _MockPreferenceActions extends Mock implements PreferenceActions {}
 
 abstract class _Listeners {
   Future<ConfirmResultWithDoNotShowAgainOption?> showConfirmDialog({
@@ -22,8 +22,8 @@ class _MockListeners extends Mock implements _Listeners {}
 
 void main() {
   late _MockListeners listeners;
-  late MockMessageActions mockMessageActions;
-  late MockPreferenceActions mockPreferenceActions;
+  late _MockMessageActions messageActions;
+  late _MockPreferenceActions preferenceActions;
   late ProviderContainer container;
 
   setUpAll(() {
@@ -38,12 +38,12 @@ void main() {
 
   setUp(() {
     listeners = _MockListeners();
-    mockMessageActions = MockMessageActions();
-    mockPreferenceActions = MockPreferenceActions();
+    messageActions = _MockMessageActions();
+    preferenceActions = _MockPreferenceActions();
     container = ProviderContainer(
       overrides: [
-        messageActionsProvider.overrideWithValue(mockMessageActions),
-        preferenceActionsProvider.overrideWithValue(mockPreferenceActions),
+        messageActionsProvider.overrideWithValue(messageActions),
+        preferenceActionsProvider.overrideWithValue(preferenceActions),
       ],
     );
   });
@@ -84,9 +84,9 @@ void main() {
   test('sendMessage should call messageActions.sendMessage', () async {
     final presenter = container.read(postMessagePresenterProvider);
 
-    when(() => mockPreferenceActions.getShouldExplainProfileLifecycle())
+    when(() => preferenceActions.getShouldExplainProfileLifecycle())
         .thenAnswer((_) async => false);
-    when(() => mockMessageActions.sendMessage(text: any(named: 'text')))
+    when(() => messageActions.sendMessage(text: any(named: 'text')))
         .thenAnswer((_) async {});
 
     presenter.registerListeners(
@@ -98,7 +98,7 @@ void main() {
 
     await presenter.sendMessage(text: 'Hello');
 
-    verify(() => mockMessageActions.sendMessage(text: 'Hello')).called(1);
+    verify(() => messageActions.sendMessage(text: 'Hello')).called(1);
   });
 
   group('メッセージを投稿しようとした', () {
@@ -109,9 +109,9 @@ void main() {
             showConfirmDialog: listeners.showConfirmDialog,
             close: listeners.close,
           );
-        when(mockPreferenceActions.getShouldExplainProfileLifecycle)
+        when(preferenceActions.getShouldExplainProfileLifecycle)
             .thenAnswer((_) async => true);
-        when(() => mockMessageActions.sendMessage(text: any(named: 'text')))
+        when(() => messageActions.sendMessage(text: any(named: 'text')))
             .thenAnswer((_) async {});
 
         await presenter.sendMessage(text: 'テスト投稿です！');
@@ -120,10 +120,9 @@ void main() {
           () => listeners.showConfirmDialog(profile: any(named: 'profile')),
         );
         verifyNever(
-          mockPreferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
+          preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
         );
-        verify(() => mockMessageActions.sendMessage(text: 'テスト投稿です！'))
-            .called(1);
+        verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
         verify(() => listeners.close()).called(1);
       });
     });
@@ -135,9 +134,9 @@ void main() {
             showConfirmDialog: listeners.showConfirmDialog,
             close: listeners.close,
           );
-        when(mockPreferenceActions.getShouldExplainProfileLifecycle)
+        when(preferenceActions.getShouldExplainProfileLifecycle)
             .thenAnswer((_) async => false);
-        when(() => mockMessageActions.sendMessage(text: any(named: 'text')))
+        when(() => messageActions.sendMessage(text: any(named: 'text')))
             .thenAnswer((_) async {});
 
         await presenter.sendMessage(text: 'テスト投稿です！');
@@ -146,10 +145,9 @@ void main() {
           () => listeners.showConfirmDialog(profile: any(named: 'profile')),
         );
         verifyNever(
-          mockPreferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
+          preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
         );
-        verify(() => mockMessageActions.sendMessage(text: 'テスト投稿です！'))
-            .called(1);
+        verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
         verify(() => listeners.close()).called(1);
       });
     });
