@@ -116,9 +116,9 @@ void main() {
 
         await presenter.sendMessage(text: 'テスト投稿です！');
 
-        verifyNever(
+        verify(
           () => listeners.showConfirmDialog(profile: any(named: 'profile')),
-        );
+        ).called(1);
         verifyNever(
           preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
         );
