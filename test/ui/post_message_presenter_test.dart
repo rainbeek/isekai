@@ -139,7 +139,7 @@ void main() {
           preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
         ).called(1);
         verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
-        verify(() => listeners.close()).called(1);
+        verify(listeners.close).called(1);
       });
 
       test('説明は表示され、説明を再度表示してほしいとして受け入れると、そのままメッセージが投稿される', () async {
@@ -170,7 +170,7 @@ void main() {
           preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
         );
         verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
-        verify(() => listeners.close()).called(1);
+        verify(listeners.close).called(1);
       });
 
       test('説明は表示され、説明で投稿をキャンセルすると、メッセージは投稿されない', () async {
@@ -198,8 +198,8 @@ void main() {
         verifyNever(
           preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
         );
-        verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
-        verify(() => listeners.close()).called(1);
+        verifyNever(() => messageActions.sendMessage(text: any(named: 'text')));
+        verifyNever(listeners.close);
       });
 
       test('説明は表示され、説明を閉じると、メッセージは投稿されない', () async {
@@ -227,8 +227,8 @@ void main() {
         verifyNever(
           preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
         );
-        verifyNever(() => messageActions.sendMessage(text: 'テスト投稿です！'));
-        verifyNever(() => listeners.close());
+        verifyNever(() => messageActions.sendMessage(text: any(named: 'text')));
+        verifyNever(listeners.close);
       });
     });
 
@@ -253,7 +253,7 @@ void main() {
           preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
         );
         verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
-        verify(() => listeners.close()).called(1);
+        verify(listeners.close).called(1);
       });
     });
   });
