@@ -141,6 +141,95 @@ void main() {
         verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
         verify(() => listeners.close()).called(1);
       });
+
+      test('説明は表示され、説明を再度表示してほしいとして受け入れると、そのままメッセージが投稿される', () async {
+        final presenter = container.read(postMessagePresenterProvider)
+          ..registerListeners(
+            showConfirmDialog: listeners.showConfirmDialog,
+            close: listeners.close,
+          );
+        when(() => listeners.showConfirmDialog(profile: any(named: 'profile')))
+            .thenAnswer(
+          (_) async => const ConfirmResultWithDoNotShowAgainOption.doContinue(
+            doNotShowAgain: false,
+          ),
+        );
+        when(preferenceActions.getShouldExplainProfileLifecycle)
+            .thenAnswer((_) async => true);
+        when(preferenceActions.userRequestedDoNotShowAgainProfileLifecycle)
+            .thenAnswer((_) async {});
+        when(() => messageActions.sendMessage(text: any(named: 'text')))
+            .thenAnswer((_) async {});
+
+        await presenter.sendMessage(text: 'テスト投稿です！');
+
+        verify(
+          () => listeners.showConfirmDialog(profile: any(named: 'profile')),
+        ).called(1);
+        verifyNever(
+          preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
+        );
+        verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
+        verify(() => listeners.close()).called(1);
+      });
+
+      test('説明は表示され、説明で投稿をキャンセルすると、メッセージは投稿されない', () async {
+        final presenter = container.read(postMessagePresenterProvider)
+          ..registerListeners(
+            showConfirmDialog: listeners.showConfirmDialog,
+            close: listeners.close,
+          );
+        when(() => listeners.showConfirmDialog(profile: any(named: 'profile')))
+            .thenAnswer(
+          (_) async => const ConfirmResultWithDoNotShowAgainOption.cancel(),
+        );
+        when(preferenceActions.getShouldExplainProfileLifecycle)
+            .thenAnswer((_) async => true);
+        when(preferenceActions.userRequestedDoNotShowAgainProfileLifecycle)
+            .thenAnswer((_) async {});
+        when(() => messageActions.sendMessage(text: any(named: 'text')))
+            .thenAnswer((_) async {});
+
+        await presenter.sendMessage(text: 'テスト投稿です！');
+
+        verify(
+          () => listeners.showConfirmDialog(profile: any(named: 'profile')),
+        ).called(1);
+        verifyNever(
+          preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
+        );
+        verify(() => messageActions.sendMessage(text: 'テスト投稿です！')).called(1);
+        verify(() => listeners.close()).called(1);
+      });
+
+      test('説明は表示され、説明を閉じると、メッセージは投稿されない', () async {
+        final presenter = container.read(postMessagePresenterProvider)
+          ..registerListeners(
+            showConfirmDialog: listeners.showConfirmDialog,
+            close: listeners.close,
+          );
+        when(() => listeners.showConfirmDialog(profile: any(named: 'profile')))
+            .thenAnswer(
+          (_) async => null,
+        );
+        when(preferenceActions.getShouldExplainProfileLifecycle)
+            .thenAnswer((_) async => true);
+        when(preferenceActions.userRequestedDoNotShowAgainProfileLifecycle)
+            .thenAnswer((_) async {});
+        when(() => messageActions.sendMessage(text: any(named: 'text')))
+            .thenAnswer((_) async {});
+
+        await presenter.sendMessage(text: 'テスト投稿です！');
+
+        verify(
+          () => listeners.showConfirmDialog(profile: any(named: 'profile')),
+        ).called(1);
+        verifyNever(
+          preferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
+        );
+        verifyNever(() => messageActions.sendMessage(text: 'テスト投稿です！'));
+        verifyNever(() => listeners.close());
+      });
     });
 
     group('プロフィールのライフサイクルについてユーザーが説明を受けなくていい', () {
