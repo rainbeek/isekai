@@ -74,7 +74,10 @@ void main() {
     test('空白ではない文字がある場合、メッセージ投稿できる', () {
       container.read(postMessagePresenterProvider).onChangeMessage('テスト投稿です！');
 
-      expect(container.read(canPostMessageOnPostMessageScreenProvider), isTrue);
+      expect(
+        container.read(canPostMessageOnPostMessageScreenProvider),
+        true,
+      );
     });
   });
 
@@ -99,7 +102,31 @@ void main() {
   });
 
   group('メッセージを投稿しようとした', () {
-    group('プロフィールのライフサイクルについてユーザーが説明を受けるべき', () {});
+    group('プロフィールのライフサイクルについてユーザーが説明を受けるべき', () {
+      test('説明は表示されず、そのままメッセージが投稿される', () async {
+        final presenter = container.read(postMessagePresenterProvider)
+          ..registerListeners(
+            showConfirmDialog: listeners.showConfirmDialog,
+            close: listeners.close,
+          );
+        when(mockPreferenceActions.getShouldExplainProfileLifecycle)
+            .thenAnswer((_) async => true);
+        when(() => mockMessageActions.sendMessage(text: any(named: 'text')))
+            .thenAnswer((_) async {});
+
+        await presenter.sendMessage(text: 'テスト投稿です！');
+
+        verifyNever(
+          () => listeners.showConfirmDialog(profile: any(named: 'profile')),
+        );
+        verifyNever(
+          mockPreferenceActions.userRequestedDoNotShowAgainProfileLifecycle,
+        );
+        verify(() => mockMessageActions.sendMessage(text: 'テスト投稿です！'))
+            .called(1);
+        verify(() => listeners.close()).called(1);
+      });
+    });
 
     group('プロフィールのライフサイクルについてユーザーが説明を受けなくていい', () {
       test('説明は表示されず、そのままメッセージが投稿される', () async {
@@ -125,30 +152,6 @@ void main() {
             .called(1);
         verify(() => listeners.close()).called(1);
       });
-    });
-
-    test(
-        'sendMessage should show confirm dialog if shouldExplainProfileLifecycle is true',
-        () async {
-      final presenter = container.read(postMessagePresenterProvider);
-
-      when(() => mockPreferenceActions.getShouldExplainProfileLifecycle())
-          .thenAnswer((_) async => true);
-      when(() => mockMessageActions.sendMessage(text: any(named: 'text')))
-          .thenAnswer((_) async {});
-
-      presenter.registerListeners(
-        showConfirmDialog: ({required Profile profile}) async {
-          return const ConfirmResultWithDoNotShowAgainOption.doContinue(
-            doNotShowAgain: true,
-          );
-        },
-        close: () {},
-      );
-
-      await presenter.sendMessage(text: 'Hello');
-
-      verify(() => mockMessageActions.sendMessage(text: 'Hello')).called(1);
     });
   });
 }
