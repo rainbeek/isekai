@@ -89,26 +89,6 @@ void main() {
     });
   });
 
-  test('sendMessage should call messageActions.sendMessage', () async {
-    final presenter = container.read(postMessagePresenterProvider);
-
-    when(() => preferenceActions.getShouldExplainProfileLifecycle())
-        .thenAnswer((_) async => false);
-    when(() => messageActions.sendMessage(text: any(named: 'text')))
-        .thenAnswer((_) async {});
-
-    presenter.registerListeners(
-      showConfirmDialog: ({required Profile profile}) async {
-        return null;
-      },
-      close: () {},
-    );
-
-    await presenter.sendMessage(text: 'Hello');
-
-    verify(() => messageActions.sendMessage(text: 'Hello')).called(1);
-  });
-
   group('メッセージを投稿しようとした', () {
     group('プロフィールのライフサイクルについてユーザーが説明を受けるべき', () {
       test('説明は表示され、説明を受け入れると、そのままメッセージが投稿される', () async {
