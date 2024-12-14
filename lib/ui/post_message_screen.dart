@@ -100,9 +100,9 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
+                spacing: 16,
                 children: [
                   Text(S.of(context)!.profileUpdateDialogContent),
-                  const SizedBox(height: 16),
                   CheckboxListTile(
                     value: doNotShowAgain,
                     onChanged: (value) {
@@ -176,9 +176,9 @@ class _ProfilePanel extends ConsumerWidget {
 
     return Row(
       mainAxisSize: MainAxisSize.min,
+      spacing: 8,
       children: [
         Text(profile.icon, style: Theme.of(context).textTheme.bodySmall),
-        const SizedBox(width: 8),
         Text(profile.name, style: Theme.of(context).textTheme.bodySmall),
       ],
     );

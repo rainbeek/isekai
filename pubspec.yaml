@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   cloud_firestore: 5.5.1
-  collection: 1.18.0
+  collection: 1.19.0
   cupertino_icons: 1.0.8
   faker: 2.2.0
   firebase_analytics: 11.3.6
@@ -28,7 +28,7 @@ dependencies:
   shared_preferences: 2.3.3
 
 dev_dependencies:
-  analyzer: 6.7.0
+  analyzer: 6.11.0
   build_runner: 2.4.13
   cider: 0.2.8
   flutter_lints: 5.0.0
@@ -38,7 +38,7 @@ dev_dependencies:
   json_serializable: 6.9.0
   mocktail: 1.0.4
   pedantic_mono: 1.29.0
-  test: 1.25.7
+  test: 1.25.8
 
 flutter:
   uses-material-design: true

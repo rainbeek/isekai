@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/dao/message_firestore.dart';
 import 'package:isekai/data/dao/thread_firestore.dart';
@@ -52,7 +51,7 @@ final threadMessagesProvider =
               final messageFirestore = doc.data();
               return messageFirestore.toMessage(userId: userId);
             })
-            .whereNotNull()
+            .nonNulls
             .toList(),
       );
 });
