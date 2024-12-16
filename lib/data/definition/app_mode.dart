@@ -13,7 +13,6 @@ const threadForDebug = Thread(title: 'Default thread for debugging');
 
 ServerEnv _getApiEnv() {
   const serverEnvString = String.fromEnvironment('FLAVOR');
-  print('ServerEnv: $serverEnvString');
 
   return ServerEnv.values.firstWhere(
     (value) => value.name == serverEnvString,
