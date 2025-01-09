@@ -36,6 +36,7 @@ class MessageActions {
       userName: profile!.name,
       text: text,
       createdAt: DateTime.now(),
+      profileIcon: profile.icon,
     );
   }
 }

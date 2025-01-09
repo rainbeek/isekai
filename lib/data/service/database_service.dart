@@ -67,12 +67,14 @@ class DatabaseActions {
     required String userName,
     required String text,
     required DateTime createdAt,
+    required String profileIcon,
   }) async {
     final messageFirestore = MessageFirestore(
       threadId: threadId,
       userName: userName,
       text: text,
       createdAt: createdAt,
+      profileIcon: profileIcon,
     );
 
     await FirebaseFirestore.instance

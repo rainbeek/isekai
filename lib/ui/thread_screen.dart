@@ -122,6 +122,10 @@ class MessagesPanel extends ConsumerWidget {
                   final message = messages[index];
 
                   return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(message.profileIcon ?? ''),
+                      radius: 16,
+                    ),
                     title: Text(message.text),
                     subtitle: Text('User: ${message.userName}'),
                     trailing: Text(

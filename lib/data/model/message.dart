@@ -8,5 +8,6 @@ class Message with _$Message {
     required String userName,
     required String text,
     required DateTime createdAt,
+    required String? profileIcon,
   }) = _Message;
 }
