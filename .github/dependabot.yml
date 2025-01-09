@@ -3,8 +3,6 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/android/"
     open-pull-requests-limit: 1
-    reviewers:
-      - "shotaIDE"
     schedule:
       interval: "daily"
       time: "05:00"
@@ -12,8 +10,6 @@ updates:
   - package-ecosystem: "pip"
     directory: "/dev-agent/"
     open-pull-requests-limit: 1
-    reviewers:
-      - "shotaIDE"
     schedule:
       interval: "daily"
       time: "06:00"
