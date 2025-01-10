@@ -2,5 +2,9 @@ version: 2
 updates:
   - package-ecosystem: "gradle"
     directory: "/android/"
+    schedule:
+      interval: "daily"
   - package-ecosystem: "pip"
     directory: "/dev-agent/"
+    schedule:
+      interval: "daily"
