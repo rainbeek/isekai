@@ -9,9 +9,9 @@ class MessageFirestore with _$MessageFirestore {
   const factory MessageFirestore({
     required String? threadId,
     required String? userName,
+    required String? userIcon,
     required String? text,
     required DateTime? createdAt,
-    required String? profileIcon, // Added profileIcon field
   }) = _MessageFirestore;
 
   const MessageFirestore._();
@@ -24,9 +24,9 @@ class MessageFirestore with _$MessageFirestore {
     return MessageFirestore(
       threadId: data?['threadId'] as String?,
       userName: data?['userName'] as String?,
+      userIcon: data?['userIcon'] as String?,
       text: data?['text'] as String?,
       createdAt: (data?['createdAt'] as Timestamp?)?.toDate(),
-      profileIcon: data?['profileIcon'] as String?, // Handle profileIcon field
     );
   }
 
@@ -34,9 +34,9 @@ class MessageFirestore with _$MessageFirestore {
     return <String, dynamic>{
       if (threadId != null) 'threadId': threadId,
       if (userName != null) 'userName': userName,
+      if (userIcon != null) 'userIcon': userIcon,
       if (text != null) 'text': text,
       if (createdAt != null) 'createdAt': createdAt,
-      if (profileIcon != null) 'profileIcon': profileIcon, // Handle profileIcon field
     };
   }
 
@@ -47,9 +47,9 @@ class MessageFirestore with _$MessageFirestore {
 
     return Message(
       userName: userName!,
+      profileIcon: userIcon,
       text: text!,
       createdAt: createdAt!,
-      profileIcon: profileIcon, // Handle profileIcon field
     );
   }
 }

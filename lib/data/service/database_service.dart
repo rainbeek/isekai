@@ -74,7 +74,7 @@ class DatabaseActions {
       userName: userName,
       text: text,
       createdAt: createdAt,
-      profileIcon: profileIcon,
+      userIcon: profileIcon,
     );
 
     await FirebaseFirestore.instance
