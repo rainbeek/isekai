@@ -34,9 +34,9 @@ class MessageActions {
       userId: session.userId,
       threadId: threadId,
       userName: profile!.name,
+      userIcon: profile.icon,
       text: text,
       createdAt: DateTime.now(),
-      profileIcon: profile.icon,
     );
   }
 }
