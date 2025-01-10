@@ -123,7 +123,7 @@ class MessagesPanel extends ConsumerWidget {
 
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage(message.profileIcon ?? ''),
+                      backgroundImage: NetworkImage(message.userIcon),
                       radius: 16,
                     ),
                     title: Text(message.text),

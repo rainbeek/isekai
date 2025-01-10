@@ -47,7 +47,7 @@ class MessageFirestore with _$MessageFirestore {
 
     return Message(
       userName: userName!,
-      profileIcon: userIcon,
+      userIcon: userIcon!,
       text: text!,
       createdAt: createdAt!,
     );

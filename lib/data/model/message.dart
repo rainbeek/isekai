@@ -6,8 +6,8 @@ part 'message.freezed.dart';
 class Message with _$Message {
   const factory Message({
     required String userName,
+    required String userIcon,
     required String text,
     required DateTime createdAt,
-    required String? profileIcon,
   }) = _Message;
 }
