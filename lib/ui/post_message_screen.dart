@@ -178,10 +178,7 @@ class _ProfilePanel extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       spacing: 8,
       children: [
-        CircleAvatar(
-          backgroundImage: NetworkImage(profile.icon),
-          radius: 16,
-        ),
+        Text(profile.icon, style: Theme.of(context).textTheme.bodySmall),
         Text(profile.name, style: Theme.of(context).textTheme.bodySmall),
       ],
     );
