@@ -122,12 +122,14 @@ class MessagesPanel extends ConsumerWidget {
                   final message = messages[index];
 
                   return ListTile(
-                    leading: Text(
-                      message.userIcon,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
                     title: Text(message.text),
-                    subtitle: Text('User: ${message.userName}'),
+                    subtitle: Row(
+                      spacing: 8,
+                      children: [
+                        Text(message.userIcon),
+                        Text(message.userName),
+                      ],
+                    ),
                     trailing: Text(
                       S.of(context)!.messageDateFormat(
                             message.createdAt,
