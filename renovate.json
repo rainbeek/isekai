@@ -58,6 +58,5 @@
       "automerge": true,
       "semanticCommitType": "dev"
     }
-  ],
-  "prConcurrentLimit": 1
+  ]
 }
