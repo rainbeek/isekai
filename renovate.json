@@ -49,6 +49,11 @@
     },
     {
       "matchManagers": ["pub"],
+      "matchPackageNames": ["collection", "dart", "intl", "path"],
+      "enabled": false
+    },
+    {
+      "matchManagers": ["pub"],
       "addLabels": ["dart"],
       "automerge": true
     },
