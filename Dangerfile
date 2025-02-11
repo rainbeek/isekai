@@ -10,6 +10,7 @@ allowed_title_prefixes = %w[
   build
   chore
   test
+  doc
 ]
 
 appended_allowed_title_prefixes = allowed_title_prefixes.map do |prefix|
