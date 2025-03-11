@@ -6,8 +6,6 @@ platform :ios, '15.0'
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
-source 'https://github.com/CocoaPods/Specs.git'
-
 project 'Runner', {
   'Debug' => :debug,
   'Profile' => :release,
@@ -34,9 +32,6 @@ require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelpe
 flutter_ios_podfile_setup
 
 target 'Runner' do
-  # FirebaseFirestoreの指定を削除し、Flutter標準のPodインストールに任せる
-  # pod 'FirebaseFirestore', '~> 11.6.0'
-
   use_frameworks!
   use_modular_headers!
 
