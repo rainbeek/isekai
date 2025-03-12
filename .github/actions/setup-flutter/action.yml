@@ -31,4 +31,6 @@ runs:
         flutter-version: ${{ steps.get-flutter-version.outputs.flutter-version }}
     - name: Install FlutterFire CLI
       shell: bash
-      run: dart pub global activate flutterfire_cli
+      # 最新版の v1.1.0 だとdSYMがアップロードできないため、ワークアラウンド
+      # https://github.com/invertase/flutterfire_cli/issues/366
+      run: dart pub global activate flutterfire_cli 1.0.1
