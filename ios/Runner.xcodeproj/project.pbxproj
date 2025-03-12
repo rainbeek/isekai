@@ -159,7 +159,7 @@
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				C8BA9D00EB2E5CB5A5479204 /* [CP] Embed Pods Frameworks */,
 				33D8829E11FC81F7165A6F37 /* [CP] Copy Pods Resources */,
-				A1E74F3534FA9B75066DC7A6 /* FlutterFire: "flutterfire upload-crashlytics-symbols" */,
+				26D298A7047EE7C7BBF5B25E /* FlutterFire: "flutterfire upload-crashlytics-symbols" */,
 			);
 			buildRules = (
 			);
@@ -220,6 +220,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		26D298A7047EE7C7BBF5B25E /* FlutterFire: "flutterfire upload-crashlytics-symbols" */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "FlutterFire: \"flutterfire upload-crashlytics-symbols\"";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\n#!/bin/bash\nPATH=\"${PATH}:$FLUTTER_ROOT/bin:$HOME/.pub-cache/bin\"\nflutterfire upload-crashlytics-symbols --upload-symbols-script-path=\"$PODS_ROOT/FirebaseCrashlytics/upload-symbols\" --platform=ios --apple-project-path=\"${SRCROOT}\" --env-platform-name=\"${PLATFORM_NAME}\" --env-configuration=\"${CONFIGURATION}\" --env-project-dir=\"${PROJECT_DIR}\" --env-built-products-dir=\"${BUILT_PRODUCTS_DIR}\" --env-dwarf-dsym-folder-path=\"${DWARF_DSYM_FOLDER_PATH}\" --env-dwarf-dsym-file-name=\"${DWARF_DSYM_FILE_NAME}\" --env-infoplist-path=\"${INFOPLIST_PATH}\" --default-config=default\n";
+		};
 		33D8829E11FC81F7165A6F37 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,7 +288,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ $FLAVOR == \"emulator\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Emulator/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\n  cp \"$SRCROOT/Runner/Firebase/Emulator/firebase_app_id_file.json\" ./\nelif [[ $FLAVOR == \"dev\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Dev/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\n  cp \"$SRCROOT/Runner/Firebase/Dev/firebase_app_id_file.json\" ./\nelse\n  echo \"error: \\\"$FLAVOR\\\" server env didn't match any environments.\"\n  exit 1\nfi\n";
+			shellScript = "if [[ $FLAVOR == \"emulator\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Emulator/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\nelif [[ $FLAVOR == \"dev\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Dev/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\nelse\n  echo \"error: \\\"$FLAVOR\\\" server env didn't match any environments.\"\n  exit 1\nfi\n";
 		};
 		78F23CE7293C4EF600D18372 /* Check Xcode Version */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -305,24 +323,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
-		};
-		A1E74F3534FA9B75066DC7A6 /* FlutterFire: "flutterfire upload-crashlytics-symbols" */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "FlutterFire: \"flutterfire upload-crashlytics-symbols\"";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\n#!/bin/bash\nPATH=\"${PATH}:$FLUTTER_ROOT/bin:$HOME/.pub-cache/bin\"\nflutterfire upload-crashlytics-symbols --upload-symbols-script-path=\"$PODS_ROOT/FirebaseCrashlytics/upload-symbols\" --platform=ios --apple-project-path=\"${SRCROOT}\" --env-platform-name=\"${PLATFORM_NAME}\" --env-configuration=\"${CONFIGURATION}\" --env-project-dir=\"${PROJECT_DIR}\" --env-built-products-dir=\"${BUILT_PRODUCTS_DIR}\" --env-dwarf-dsym-folder-path=\"${DWARF_DSYM_FOLDER_PATH}\" --env-dwarf-dsym-file-name=\"${DWARF_DSYM_FILE_NAME}\" --env-infoplist-path=\"${INFOPLIST_PATH}\" --default-config=default\n";
 		};
 		C8BA9D00EB2E5CB5A5479204 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
