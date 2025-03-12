@@ -180,6 +180,7 @@ flutter pub get
 https://firebase.google.com/docs/flutter/setup?hl=ja&platform=ios#install-cli-tools
 
 以下コマンドを実行します。
+途中の選択肢は、"Build configutaion"と、"Debug-emulator"または"Debug-dev"を選択します。
 
 ```shell
 flutterfire config \
