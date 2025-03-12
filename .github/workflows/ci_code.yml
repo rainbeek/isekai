@@ -126,7 +126,6 @@ jobs:
         uses: ./.github/actions/generate-uncommited-ios-files
         with:
           google-service-plist-base64-dev: ${{ secrets.GOOGLE_SERVICE_PLIST_BASE64_DEV }}
-      - run: flutterfire
       - name: Build iOS dev app
         run: bundle exec fastlane ios build_dev_with_no_code_sign
         working-directory: ./ios
