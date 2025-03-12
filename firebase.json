@@ -4,16 +4,58 @@
     "indexes": "firestore.indexes.json"
   },
   "emulators": {
-    "auth": {
-      "port": 9099,
-      "host": "0.0.0.0"
-    },
-    "firestore": {
-      "port": 8080,
-      "host": "0.0.0.0"
-    },
-    "ui": {
-      "enabled": true
+    "auth": { "port": 9099, "host": "0.0.0.0" },
+    "firestore": { "port": 8080, "host": "0.0.0.0" },
+    "ui": { "enabled": true }
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "shicolabs-dev",
+          "appId": "1:496690593871:android:164876b2b4d6e7da05ea3a",
+          "fileOutput": "android/app/google-services.json"
+        },
+        "buildConfigurations": {
+          "src/emulator": {
+            "projectId": "shicolabs-dev",
+            "appId": "1:496690593871:android:380e3b35e9b44d2b05ea3a",
+            "fileOutput": "android/app/src/emulator/google-services.json"
+          }
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "shicolabs-dev",
+          "appId": "1:496690593871:ios:4dd3a78d4982dac605ea3a",
+          "uploadDebugSymbols": true,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        },
+        "buildConfigurations": {
+          "Debug-emulator": {
+            "projectId": "shicolabs-dev",
+            "appId": "1:496690593871:ios:66fcc1fca7547ee005ea3a",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/Runner/Firebase/Emulator/GoogleService-Info.plist"
+          }
+        }
+      },
+      "dart": {
+        "lib/firebase_options_dev.dart": {
+          "projectId": "shicolabs-dev",
+          "configurations": {
+            "android": "1:496690593871:android:164876b2b4d6e7da05ea3a",
+            "ios": "1:496690593871:ios:4dd3a78d4982dac605ea3a"
+          }
+        },
+        "lib/firebase_options_emulator.dart": {
+          "projectId": "shicolabs-dev",
+          "configurations": {
+            "android": "1:496690593871:android:380e3b35e9b44d2b05ea3a",
+            "ios": "1:496690593871:ios:66fcc1fca7547ee005ea3a"
+          }
+        }
+      }
     }
   }
 }
