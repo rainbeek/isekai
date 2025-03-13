@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -173,7 +173,7 @@
 			);
 			mainGroup = 97C146E51CF9000F007C117D;
 			packageReferences = (
-				781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "FlutterGeneratedPluginSwiftPackage" */,
+				781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage" */,
 			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
@@ -233,7 +233,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ $FLAVOR == \"emulator\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Emulator/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\n  cp \"$SRCROOT/Runner/Firebase/Emulator/firebase_app_id_file.json\" ./\nelif [[ $FLAVOR == \"dev\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Dev/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\n  cp \"$SRCROOT/Runner/Firebase/Dev/firebase_app_id_file.json\" ./\nelse\n  echo \"error: \\\"$FLAVOR\\\" server env didn't match any environments.\"\n  exit 1\nfi\n";
+			shellScript = "if [[ $FLAVOR == \"emulator\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Emulator/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\nelif [[ $FLAVOR == \"dev\" ]]; then\n  cp \"$SRCROOT/Runner/Firebase/Dev/GoogleService-Info.plist\" \"$SRCROOT/Runner/GoogleService-Info.plist\"\nelse\n  echo \"error: \\\"$FLAVOR\\\" server env didn't match any environments.\"\n  exit 1\nfi\n";
 		};
 		78F23CE7293C4EF600D18372 /* Check Xcode Version */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -789,7 +789,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "FlutterGeneratedPluginSwiftPackage" */ = {
+		781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage;
 		};
