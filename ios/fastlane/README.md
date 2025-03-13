@@ -58,14 +58,6 @@ Flutterの依存関係をインストールします。
 
 ## iOS
 
-### ios install_dependencies
-
-```sh
-[bundle exec] fastlane ios install_dependencies
-```
-
-iOSの依存関係をインストールします。
-
 ### ios build_dev
 
 ```sh
