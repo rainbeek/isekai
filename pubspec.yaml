@@ -42,7 +42,6 @@ dev_dependencies:
   test: 1.25.8
 
 flutter:
-  disable-swift-package-manager: true
   uses-material-design: true
   generate: true
   assets:
