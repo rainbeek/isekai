@@ -180,22 +180,21 @@ flutter pub get
 https://firebase.google.com/docs/flutter/setup?hl=ja&platform=ios#install-cli-tools
 
 以下コマンドを実行します。
+途中の選択肢は、"Build configutaion"と、"Debug-emulator"または"Debug-dev"を選択します。
 
 ```shell
 flutterfire config \
   --project=shicolabs-dev \
   --out=lib/firebase_options_emulator.dart \
   --ios-bundle-id=com.rainbeek.isekai.emulator \
-  --android-package-name=com.rainbeek.isekai.emulator
-mv android/app/google-services.json android/app/src/emulator/
-mv ios/Runner/GoogleService-Info.plist ios/Runner/Firebase/Emulator/
-mv ios/firebase_app_id_file.json ios/Runner/Firebase/Emulator/
+  --ios-out=ios/Runner/Firebase/Emulator/GoogleService-Info.plist \
+  --android-package-name=com.rainbeek.isekai.emulator \
+  --android-out=android/app/src/emulator/google-services.json
 flutterfire config \
   --project=shicolabs-dev \
   --out=lib/firebase_options_dev.dart \
   --ios-bundle-id=com.rainbeek.isekai.dev \
-  --android-package-name=com.rainbeek.isekai.dev
-mv android/app/google-services.json android/app/src/dev/
-mv ios/Runner/GoogleService-Info.plist ios/Runner/Firebase/Dev/
-mv ios/firebase_app_id_file.json ios/Runner/Firebase/Dev/
+  --ios-out=ios/Runner/Firebase/Dev/GoogleService-Info.plist \
+  --android-package-name=com.rainbeek.isekai.dev \
+  --android-out=android/app/src/dev/google-services.json
 ```

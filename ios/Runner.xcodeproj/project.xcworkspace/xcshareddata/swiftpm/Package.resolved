@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/flutterfire",
       "state" : {
-        "revision" : "601aead3153bcd0adbd4a931edcab03f65031e64",
-        "version" : "3.10.1-firebase-core-swift"
+        "revision" : "438c4c36ba188d071920e2a19d1c2b0b28799860",
+        "version" : "3.12.1-firebase-core-swift"
       }
     },
     {

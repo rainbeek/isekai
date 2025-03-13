@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,6 +27,10 @@ class DebugScreen extends StatelessWidget {
           const _UpdateProfileTile(),
           const SizedBox(height: 16),
           const _ToggleDoNotShowAgainTile(),
+          const SizedBox(height: 16),
+          const _ForceErrorTile(),
+          const SizedBox(height: 16),
+          const _ForceCrashTile(),
           SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 16),
         ],
       ),
@@ -71,6 +76,30 @@ class _ToggleDoNotShowAgainTile extends ConsumerWidget {
     return ListTile(
       title: const Text('今後は表示しないをリセットする'),
       onTap: preferenceActions.resetDoNotShowAgainProfileLifecycleForDebug,
+    );
+  }
+}
+
+class _ForceErrorTile extends StatelessWidget {
+  const _ForceErrorTile();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: const Text('強制エラー'),
+      onTap: () => throw Exception('Force error on debug screen'),
+    );
+  }
+}
+
+class _ForceCrashTile extends StatelessWidget {
+  const _ForceCrashTile();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: const Text('強制クラッシュ'),
+      onTap: () => FirebaseCrashlytics.instance.crash(),
     );
   }
 }
