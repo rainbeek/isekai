@@ -68,11 +68,5 @@
         }
       }
     }
-  },
-  "apple": {
-    "crashlytics": {
-      "app_id": "1:496690593871:ios:4dd3a78d4982dac605ea3a",
-      "project_id": "shicolabs-dev"
-    }
   }
 }
