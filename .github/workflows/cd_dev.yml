@@ -24,6 +24,8 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Setup Xcode
         uses: ./.github/actions/setup-xcode
+      - name: Setup Swift Package Manager
+        uses: ./.github/actions/setup-spm
       - name: Setup CocoaPods
         uses: ./.github/actions/setup-cocoapods
       - name: Setup Ruby
