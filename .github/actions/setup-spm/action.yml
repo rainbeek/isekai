@@ -1,0 +1,13 @@
+name: "Setup Swift Package Manager Cache"
+description: "Setup Swift Package Manager cache for iOS builds"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cache Swift packages
+      uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
+      with:
+        path: ~/Library/Developer/Xcode/DerivedData
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
