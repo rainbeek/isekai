@@ -16,7 +16,7 @@ dependencies:
   firebase_core: 3.12.1
   firebase_crashlytics: 4.3.4
   firebase_remote_config: 5.4.2
-  flame: 1.26.1
+  flame: 1.27.0
   flutter:
     sdk: flutter
   flutter_localizations:
