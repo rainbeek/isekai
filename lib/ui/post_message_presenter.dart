@@ -15,17 +15,17 @@ final postMessagePresenterProvider = Provider(
 
 final canPostMessageOnPostMessageScreenProvider =
     StateNotifierProvider<_CanPostMessageNotifier, bool>(
-  (ref) => _CanPostMessageNotifier(),
-);
+      (ref) => _CanPostMessageNotifier(),
+    );
 
 class PostMessagePresenter {
   PostMessagePresenter({
     required MessageActions messageActions,
     required PreferenceActions preferenceActions,
     required Ref ref,
-  })  : _messageActions = messageActions,
-        _preferenceActions = preferenceActions,
-        _ref = ref;
+  }) : _messageActions = messageActions,
+       _preferenceActions = preferenceActions,
+       _ref = ref;
 
   static const int maxMessageLength = 140;
 
@@ -35,13 +35,15 @@ class PostMessagePresenter {
 
   late Future<ConfirmResultWithDoNotShowAgainOption?> Function({
     required Profile profile,
-  }) _showConfirmDialog;
+  })
+  _showConfirmDialog;
   late void Function() _close;
 
   void registerListeners({
     required Future<ConfirmResultWithDoNotShowAgainOption?> Function({
       required Profile profile,
-    }) showConfirmDialog,
+    })
+    showConfirmDialog,
     required void Function() close,
   }) {
     _showConfirmDialog = showConfirmDialog;
@@ -68,10 +70,15 @@ class PostMessagePresenter {
         return;
       }
 
-      final doNotShowAgain = result.maybeWhen(
-        doContinue: (doNotShowAgain) => doNotShowAgain,
-        orElse: () => null,
-      );
+      final bool? doNotShowAgain;
+      switch (result) {
+        case ConfirmResultWithDoNotShowAgainOptionContinued(
+          doNotShowAgain: final doNotShowAgainValue,
+        ):
+          doNotShowAgain = doNotShowAgainValue;
+        case ConfirmResultWithDoNotShowAgainOptionCanceled():
+          doNotShowAgain = null;
+      }
       final cancelled = doNotShowAgain == null;
       if (cancelled) {
         return;
