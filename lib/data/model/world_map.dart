@@ -5,7 +5,7 @@ part 'world_map.freezed.dart';
 part 'world_map.g.dart';
 
 @freezed
-class WorldMap with _$WorldMap {
+abstract class WorldMap with _$WorldMap {
   const factory WorldMap({
     required int width,
     required int height,

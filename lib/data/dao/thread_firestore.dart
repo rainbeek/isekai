@@ -5,7 +5,7 @@ import 'package:isekai/data/model/thread.dart';
 part 'thread_firestore.freezed.dart';
 
 @freezed
-class ThreadFirestore with _$ThreadFirestore {
+abstract class ThreadFirestore with _$ThreadFirestore {
   const factory ThreadFirestore({
     required String? threadId,
     required String? title,
@@ -32,8 +32,6 @@ class ThreadFirestore with _$ThreadFirestore {
   }
 
   Thread toThread() {
-    return Thread(
-      title: title!,
-    );
+    return Thread(title: title!);
   }
 }

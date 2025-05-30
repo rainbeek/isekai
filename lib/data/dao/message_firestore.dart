@@ -5,7 +5,7 @@ import 'package:isekai/data/model/message.dart';
 part 'message_firestore.freezed.dart';
 
 @freezed
-class MessageFirestore with _$MessageFirestore {
+abstract class MessageFirestore with _$MessageFirestore {
   const factory MessageFirestore({
     required String? threadId,
     required String? userName,
