@@ -13,8 +13,8 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
-      "matchManagers": ["asdf"],
-      "addLabels": ["flutter"],
+      "matchPackageNames": ["flutter", "dart"],
+      "groupName": "flutter",
       "automerge": true
     },
     {
@@ -49,13 +49,8 @@
     },
     {
       "matchManagers": ["pub"],
-      "matchPackageNames": ["collection", "dart", "intl", "path"],
+      "matchPackageNames": ["collection", "intl", "path"],
       "enabled": false
-    },
-    {
-      "matchManagers": ["pub"],
-      "addLabels": ["dart"],
-      "automerge": true
     },
     {
       "matchManagers": ["ruby-version"],
