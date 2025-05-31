@@ -53,11 +53,6 @@
       "enabled": false
     },
     {
-      "matchManagers": ["pub"],
-      "addLabels": ["dart"],
-      "automerge": true
-    },
-    {
       "matchManagers": ["ruby-version"],
       "addLabels": ["ruby"],
       "automerge": true,
