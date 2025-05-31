@@ -1,9 +1,9 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
+import 'package:isekai/l10n/generated/app_localizations.dart';
 
 class DebugScreen extends StatelessWidget {
   const DebugScreen({super.key});
@@ -11,16 +11,14 @@ class DebugScreen extends StatelessWidget {
   static const name = 'DebugScreen';
 
   static MaterialPageRoute<DebugScreen> route() => MaterialPageRoute(
-        builder: (_) => const DebugScreen(),
-        settings: const RouteSettings(name: name),
-      );
+    builder: (_) => const DebugScreen(),
+    settings: const RouteSettings(name: name),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context)!.debug),
-      ),
+      appBar: AppBar(title: Text(S.of(context)!.debug)),
       body: Column(
         children: [
           const SizedBox(height: 16),

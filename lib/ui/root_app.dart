@@ -1,11 +1,11 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/data/usecase/session_use_case.dart';
+import 'package:isekai/l10n/generated/app_localizations.dart';
 import 'package:isekai/ui/game/game_router.dart';
 import 'package:isekai/ui/root_presenter.dart';
 import 'package:isekai/ui/start_page.dart';
@@ -36,9 +36,7 @@ class RootApp extends ConsumerWidget {
     ];
 
     return MaterialApp(
-      theme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-      ),
+      theme: ThemeData(colorSchemeSeed: Colors.blue),
       home: home,
       localizationsDelegates: const [
         S.delegate,
@@ -46,9 +44,7 @@ class RootApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('ja', 'JP'),
-      ],
+      supportedLocales: const [Locale('ja', 'JP')],
       navigatorObservers: navigatorObservers,
     );
   }
