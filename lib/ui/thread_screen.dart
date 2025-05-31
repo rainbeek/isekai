@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/model/thread.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
 import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/thread_use_case.dart';
+import 'package:isekai/l10n/generated/app_localizations.dart';
 import 'package:isekai/ui/post_message_screen.dart';
 import 'package:isekai/ui/settings_screen.dart';
 
@@ -20,10 +20,7 @@ class ThreadScreen extends ConsumerWidget {
         actions: [
           _ProfileIconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                SettingsScreen.route(),
-              );
+              Navigator.push(context, SettingsScreen.route());
             },
           ),
         ],
@@ -31,10 +28,7 @@ class ThreadScreen extends ConsumerWidget {
       body: const MessagesPanel(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            PostMessageScreen.route(),
-          );
+          Navigator.push(context, PostMessageScreen.route());
         },
         tooltip: S.of(context)!.postComment,
         child: const Icon(Icons.add),
@@ -71,9 +65,7 @@ class _TitleText extends ConsumerWidget {
 }
 
 class _ProfileIconButton extends ConsumerWidget {
-  const _ProfileIconButton({
-    required this.onPressed,
-  });
+  const _ProfileIconButton({required this.onPressed});
 
   final VoidCallback onPressed;
 
@@ -84,10 +76,7 @@ class _ProfileIconButton extends ConsumerWidget {
       return const CircularProgressIndicator();
     }
 
-    return IconButton(
-      icon: Text(icon),
-      onPressed: onPressed,
-    );
+    return IconButton(icon: Text(icon), onPressed: onPressed);
   }
 }
 
@@ -131,7 +120,9 @@ class MessagesPanel extends ConsumerWidget {
                       ],
                     ),
                     trailing: Text(
-                      S.of(context)!.messageDateFormat(
+                      S
+                          .of(context)!
+                          .messageDateFormat(
                             message.createdAt,
                             message.createdAt,
                           ),

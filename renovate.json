@@ -48,11 +48,6 @@
       "groupName": "firebase"
     },
     {
-      "matchManagers": ["pub"],
-      "matchPackageNames": ["collection", "intl", "path"],
-      "enabled": false
-    },
-    {
       "matchManagers": ["ruby-version"],
       "addLabels": ["ruby"],
       "automerge": true,

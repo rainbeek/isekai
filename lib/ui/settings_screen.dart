@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/definition/app_mode.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
+import 'package:isekai/l10n/generated/app_localizations.dart';
 import 'package:isekai/ui/debug_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -11,9 +11,9 @@ class SettingsScreen extends StatelessWidget {
   static const name = 'SettingsScreen';
 
   static MaterialPageRoute<SettingsScreen> route() => MaterialPageRoute(
-        builder: (_) => const SettingsScreen(),
-        settings: const RouteSettings(name: name),
-      );
+    builder: (_) => const SettingsScreen(),
+    settings: const RouteSettings(name: name),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,7 @@ class SettingsScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context)!.settings),
-      ),
+      appBar: AppBar(title: Text(S.of(context)!.settings)),
       body: Center(
         child: Column(
           children: [
@@ -55,8 +53,10 @@ class _ProfilePanel extends ConsumerWidget {
     final validUntil = profile.validUntil;
 
     return ListTile(
-      leading:
-          Text(profile.icon, style: Theme.of(context).textTheme.headlineLarge),
+      leading: Text(
+        profile.icon,
+        style: Theme.of(context).textTheme.headlineLarge,
+      ),
       title: Text(profile.name),
       subtitle: Text(
         S.of(context)!.thisProfileContinuesToFormat(validUntil, validUntil),

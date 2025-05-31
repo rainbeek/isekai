@@ -4,11 +4,13 @@ publish_to: "none"
 version: 0.14.0+43
 
 environment:
-  sdk: 3.7.2
+  sdk: 3.8.1
 
 dependencies:
   cloud_firestore: 5.6.5
-  collection: 1.19.1
+  # FlutterのSDKによりピン留めされているため、バージョンを指定しない
+  # https://github.com/dart-lang/sdk/blob/main/docs/Flutter-Pinned-Packages.md
+  collection: any
   cupertino_icons: 1.0.8
   faker: 2.2.0
   firebase_analytics: 11.4.4
@@ -24,7 +26,8 @@ dependencies:
   flutter_riverpod: 2.6.1
   freezed_annotation: 3.0.0
   in_app_review: 2.0.10
-  intl: 0.19.0
+  # FlutterのSDKによりピン留めされているため、バージョンを指定しない
+  intl: any
   package_info_plus: 8.3.0
   shared_preferences: 2.5.3
 
