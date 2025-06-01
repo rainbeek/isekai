@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:isekai/data/definition/source.dart';
+import 'package:isekai/l10n/generated/app_localizations.dart';
 
 class UpdateAppScreen extends StatefulWidget {
   const UpdateAppScreen({super.key});
@@ -31,9 +31,7 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
-    );
+    return Scaffold(body: Container());
   }
 
   Future<void> _showDialog() async {
@@ -44,14 +42,10 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
           // Android OSのバックボタンでダイアログが閉じないようにする
           canPop: false,
           child: AlertDialog(
-            content: Text(
-              S.of(context)!.newVersionIsAvailableDescription,
-            ),
+            content: Text(S.of(context)!.newVersionIsAvailableDescription),
             actions: [
               TextButton(
-                child: Text(
-                  S.of(context)!.update,
-                ),
+                child: Text(S.of(context)!.update),
                 onPressed: () async {
                   await InAppReview.instance.openStoreListing(
                     appStoreId: appStoreId,

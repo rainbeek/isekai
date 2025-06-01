@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/model/profile.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
+import 'package:isekai/l10n/generated/app_localizations.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 import 'package:isekai/ui/post_message_presenter.dart';
 
@@ -12,10 +12,10 @@ class PostMessageScreen extends ConsumerStatefulWidget {
   static const name = 'PostMessageScreen';
 
   static MaterialPageRoute<PostMessageScreen> route() => MaterialPageRoute(
-        builder: (_) => const PostMessageScreen(),
-        settings: const RouteSettings(name: name),
-        fullscreenDialog: true,
-      );
+    builder: (_) => const PostMessageScreen(),
+    settings: const RouteSettings(name: name),
+    fullscreenDialog: true,
+  );
 
   @override
   ConsumerState<PostMessageScreen> createState() => _PostMessageScreenState();
@@ -28,7 +28,9 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   void initState() {
     super.initState();
 
-    ref.read(postMessagePresenterProvider).registerListeners(
+    ref
+        .read(postMessagePresenterProvider)
+        .registerListeners(
           showConfirmDialog: _showProfileUpdateDialog,
           close: () => Navigator.pop(context),
         );
@@ -48,17 +50,12 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context)!.postComment),
-      ),
+      appBar: AppBar(title: Text(S.of(context)!.postComment)),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: _ProfilePanel(),
-            ),
+            Align(alignment: Alignment.centerRight, child: _ProfilePanel()),
             const SizedBox(height: 8),
             TextField(
               controller: _controller,
@@ -141,9 +138,8 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
 }
 
 class _PostMessageButton extends ConsumerWidget {
-  const _PostMessageButton({
-    required TextEditingController controller,
-  }) : _controller = controller;
+  const _PostMessageButton({required TextEditingController controller})
+    : _controller = controller;
 
   final TextEditingController _controller;
 
