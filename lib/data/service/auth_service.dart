@@ -31,7 +31,7 @@ class SessionState extends StateNotifier<Session?> {
 
     _sessionSubscription = FirebaseAuth.instance
         .authStateChanges()
-        .asyncMap((user) async {
+        .asyncMap((user) {
           if (user == null) {
             return null;
           }

@@ -48,7 +48,7 @@ class PreferenceRepository {
     );
   }
 
-  Future<bool?> getShouldExplainProfileLifecycle() async {
+  Future<bool?> getShouldExplainProfileLifecycle() {
     return _local.getBool(PreferenceKey.shouldExplainProfileLifecycle);
   }
 

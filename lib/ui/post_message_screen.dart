@@ -78,7 +78,7 @@ class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
 
   Future<ConfirmResultWithDoNotShowAgainOption?> _showProfileUpdateDialog({
     required Profile profile,
-  }) async {
+  }) {
     return showDialog<ConfirmResultWithDoNotShowAgainOption>(
       context: context,
       builder: (context) {

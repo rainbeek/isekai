@@ -3,9 +3,7 @@ import 'package:isekai/data/model/session.dart';
 import 'package:isekai/data/service/auth_service.dart';
 
 /// セッションが生成されるまで待ち、not-nullの型で取得するためのプロバイダー
-final FutureProvider<Session> forceSessionProvider = FutureProvider((
-  ref,
-) async {
+final FutureProvider<Session> forceSessionProvider = FutureProvider((ref) {
   return ref.watch(_sessionStreamProvider.future);
 });
 

@@ -15,9 +15,7 @@ final StreamProvider<Set<String>> updatedRemoteConfigKeysProvider =
       );
     });
 
-final FutureProvider<int> minimumBuildNumberProvider = FutureProvider((
-  _,
-) async {
+final FutureProvider<int> minimumBuildNumberProvider = FutureProvider((_) {
   final key = Platform.isIOS
       ? 'iosMinimumBuildNumber'
       : 'androidMinimumBuildNumber';
