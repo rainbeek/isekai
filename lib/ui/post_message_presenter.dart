@@ -5,7 +5,7 @@ import 'package:isekai/data/usecase/message_use_case.dart';
 import 'package:isekai/data/usecase/preference_use_case.dart';
 import 'package:isekai/ui/model/confirm_result_with_do_not_show_again_option.dart';
 
-final postMessagePresenterProvider = Provider(
+final Provider<PostMessagePresenter> postMessagePresenterProvider = Provider(
   (ref) => PostMessagePresenter(
     messageActions: ref.watch(messageActionsProvider),
     preferenceActions: ref.watch(preferenceActionsProvider),
@@ -27,7 +27,7 @@ class PostMessagePresenter {
        _preferenceActions = preferenceActions,
        _ref = ref;
 
-  static const int maxMessageLength = 140;
+  static const maxMessageLength = 140;
 
   final MessageActions _messageActions;
   final PreferenceActions _preferenceActions;
@@ -57,8 +57,8 @@ class PostMessagePresenter {
   }
 
   Future<void> sendMessage({required String text}) async {
-    final shouldExplainProfileLifecycle =
-        await _preferenceActions.getShouldExplainProfileLifecycle();
+    final shouldExplainProfileLifecycle = await _preferenceActions
+        .getShouldExplainProfileLifecycle();
     if (shouldExplainProfileLifecycle) {
       final profile = _ref.read(profileProvider);
       if (profile == null) {

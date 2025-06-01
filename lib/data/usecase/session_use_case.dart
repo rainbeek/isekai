@@ -3,11 +3,11 @@ import 'package:isekai/data/model/session.dart';
 import 'package:isekai/data/service/auth_service.dart';
 
 /// セッションが生成されるまで待ち、not-nullの型で取得するためのプロバイダー
-final forceSessionProvider = FutureProvider((ref) async {
+final FutureProvider<Session> forceSessionProvider = FutureProvider((ref) {
   return ref.watch(_sessionStreamProvider.future);
 });
 
-final sessionActionsProvider = Provider(
+final Provider<SessionActions> sessionActionsProvider = Provider(
   (ref) => SessionActions(
     sessionState: ref.watch(sessionStateProvider.notifier),
     authActions: ref.watch(authActionsProvider),
@@ -30,9 +30,9 @@ class SessionActions {
     required SessionState sessionState,
     required AuthActions authActions,
     required Ref ref,
-  })  : _sessionState = sessionState,
-        _authActions = authActions,
-        _ref = ref;
+  }) : _sessionState = sessionState,
+       _authActions = authActions,
+       _ref = ref;
 
   final SessionState _sessionState;
   final AuthActions _authActions;

@@ -10,16 +10,14 @@ import 'package:isekai/ui/game/rock.dart';
 class FieldHome extends Component
     with HasGameReference<GameRouter>, HasCollisionDetection {
   late final CameraComponent _cameraComponent;
-  late final Player _player = Player();
+  late final _player = Player();
   late final World _world;
 
   @override
   Future<void> onLoad() async {
     _world = World()..add(MapSprite());
     _world.add(_player);
-    _cameraComponent = CameraComponent(
-      world: _world,
-    );
+    _cameraComponent = CameraComponent(world: _world);
 
     _world.add(Rock(Vector2(0, 0)));
 
@@ -31,9 +29,7 @@ class FieldHome extends Component
 
     await addWorldCollision(_world);
 
-    await addAll(
-      [_world, _cameraComponent],
-    );
+    await addAll([_world, _cameraComponent]);
   }
 
   Future<void> addWorldCollision(World world) async {

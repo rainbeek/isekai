@@ -3,6 +3,7 @@ autofocus
 collidable
 cupertino
 firestore
+futureor
 hitbox
 ltwh
 mocktail
