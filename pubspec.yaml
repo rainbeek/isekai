@@ -35,7 +35,7 @@ dev_dependencies:
   analyzer: 7.4.5
   build_runner: 2.4.15
   cider: 0.2.8
-  flutter_lints: 5.0.0
+  flutter_lints: 6.0.0
   flutter_test:
     sdk: flutter
   freezed: 3.0.6
