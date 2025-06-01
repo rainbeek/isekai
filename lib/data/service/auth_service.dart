@@ -9,7 +9,7 @@ final sessionStateProvider = StateNotifierProvider<SessionState, Session?>(
   (ref) => SessionState(),
 );
 
-final authActionsProvider = Provider(
+final Provider<AuthActions> authActionsProvider = Provider(
   (ref) => AuthActions(),
 );
 
@@ -29,17 +29,18 @@ class SessionState extends StateNotifier<Session?> {
     final session = await _currentSession();
     state = session;
 
-    _sessionSubscription = FirebaseAuth.instance.authStateChanges().asyncMap(
-      (user) async {
-        if (user == null) {
-          return null;
-        }
+    _sessionSubscription = FirebaseAuth.instance
+        .authStateChanges()
+        .asyncMap((user) async {
+          if (user == null) {
+            return null;
+          }
 
-        return _convertUserToLoginSession(user);
-      },
-    ).listen((session) {
-      state = session;
-    });
+          return _convertUserToLoginSession(user);
+        })
+        .listen((session) {
+          state = session;
+        });
   }
 
   Future<Session?> _currentSession() async {

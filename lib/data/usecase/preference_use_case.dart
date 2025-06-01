@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/model/profile.dart';
 import 'package:isekai/data/repository/preference_repository.dart';
 
-final preferenceActionsProvider = Provider(
+final Provider<PreferenceActions> preferenceActionsProvider = Provider(
   (ref) => PreferenceActions(
     preferenceRepository: ref.watch(preferenceRepositoryProvider),
     ref: ref,
@@ -16,8 +16,8 @@ class PreferenceActions {
   const PreferenceActions({
     required PreferenceRepository preferenceRepository,
     required Ref ref,
-  })  : _preferenceRepository = preferenceRepository,
-        _ref = ref;
+  }) : _preferenceRepository = preferenceRepository,
+       _ref = ref;
 
   final PreferenceRepository _preferenceRepository;
   final Ref _ref;
@@ -56,11 +56,7 @@ class PreferenceActions {
     final name = _generateRandomName();
     final validUntil = DateTime.now().add(const Duration(days: 1));
 
-    return Profile(
-      icon: icon,
-      name: name,
-      validUntil: validUntil,
-    );
+    return Profile(icon: icon, name: name, validUntil: validUntil);
   }
 
   String _generateRandomIcon() {

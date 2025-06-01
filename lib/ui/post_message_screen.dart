@@ -22,7 +22,7 @@ class PostMessageScreen extends ConsumerStatefulWidget {
 }
 
 class _PostMessageScreenState extends ConsumerState<PostMessageScreen> {
-  final TextEditingController _controller = TextEditingController();
+  final _controller = TextEditingController();
 
   @override
   void initState() {

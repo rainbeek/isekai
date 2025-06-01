@@ -4,27 +4,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isekai/data/local/preference_local_data_source.dart';
 import 'package:isekai/data/model/profile.dart';
 
-final profileProvider = Provider(
+final Provider<Profile?> profileProvider = Provider(
   (ref) => ref.watch(_profileStateProvider),
 );
 
-final preferenceRepositoryProvider = Provider(
+final Provider<PreferenceRepository> preferenceRepositoryProvider = Provider(
   (ref) => PreferenceRepository(
     localDataStore: ref.watch(preferenceLocalDataSourceProvider),
     profileStateController: ref.watch(_profileStateProvider.notifier),
   ),
 );
 
-final _profileStateProvider = StateProvider<Profile?>(
-  (ref) => null,
-);
+final _profileStateProvider = StateProvider<Profile?>((ref) => null);
 
 class PreferenceRepository {
   PreferenceRepository({
     required PreferenceLocalDataStore localDataStore,
     required StateController<Profile?> profileStateController,
-  })  : _local = localDataStore,
-        _profileStateController = profileStateController;
+  }) : _local = localDataStore,
+       _profileStateController = profileStateController;
 
   final PreferenceLocalDataStore _local;
   final StateController<Profile?> _profileStateController;

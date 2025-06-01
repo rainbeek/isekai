@@ -6,9 +6,9 @@ const firebaseEmulatorHost = String.fromEnvironment('FIREBASE_EMULATOR_HOST');
 // TODO(ide): Productionのリリースビルドではfalseにする
 const isDebugScreenAvailable = true;
 
-const isCrashlyticsEnabled = kReleaseMode;
+const bool isCrashlyticsEnabled = kReleaseMode;
 
-final serverEnv = _getApiEnv();
+final ServerEnv serverEnv = _getApiEnv();
 
 // cspell:disable next
 const threadIdForDebug = 'sELkOLGe1qHrasoPQpg0';
@@ -23,7 +23,4 @@ ServerEnv _getApiEnv() {
   );
 }
 
-enum ServerEnv {
-  emulator,
-  dev,
-}
+enum ServerEnv { emulator, dev }

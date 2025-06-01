@@ -8,18 +8,18 @@ import 'package:isekai/ui/game/map.dart';
 class Player extends SpriteAnimationGroupComponent<PlayerState>
     with HasGameReference<GameRouter>, TapCallbacks, CollisionCallbacks {
   Player()
-      : super(
-          position: Vector2.all(200),
-          size: Vector2.all(32),
-          anchor: Anchor.center,
-        );
+    : super(
+        position: Vector2.all(200),
+        size: Vector2.all(32),
+        anchor: Anchor.center,
+      );
 
   late TimerComponent bulletCreator;
 
   JoystickDirection direction = JoystickDirection.idle;
   JoystickDirection _collisionDirection = JoystickDirection.idle;
   final double _playerSpeed = 300;
-  final double _animationSpeed = 0.15;
+  final _animationSpeed = 0.15;
 
   double maxSpeed = 300;
 
@@ -27,8 +27,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   Future<void> onLoad() async {
     super.onLoad();
     debugMode = true;
-    await _loadAnimations()
-        .then((_) => {current = PlayerState.standingAnimation});
+    await _loadAnimations().then(
+      (_) => {current = PlayerState.standingAnimation},
+    );
 
     add(
       bulletCreator = TimerComponent(
@@ -49,16 +50,31 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     );
 
     animations = {
-      PlayerState.runDownAnimation:
-          spriteSheet.createAnimation(row: 0, stepTime: _animationSpeed, to: 4),
-      PlayerState.runLeftAnimation:
-          spriteSheet.createAnimation(row: 1, stepTime: _animationSpeed, to: 4),
-      PlayerState.runUpAnimation:
-          spriteSheet.createAnimation(row: 2, stepTime: _animationSpeed, to: 4),
-      PlayerState.runRightAnimation:
-          spriteSheet.createAnimation(row: 3, stepTime: _animationSpeed, to: 4),
-      PlayerState.standingAnimation:
-          spriteSheet.createAnimation(row: 0, stepTime: _animationSpeed, to: 1),
+      PlayerState.runDownAnimation: spriteSheet.createAnimation(
+        row: 0,
+        stepTime: _animationSpeed,
+        to: 4,
+      ),
+      PlayerState.runLeftAnimation: spriteSheet.createAnimation(
+        row: 1,
+        stepTime: _animationSpeed,
+        to: 4,
+      ),
+      PlayerState.runUpAnimation: spriteSheet.createAnimation(
+        row: 2,
+        stepTime: _animationSpeed,
+        to: 4,
+      ),
+      PlayerState.runRightAnimation: spriteSheet.createAnimation(
+        row: 3,
+        stepTime: _animationSpeed,
+        to: 4,
+      ),
+      PlayerState.standingAnimation: spriteSheet.createAnimation(
+        row: 0,
+        stepTime: _animationSpeed,
+        to: 1,
+      ),
     };
   }
 
