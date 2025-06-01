@@ -11,6 +11,8 @@ class GameRouter extends FlameGame {
   final Future<SharedPreferences> ref = SharedPreferences.getInstance();
 
   @override
+  // 親クラスの仕様に従うため、FutureOr<void を返す
+  // ignore: avoid_futureor_void
   FutureOr<void> onLoad() {
     add(
       router = RouterComponent(
@@ -18,8 +20,9 @@ class GameRouter extends FlameGame {
         routes: {
           'init': Route(GameInit.new),
           'field_home': Route(FieldHome.new),
-          'thread_screen':
-              OverlayRoute((context, game) => const ThreadScreen()),
+          'thread_screen': OverlayRoute(
+            (context, game) => const ThreadScreen(),
+          ),
         },
       ),
     );
