@@ -5,7 +5,7 @@ import 'package:isekai/ui/game/game_router.dart';
 
 class GameInit extends Component with HasGameReference<GameRouter> {
   @override
-  Future<void> onLoad() async {
+  FutureOr<void> onLoad() async {
     final ref = await game.ref;
     if (ref.getBool('isRegistered') ?? false) {
       game.router.pushNamed('field_home');
