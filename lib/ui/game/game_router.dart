@@ -11,7 +11,7 @@ class GameRouter extends FlameGame {
   final Future<SharedPreferences> ref = SharedPreferences.getInstance();
 
   @override
-  FutureOr<void> onLoad() {
+  Future<void> onLoad() async {
     add(
       router = RouterComponent(
         initialRoute: 'init',
@@ -24,6 +24,6 @@ class GameRouter extends FlameGame {
       ),
     );
 
-    return super.onLoad();
+    await super.onLoad();
   }
 }
