@@ -43,6 +43,7 @@
         "firebase_analytics",
         "firebase_auth",
         "firebase_core",
+        "firebase_crashlytics",
         "firebase_remote_config"
       ],
       "groupName": "firebase"
