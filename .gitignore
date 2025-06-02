@@ -6,6 +6,7 @@ GoogleService-Info.plist
 
 /emulator-data
 
+/.claude/settings.local.json
 /android/fastlane/google-play-service-account-key.json
 /android/fastlane/report.xml
 /dart-defines*.json
