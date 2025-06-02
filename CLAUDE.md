@@ -217,3 +217,14 @@ class SomeScreen extends StatelessWidget {
 // When transitioning
 Navigator.of(context).push(SomeScreen.route);
 ```
+
+## Troubleshooting
+
+### Policy
+
+When troubleshooting, adopt solutions in the following order of priority:
+
+1. Apply solutions according to official documentation and guidelines
+2. If a future response is planned in an official issue, wait for that response
+3. Apply solutions indicated in the official issue
+4. Apply solutions indicated in communities such as Stack Overflow
