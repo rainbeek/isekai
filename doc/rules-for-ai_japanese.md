@@ -223,3 +223,14 @@ class SomeScreen extends StatelessWidget {
 // 遷移する際
 Navigator.of(context).push(SomeScreen.route);
 ```
+
+## トラブルシューティング
+
+### 方針
+
+トラブルシューティングにおける解決策は、以下の優先順位で採用しなさい。
+
+1. 公式のドキュメントやガイドラインに従った解決策を適用
+2. 公式の Issue で将来の対応が予定されている場合は、その対応を待つ
+3. 公式の Issue で示されている解決策を適用
+4. Stack Overflow などのコミュニティで示されている解決策を適用
