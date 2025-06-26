@@ -721,10 +721,10 @@ packages:
     dependency: "direct dev"
     description:
       name: pedantic_mono
-      sha256: f0ce79cee8c4730e83c312f00ba356dd31919f14eccedc80712178b504057ab9
+      sha256: "58b3d526331a20b4b0b4606b562488334c3e4892a4c4a287ce804a47a7d8b013"
       url: "https://pub.dev"
     source: hosted
-    version: "1.31.0"
+    version: "1.32.0"
   platform:
     dependency: transitive
     description:
