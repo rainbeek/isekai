@@ -90,7 +90,7 @@ jobs:
           working-directory: ./ios
       - name: Run Flutter test
         run: flutter test --file-reporter json:flutter-test-results.log
-      - uses: dorny/test-reporter@890a17cecf52a379fc869ab770a71657660be727 # v2
+      - uses: dorny/test-reporter@dc3a92680fcc15842eef52e8c4606ea7ce6bd3f3 # v2
         if: success() || failure()
         with:
           name: "Test Flutter results"
