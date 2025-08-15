@@ -24,7 +24,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: 2.6.1
-  freezed_annotation: 3.0.0
+  freezed_annotation: 3.1.0
   in_app_review: 2.0.10
   # FlutterのSDKによりピン留めされているため、バージョンを指定しない
   intl: any
