@@ -33,7 +33,7 @@ dependencies:
 
 dev_dependencies:
   analyzer: 7.4.5
-  build_runner: 2.4.15
+  build_runner: 2.10.5
   cider: 0.2.8
   flutter_test:
     sdk: flutter
